@@ -2,6 +2,7 @@
   "name": "cocos-fe",
   "version": "1.0.0",
   "description": "cocos fe team",
+  "private": "false",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,7 +16,7 @@
     "creator"
   ],
   "author": "cocos FE",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/cocos-creator/cocos-fe/issues"
   },
