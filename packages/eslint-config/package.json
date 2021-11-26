@@ -1,0 +1,14 @@
+{
+  "name": "@cocos-fe/eslint-config-cocos",
+  "version": "1.0.0",
+  "description": "cocos 编辑器团队的共享配置",
+  "main": "index.js",
+  "scripts": {},
+  "engines": {
+    "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
+  },
+  "peerDependencies": {
+    "eslint": "^6.2.0 || ^7.0.0 || ^8.0.0"
+  },
+  "license": "ISC"
+}

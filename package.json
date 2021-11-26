@@ -1,0 +1,26 @@
+{
+  "name": "cocos-fe",
+  "version": "1.0.0",
+  "description": "cocos fe team",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cocos-creator/cocos-fe.git"
+  },
+  "keywords": [
+    "cocos",
+    "creator"
+  ],
+  "author": "cocos FE",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cocos-creator/cocos-fe/issues"
+  },
+  "homepage": "https://github.com/cocos-creator/cocos-fe#readme",
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}
