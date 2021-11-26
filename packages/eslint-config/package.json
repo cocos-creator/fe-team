@@ -10,9 +10,6 @@
   "peerDependencies": {
     "eslint": "^6.2.0 || ^7.0.0 || ^8.0.0"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "license": "MIT",
   "gitHead": "059b8c355c74c75198f32e5632459b7aec23d8b5"
 }
