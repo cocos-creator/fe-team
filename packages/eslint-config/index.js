@@ -14,14 +14,10 @@ module.exports = {
     },
     "extends": [
         "eslint:recommended",
-        "plugin:vue/vue3-essential",
     ],
     "parserOptions": {
         ecmaVersion: 2021
     },
-    "plugins": [
-        "vue"
-    ],
     "rules": {
         "vue/html-closing-bracket-newline": ["error", {
             "singleline": "never",
