@@ -1,5 +1,5 @@
 {
-  "name": "@cocos-fe/eslint-config-cocos",
+  "name": "@dogodo/eslint-config-cocos",
   "version": "1.0.3-alpha.0",
   "description": "cocos 编辑器团队的共享配置",
   "main": "index.js",
@@ -11,5 +11,5 @@
     "eslint": "^6.2.0 || ^7.0.0 || ^8.0.0"
   },
   "license": "MIT",
-  "gitHead": "8d3a6789cd7b1ab4fc3fa07a6586b4c9c1e079a7"
+  "gitHead": "5b6fd0cb889a52d382c53abde37030e195349396"
 }

@@ -1,8 +1,8 @@
 {
-  "name": "cocos-fe",
+  "name": "dogodo",
   "version": "1.0.0",
   "description": "cocos fe team",
-  "private": "false",
+  "private": false,
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
