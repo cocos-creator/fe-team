@@ -1,5 +1,5 @@
 {
-  "name": "@dogodo/utils",
+  "name": "@cocos-fe/utils",
   "version": "1.0.3",
   "description": "工具函数集",
   "main": "index.js",
@@ -8,5 +8,5 @@
   },
   "author": "",
   "license": "MIT",
-  "gitHead": "5b6fd0cb889a52d382c53abde37030e195349396"
+  "gitHead": "059b8c355c74c75198f32e5632459b7aec23d8b5"
 }
