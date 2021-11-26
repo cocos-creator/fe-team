@@ -1,6 +1,6 @@
 {
   "name": "@cocos-fe/utils",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "工具函数集",
   "main": "index.js",
   "scripts": {
