@@ -1,6 +1,6 @@
 {
   "name": "@dogodo/utils",
-  "version": "1.0.3-alpha.0",
+  "version": "1.0.3",
   "description": "工具函数集",
   "main": "index.js",
   "scripts": {
