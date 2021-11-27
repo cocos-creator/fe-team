@@ -6,7 +6,6 @@
   "workspaces": [
     "packages/*"
   ],
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,5 +25,8 @@
   "homepage": "https://github.com/cocos-creator/cocos-fe#readme",
   "devDependencies": {
     "lerna": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
