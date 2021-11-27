@@ -11,7 +11,7 @@ module.exports = {
         "browser": true,
         "commonjs": true,
         "node": true,
-        "es2022": true,
+        "es2021": true,
         "mocha": true,
         "jest": true
     },
