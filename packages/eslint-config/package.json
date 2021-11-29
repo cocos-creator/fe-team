@@ -17,6 +17,7 @@
   "license": "MIT",
   "gitHead": "059b8c355c74c75198f32e5632459b7aec23d8b5",
   "dependencies": {
+    "eslint-plugin-vue": "^8.1.1",
     "vue-eslint-parser": "^8.0.1"
   }
 }
