@@ -1,6 +1,6 @@
 {
   "name": "@cocos-fe/eslint-config",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "cocos 编辑器团队的共享配置",
   "main": "index.js",
   "scripts": {},
