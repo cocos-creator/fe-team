@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.3.0
+        with:
+          node-version: 16
+      
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+
+      - name: 安装依赖
+        run: npm install
+
+      - name: 构建项目
+        run: |
+          npm run build:docs
+          echo 构建成功.
+          
+      - uses: manyuanrong/setup-ossutil@v2.0
+        with:
+          endpoint: "oss-cn-hangzhou.aliyuncs.com"
+          access-key-id: ${{ secrets.OSS_ID }}
+          access-key-secret: ${{ secrets.OSS_SECRET }}
+      - name: 发送到 OSS/90s/
+        run: ossutil cp -rf ./projects/document/docs/.vitepress/dist oss://website-cocos-fe/

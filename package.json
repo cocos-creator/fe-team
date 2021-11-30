@@ -4,10 +4,11 @@
   "description": "cocos fe team",
   "private": false,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "projects/*"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:docs": "npm run build -w @cocos-fe/document"
   },
   "repository": {
     "type": "git",
