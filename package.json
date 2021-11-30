@@ -8,6 +8,8 @@
     "projects/*"
   ],
   "scripts": {
+    "preinstall": "npx only-allow npm",
+    "dev:docs": "npm run dev -w @cocos-fe/document",
     "build:docs": "npm run build -w @cocos-fe/document"
   },
   "repository": {
@@ -25,7 +27,8 @@
   },
   "homepage": "https://github.com/cocos-creator/cocos-fe#readme",
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "only-allow": "^1.0.0"
   },
   "engines": {
     "node": ">=16.0.0"
