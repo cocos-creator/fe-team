@@ -9,5 +9,5 @@
 具体流程可以参考下图：
 
 <picture>
-  <img src="../assets/git 工作流.jpg" alt="Image">
+  <img src="../assets/git-remote.jpg" alt="Image">
 </picture>
