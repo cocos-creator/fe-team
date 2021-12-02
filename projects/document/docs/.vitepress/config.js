@@ -35,15 +35,12 @@ function getArticleSidebar() {
             text: '文档',
             children: [
                 {
-                    text: '文档1',
-                    link: '/article/1'
+                    text: 'web-components',
+                    link: '/article/web-components'
                 },
                 {
-                    text: '文档2',
-                    link: '/article/2'
-                }, {
-                    text: '文档3',
-                    link: '/article/3'
+                    text: '关于命名的一点建议',
+                    link: '/article/关于命名的一点建议'
                 }
             ]
         }
