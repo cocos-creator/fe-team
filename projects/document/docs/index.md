@@ -15,3 +15,13 @@ features:
     details: 保持热情，保持健康，不断进步！
 footer: MIT Licensed | Copyright © 2019-present cocos FE
 --- 
+
+<style>
+.home-hero .figure .image {
+  max-height: 200px!important;
+  margin-bottom: 20px;
+}
+.home-hero #main-title {
+  display: none;
+}
+</style>

@@ -41,6 +41,10 @@ function getArticleSidebar() {
                 {
                     text: '关于命名的一点建议',
                     link: '/article/关于命名的一点建议'
+                },
+                {
+                    text: 'Git 教程',
+                    link: '/article/Git 教程'
                 }
             ]
         }
