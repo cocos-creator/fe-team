@@ -21,6 +21,19 @@ function replaceIds() {
 
   fetch(url).then(res => res.json()).then(data => {
     console.log(data)
+    window.github_ids = data;
+
+    Array.from(document.querySelectorAll('.author, .assignee span'))
+      .forEach(ele => {
+        const text = ele.innerText;
+        const textZH = data[text];
+        if (!ele.dataset.github) {
+          ele.dataset.github = text;
+        }
+        if (textZH) {
+          ele.innerText = textZH;
+        }
+      })
   })
 }
 
