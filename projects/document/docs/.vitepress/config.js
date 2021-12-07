@@ -55,7 +55,10 @@ function getCoreSidebar() {
     return [
         {
             text: '基建',
-            children: [{ text: 'Eslint', link: '/core/eslint' }]
+            children: [
+                { text: 'Eslint', link: '/core/eslint' },
+                { text: 'Github ID 翻译', link: '/core/chrome-extension-github-ids' },
+            ]
         },
     ]
 }
