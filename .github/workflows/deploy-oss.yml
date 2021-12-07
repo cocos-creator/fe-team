@@ -43,4 +43,6 @@ jobs:
           access-key-id: ${{ secrets.OSS_ID }}
           access-key-secret: ${{ secrets.OSS_SECRET }}
       - name: 发送到 OSS/90s/
-        run: ossutil cp -rf ./projects/document/docs/.vitepress/dist oss://website-cocos-fe/
+        run: |
+          ossutil cp -rf ./projects/document/docs/.vitepress/dist oss://website-cocos-fe/
+          ossutil cp ./projects/github-ids/github-ids.json oss://90s/github-ids/

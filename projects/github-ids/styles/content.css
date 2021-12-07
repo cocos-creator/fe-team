@@ -1,0 +1,25 @@
+
+#githubs-ids {
+  position: fixed;
+  top: 126px;
+  right: 10px;
+  z-index: 999999;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow:0px 0px 5px rgba(0,0,0,.5);
+}
+
+#githubs-ids img {
+  width: 30px;
+  transition: width .2s linear;
+}
+
+#githubs-ids img:hover {
+  width: 34px;
+}
