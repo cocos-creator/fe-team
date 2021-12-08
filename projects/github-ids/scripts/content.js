@@ -33,6 +33,7 @@ function createList(data) {
     li.innerHTML = `<div class="en">${k}</div><div class="zh">${v}</div>`;
     fragment.appendChild(li);
   });
+  $panel.querySelector('ul').innerHTML = '';
   $panel.querySelector('ul').appendChild(fragment);
 }
 
