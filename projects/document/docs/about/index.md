@@ -7,8 +7,8 @@ sidebar: false
 我们是雅基集团旗下的 cocos creator 开发团队。
 
 <div class="luxun">
-    <p><i>这是一支牛逼的团队！</i></p>
-    <img src="../assets/鲁迅.jpeg" />   
+    <img src="../assets/鲁迅.jpeg" />
+    <p><i>这是一支牛逼的团队。</i></p>   
 </div>
 
 <style>
@@ -22,6 +22,6 @@ sidebar: false
 }
 .luxun img {
     width: 100px;
-    margin-left: 20px;
+    margin-right: 20px;
 }
 </style>   

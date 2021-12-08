@@ -1,21 +1,20 @@
 # Github ID 翻译插件
 
-## 前因
+## 缘起
 
-公司的项目是在 Github 上维护的，每个成员都使用自己的 Github ID（并不是公司统一分配，统一命名）。由于每个成员都很有个性，ID 取的琳瑯满目，要把它们和队员的真名对应起来有点困难。
+公司的项目是在 Github 上维护的，每个成员都使用自己的 Github 账号（非公司统一分配，规范命名）。由于每个成员都很有个性，ID 取的琳瑯满目。要把它们和队员的真名对应起来有点困难。
 
 目前的的方案是公共文档有一份 ID 列表，大家对照表格来识别其他的协作成员。（这一点都不互联网，也不酷）
 
-![image](https://user-images.githubusercontent.com/35713518/145004585-e7ed56df-db9e-45c0-810a-267e1732c270.png)
-
+<img width="600" src="https://user-images.githubusercontent.com/35713518/145004585-e7ed56df-db9e-45c0-810a-267e1732c270.png" />
 
 于是大家觉得需要有个插件来解决这个问题。
 
-![image](https://user-images.githubusercontent.com/35713518/145000281-102f1a01-b287-44a0-bf68-cb21d9dbfba7.png)
+<img width="400" src="https://user-images.githubusercontent.com/35713518/145000281-102f1a01-b287-44a0-bf68-cb21d9dbfba7.png" />
 
 ## 方案
 
-利用谷歌插件，将页面上的 `Github ID` ，替换成对应的中文名。
+利用谷歌插件，将页面上的 `Github ID` ，替换成对应成员的中文名。
 
 实现流程：
 - 在 Git 仓库里维护 `github-ids.json` ，利用 `workflows` 将文件同步到 oss。
@@ -46,9 +45,15 @@ function replaceIds() {
 }
 ```
 
+效果如下：
+
+![截屏2021-12-08 13 50 29](https://user-images.githubusercontent.com/35713518/145160567-58009cf5-e702-4d3c-a721-f694f145c76e.png)
+
+我们替换了页面上原本显示 Github ID 的地方，展示为中文名称。并且在右上角放置了一个 Icon，点击可以展开/关闭一个 ID 列表。点击 ID 或者英文名称都可以复制对应内容。
+
 ## 数据维护
 
-我们把数据统一在 [这里](https://github.com/cocos-creator/cocos-fe/blob/main/projects/github-ids/github-ids.json) 维护。如果有更新人员名单，往这个[仓库](https://github.com/cocos-creator/cocos-fe) 提个 PR 即可。我们的 `workflows` 会触发相应的任务，将最新的 `github-ids.json` 推送到 OSS。
+我们把数据统一在 [这里](https://github.com/cocos-creator/cocos-fe/blob/main/projects/github-ids/github-ids.json) 维护。如果有更新人员名单，往仓库[cocos-fe](https://github.com/cocos-creator/cocos-fe) 提个 PR 即可。我们的 `workflows` 会触发相应的任务，将最新的 `github-ids.json` 推送到 OSS。
 
 插件那边会获取到最新的数据映射表。通过如下粗暴的方式：
 
@@ -56,9 +61,9 @@ function replaceIds() {
 const url = `https://90s.oss-cn-hangzhou.aliyuncs.com/github-ids/github-ids.json?v=${Date.now()}`;
 ```
 
-## 遇到了一些问题
+## 遇到的问题
 
-Github 也是类似 SPA 的渲染方式，导致它进行路由切换的时候不会刷新页面，进而不能通过 onload 这样的方式来执行替换 ID 的逻辑。
+Github 某些页面是以 SPA 的方式渲染，导致它进行路由切换的时候不会刷新页面，进而不能通过 onload 这样的方式来执行替换 ID 的逻辑。
 
 而如果通过监听 `popstate` 事件，它无法捕获 `history.pushState() | history.replaceState()` ，所以此路不通（可能魔改可以）。
 
@@ -83,6 +88,7 @@ function observerProgress() {
 }
 ```
 
-## 结尾
+## 使用
 
-目前浏览器插件已经开发完成，但是没有开发者账号，无法发布到谷歌商店。只能通过文件共享。
+前往谷歌插件商店搜索 `@cocos-fe/github-ids` 安装即可。
+
