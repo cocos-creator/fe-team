@@ -14,7 +14,7 @@
 
 ## 方案
 
-利用谷歌插件，将页面上的 `Github ID` ，替换成对应成员的中文名。
+利用浏览器插件，将页面上的 `Github ID` ，替换成对应成员的中文名。
 
 实现流程：
 - 在 Git 仓库里维护 `github-ids.json` ，利用 `workflows` 将文件同步到 oss。
@@ -61,6 +61,9 @@ function replaceIds() {
 const url = `https://90s.oss-cn-hangzhou.aliyuncs.com/github-ids/github-ids.json?v=${Date.now()}`;
 ```
 
+:::tip
+由于人员 ID 列表是一个不经常更新的数据，所以我们默认都是从本地缓存里拿，所以如果有更新了远程的数据，手动点击一下更新按钮即可。
+:::
 ## 遇到的问题
 
 Github 某些页面是以 SPA 的方式渲染，导致它进行路由切换的时候不会刷新页面，进而不能通过 onload 这样的方式来执行替换 ID 的逻辑。
@@ -90,5 +93,7 @@ function observerProgress() {
 
 ## 使用
 
-前往谷歌插件商店搜索 `@cocos-fe/github-ids` 安装即可。
+前往谷歌插件商店搜索 [@cocos-fe/github-ids](https://chrome.google.com/webstore/detail/cocos-fegithub-ids/eidodebdpdgnbcphggoimbpohochfpoj/related?hl=zh-CN&authuser=0) 安装即可。
+
+大家记得去给插件一个好评，这样我们后期的更新评审会更容易通过。
 
