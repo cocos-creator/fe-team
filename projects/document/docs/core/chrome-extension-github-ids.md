@@ -47,9 +47,13 @@ function replaceIds() {
 
 效果如下：
 
-![截屏2021-12-08 13 50 29](https://user-images.githubusercontent.com/35713518/145160567-58009cf5-e702-4d3c-a721-f694f145c76e.png)
+<video width="100%" controls src="https://website-cocos-fe.oss-cn-hangzhou.aliyuncs.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62021-12-10%2021.12.50.mov" />
 
-我们替换了页面上原本显示 Github ID 的地方，展示为中文名称。并且在右上角放置了一个 Icon，点击可以展开/关闭一个 ID 列表。点击 ID 或者中文名称都可以复制对应内容。
+我们替换了页面上原本显示 Github ID 的地方，展示为中文名称。并且在右上角放置了一个 ICON，点击可以展开/关闭一个 ID 列表。
+
+列表支持按中文名搜索 ID，方便 `@` 其他成员。 点击 ID 或者中文名称都可以复制对应内容。
+
+如果远程更新了数据，点击刷新按钮即可同步远程数据。
 
 ## 数据维护
 
@@ -96,4 +100,3 @@ function observerProgress() {
 前往谷歌插件商店搜索 [@cocos-fe/github-ids](https://chrome.google.com/webstore/detail/cocos-fegithub-ids/eidodebdpdgnbcphggoimbpohochfpoj/related?hl=zh-CN&authuser=0) 安装即可。
 
 大家记得去给插件一个好评，这样我们后期的更新评审会更容易通过。
-
