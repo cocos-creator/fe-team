@@ -32,8 +32,8 @@ function createPanel() {
     }
   }, false);
 
-  $panel.querySelector('input').addEventListener('input', e => {
-    search(e.data);
+  $panel.querySelector('input').addEventListener('input', (e) => {
+    search(e.target.value);
   })
 
   $panel.querySelector('ul').addEventListener('click', ({ target }) => {
