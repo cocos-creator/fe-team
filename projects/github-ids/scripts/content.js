@@ -16,13 +16,17 @@ chrome.storage.sync.get([storageKey], (result) => {
 function createPanel() {
   const image = chrome.runtime.getURL('images/logo.png');
   const updateImage = chrome.runtime.getURL('images/update.png');
+  const updateImageDark = chrome.runtime.getURL('images/update-dark.png');
   $panel.innerHTML = `
     <div class="icon">
       <img src="${image}" alt="githubs-ids" />
     </div>
     <input type="text" />
     <ul></ul>
-    <div class="tip"><span>${tipText}</span> <img title="更新数据" width="14" height="14" src="${updateImage}" /></div>
+    <div class="tip"><span>${tipText}</span> 
+      <img class="update" title="更新数据" width="14" height="14" src="${updateImage}" />
+      <img class="update-dark" title="更新数据" width="14" height="14" src="${updateImageDark}" />
+    </div>
   `;
 
   $panel.querySelector('.icon').addEventListener('click', () => {
