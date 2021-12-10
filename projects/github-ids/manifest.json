@@ -4,7 +4,9 @@
   "description": "cocos 开发人员的 github 中文名映射表",
   "homepage_url": "http://cocos.90s.co",
   "manifest_version": 3,
-  "permissions": [],
+  "permissions": [
+    "storage"
+  ],
   "content_scripts": [
     {
       "matches": [
