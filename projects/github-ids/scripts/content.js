@@ -31,9 +31,6 @@ function createPanel() {
 
   $panel.querySelector('.icon').addEventListener('click', () => {
     $panel.classList.toggle('show');
-    if ($panel.querySelectorAll('ul li').length === 0) {
-      replaceIds();
-    }
   }, false);
 
   $panel.querySelector('input').addEventListener('input', (e) => {
@@ -48,6 +45,13 @@ function createPanel() {
 
   $panel.querySelector('.tip').addEventListener('click', () => {
     update();
+  })
+
+  $panel.addEventListener('click', e => {
+    e.stopPropagation();
+  })
+  document.body.addEventListener('click', () => {
+    $panel.classList.remove('show');
   })
   document.body.appendChild($panel);
 }
@@ -110,6 +114,7 @@ function replaceIds() {
     '.TimelineItem-body a span',
     '.commit-author',
     '.BorderGrid-row li a strong',
+    'a[rel="contributor"]'
   ].join();
   Array.from(document.querySelectorAll(selector))
     .forEach(ele => {
