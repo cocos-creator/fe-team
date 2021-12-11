@@ -19,8 +19,8 @@
 实现流程：
 - 在 Git 仓库里维护 `github-ids.json` ，利用 `workflows` 将文件同步到 oss。
 - 浏览器插件从 oss 获取到最新的 `github-ids.json` 列表
-- 查看 Github 页面的 DOM 结构，找出会显示 ID 的 DOM
-- 将匹配到的 DOM 的内容，替换成匹配到的中文名
+- 查看 Github 的页面结构，找出会显示 ID 的 DOM
+- 将匹配到的 DOM 的内容，替换成对应的中文名
 
 ```js
 function replaceIds() {
@@ -28,15 +28,10 @@ function replaceIds() {
 
   // 获取数据
   fetch(url).then(res => res.json()).then(data => {
-    console.log(data)
-
     Array.from(document.querySelectorAll('.author, .assignee span, .TimelineItem-body a span'))
       .forEach(ele => {
         const text = ele.innerText;
         const textZH = data[text];
-        if (!ele.dataset.github) {
-          ele.dataset.github = text;
-        }
         if (textZH) {
           ele.innerText = textZH;
         }
@@ -66,7 +61,7 @@ const url = `https://90s.oss-cn-hangzhou.aliyuncs.com/github-ids/github-ids.json
 ```
 
 :::tip
-由于人员 ID 列表是一个不经常更新的数据，所以我们默认都是从本地缓存里拿，所以如果有更新了远程的数据，手动点击一下更新按钮即可。
+由于人员 ID 列表是一个不经常更新的数据，所以我们默认都是从本地缓存里拿。如果有更新了远程的数据，手动点击一下更新按钮即可。
 :::
 ## 遇到的问题
 

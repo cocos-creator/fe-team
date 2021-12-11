@@ -104,13 +104,17 @@ function fetchList() {
 
 // 替换页面id
 function replaceIds() {
-  Array.from(document.querySelectorAll('.author, .assignee span, .TimelineItem-body a span'))
+  const selector = [
+    '.author',
+    '.assignee span',
+    '.TimelineItem-body a span',
+    '.commit-author',
+    '.BorderGrid-row li a strong',
+  ].join();
+  Array.from(document.querySelectorAll(selector))
     .forEach(ele => {
       const text = ele.innerText;
       const textZH = idsMap[text];
-      if (!ele.dataset.github) {
-        ele.dataset.github = text;
-      }
       if (textZH) {
         ele.innerText = textZH;
       }
@@ -123,7 +127,8 @@ function observerProgress() {
   const callback = function (mutationsList) {
     for (let mutation of mutationsList) {
       if (mutation.type === 'attributes') {
-        if ($progress.style.width === '100%') {
+        const press = parseInt($progress.style.width, 10);
+        if (press && press > 95) {
           window.setTimeout(replaceIds, 200);
         }
       }
