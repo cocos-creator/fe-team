@@ -10,7 +10,7 @@ const storageKey = 'cocos-github-ids'
 
 chrome.storage.sync.get([storageKey], (result) => {
   console.log('storage.get:', result[storageKey]);
-  idsMap = result[storageKey];
+  idsMap = result[storageKey] ?? {};
 });
 
 function createPanel() {
@@ -202,11 +202,11 @@ function message() {
 // 监听路由等事件
 ['hashchange', 'popstate', 'load'].forEach(ev => {
   window.addEventListener(ev, async () => {
+    if (!idsMap || Object.keys(idsMap).length === 0) {
+      await fetchList();
+    }
     replaceIds();
     if (ev === 'load') {
-      if (Object.keys(idsMap).length === 0) {
-        await fetchList();
-      }
       observerProgress();
       createPanel();
       createList();
