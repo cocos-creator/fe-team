@@ -1,6 +1,6 @@
 module.exports = {
-    title: 'COCOS FE',
-    description: 'cocos FE team',
+    title: 'Cocos FE',
+    description: 'Cocos FE Team',
     themeConfig: {
         repo: 'cocos-creator/cocos-fe',
         docsDir: 'docs',
