@@ -95,3 +95,7 @@ function observerProgress() {
 前往谷歌插件商店搜索 [@cocos-fe/github-ids](https://chrome.google.com/webstore/detail/cocos-fegithub-ids/eidodebdpdgnbcphggoimbpohochfpoj/related?hl=zh-CN&authuser=0) 安装即可。
 
 大家记得去给插件一个好评，这样我们后期的更新评审会更容易通过。
+
+:::tip
+插件有点bug，修复的版本谷歌还在审核中，请勿下载。
+:::

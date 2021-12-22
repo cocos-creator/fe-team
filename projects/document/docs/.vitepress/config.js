@@ -45,6 +45,10 @@ function getArticleSidebar() {
                 {
                     text: 'Git 教程',
                     link: '/article/Git 教程'
+                },
+                {
+                    text: 'inspector',
+                    link: '/article/inspector'
                 }
             ]
         }
