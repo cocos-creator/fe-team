@@ -1,3 +1,8 @@
+---
+navbar: true
+sidebar: true
+---
+
 # Inspector 
 
 Inspector 负责各种数据的显示和更新功能，目前包括（node、asset）两种数据。它只是一个平台，数据和渲染组件都不是由它提供。

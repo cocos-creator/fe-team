@@ -49,6 +49,10 @@ function getArticleSidebar() {
                 {
                     text: 'inspector',
                     link: '/article/inspector'
+                },
+                {
+                    text: 'assets',
+                    link: '/article/assets'
                 }
             ]
         }

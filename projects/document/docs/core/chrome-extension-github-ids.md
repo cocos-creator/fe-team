@@ -92,10 +92,12 @@ function observerProgress() {
 
 ## 使用
 
-前往谷歌插件商店搜索 [@cocos-fe/github-ids](https://chrome.google.com/webstore/detail/cocos-fegithub-ids/eidodebdpdgnbcphggoimbpohochfpoj/related?hl=zh-CN&authuser=0) 安装即可。
+点击 [@cocos-fe/github-ids](https://chrome.google.com/webstore/detail/cocos-fegithub-ids/eidodebdpdgnbcphggoimbpohochfpoj/related?hl=zh-CN&authuser=0) 安装即可。
 
 大家记得去给插件一个好评，这样我们后期的更新评审会更容易通过。
 
-:::tip
-插件有点bug，修复的版本谷歌还在审核中，请勿下载。
-:::
+## 数据安全
+
+我们将插件的发布方式设置为`不公开`，所以外界人员无法直接从商店看到我们的插件。除非我们内部人员把安装地址共享出去，这个安全性和我们把 ID 列表存储在腾讯文档是一致的。
+
+![image](https://user-images.githubusercontent.com/35713518/147624972-40eacd90-4197-4cc0-8950-560f52fcaec5.png)
