@@ -114,7 +114,8 @@ function replaceIds() {
     '.TimelineItem-body a span',
     '.commit-author',
     '.BorderGrid-row li a strong',
-    'a[rel="contributor"]'
+    'a[rel="contributor"]',
+    '.opened-by a.Link--muted'
   ].join();
   Array.from(document.querySelectorAll(selector))
     .forEach(ele => {
