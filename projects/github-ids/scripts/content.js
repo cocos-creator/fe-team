@@ -148,43 +148,33 @@ function observerProgress() {
 
 // 复制
 function copy(text) {
-  var id = 'mycustom-clipboard-textarea-hidden-id';
-  var existsTextarea = document.getElementById(id);
+  const textarea = document.createElement('textarea');
+  textarea.style.all = 'unset';
+  textarea.style.position = 'fixed';
+  textarea.style.top = '110%';
+  textarea.style.left = '110%';
 
-  if (!existsTextarea) {
-    var textarea = document.createElement('textarea');
-    textarea.id = id;
-    textarea.style.position = 'fixed';
-    textarea.style.top = '-1px';
-    textarea.style.left = '-1px';
-    textarea.style.width = '1px';
-    textarea.style.height = '1px';
-    textarea.style.padding = 0;
-    textarea.style.border = 'none';
-    textarea.style.outline = 'none';
-    textarea.style.boxShadow = 'none';
-    textarea.style.background = 'transparent';
+  document.body.appendChild(textarea);
 
-    document.querySelector('body').appendChild(textarea);
-    existsTextarea = document.getElementById(id);
-  }
-
-  existsTextarea.value = text;
-  existsTextarea.select();
+  textarea.value = text;
+  textarea.select();
 
   return new Promise((resolve, reject) => {
     try {
-      var status = document.execCommand('copy');
+      const status = document.execCommand('copy');
       if (status) {
-        resolve();
+        resolve(true);
       } else {
-        reject(new Error('复制失败！'));
+        reject(new Error('复制失败!'));
       }
     } catch (err) {
       reject(err);
+    } finally {
+      textarea.parentNode?.removeChild(textarea);
     }
   });
 }
+
 
 // 复制成功提示
 function message() {
