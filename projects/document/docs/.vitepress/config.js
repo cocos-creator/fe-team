@@ -51,9 +51,13 @@ function getArticleSidebar() {
                     link: '/article/inspector'
                 },
                 {
-                    text: 'assets',
-                    link: '/article/assets'
-                }
+                    text: 'cocos creator',
+                    link: '/article/cocos-creator'
+                },
+                // {
+                //     text: 'assets',
+                //     link: '/article/assets'
+                // }
             ]
         }
     ]
