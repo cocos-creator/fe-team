@@ -7,4 +7,4 @@ sidebar: true
 
 ## 编辑器各模块之间的协作流程
 
-![Untitled-2022-01-21-1737](https://user-images.githubusercontent.com/35713518/154421039-93c8e513-5257-4164-a24d-7127c0effb1a.png)
+![Untitled-2022-01-21-1737](https://user-images.githubusercontent.com/35713518/154624922-16c71d86-bb50-4ab8-9e06-77cc3dbf27d7.png)
