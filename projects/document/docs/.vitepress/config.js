@@ -53,6 +53,10 @@ function getArticleSidebar() {
                     link: '/article/Git 教程'
                 },
                 {
+                    text: '软链接教程',
+                    link: '/article/软链接'
+                },
+                {
                     text: 'inspector',
                     link: '/article/inspector'
                 },
