@@ -1,5 +1,33 @@
 # Github ID 翻译插件
 
+
+
+## 使用
+
+点击 [@cocos-fe/github-ids](https://chrome.google.com/webstore/detail/cocos-fegithub-ids/eidodebdpdgnbcphggoimbpohochfpoj/related?hl=zh-CN) 安装即可。
+
+大家记得去给插件一个好评，这样我们后期的更新评审会更容易通过。
+
+## 数据维护
+
+我们把数据统一在 [github-ids.json)](https://github.com/cocos-creator/fe-team/blob/main/projects/github-ids/github-ids.json) 维护。如果有更新人员名单，往仓库[cocos-fe](https://github.com/cocos-creator/fe-team) 提个 PR 即可。我们的 `Actions` 会触发相应的任务，将最新的 `github-ids.json` 推送到 OSS。
+
+插件那边会获取到最新的数据映射表。通过如下粗暴的方式：
+
+```
+const url = `https://90s.oss-cn-hangzhou.aliyuncs.com/github-ids/github-ids.json?v=${Date.now()}`;
+```
+
+:::tip
+由于人员 ID 列表是一个不经常更新的数据，所以我们默认都是从本地缓存里拿。如果有更新了远程的数据，手动点击一下更新按钮即可。
+:::
+
+
+## 数据安全
+
+我们将插件的发布方式设置为`不公开`，所以外界人员无法直接从商店看到我们的插件。除非我们内部人员把安装地址共享出去，这个安全性和我们把 ID 列表存储在腾讯文档是一致的。
+
+![image](https://user-images.githubusercontent.com/35713518/147624972-40eacd90-4197-4cc0-8950-560f52fcaec5.png)
 ## 背景
 
 公司的项目是在 Github 上维护的，每个成员都使用自己的 Github 账号（非公司统一分配，规范命名）。由于每个成员都很有个性，ID 取的琳瑯满目。要把它们和队员的真名对应起来有点困难。
@@ -50,19 +78,7 @@ function replaceIds() {
 
 如果远程更新了数据，点击刷新按钮即可同步远程数据。
 
-## 数据维护
 
-我们把数据统一在 [这里](https://github.com/cocos-creator/cocos-fe/blob/main/projects/github-ids/github-ids.json) 维护。如果有更新人员名单，往仓库[cocos-fe](https://github.com/cocos-creator/cocos-fe) 提个 PR 即可。我们的 `workflows` 会触发相应的任务，将最新的 `github-ids.json` 推送到 OSS。
-
-插件那边会获取到最新的数据映射表。通过如下粗暴的方式：
-
-```
-const url = `https://90s.oss-cn-hangzhou.aliyuncs.com/github-ids/github-ids.json?v=${Date.now()}`;
-```
-
-:::tip
-由于人员 ID 列表是一个不经常更新的数据，所以我们默认都是从本地缓存里拿。如果有更新了远程的数据，手动点击一下更新按钮即可。
-:::
 ## 遇到的问题
 
 Github 某些页面是以 SPA 的方式渲染，导致它进行路由切换的时候不会刷新页面，进而不能通过 onload 这样的方式来执行替换 ID 的逻辑。
@@ -90,14 +106,3 @@ function observerProgress() {
 }
 ```
 
-## 使用
-
-点击 [@cocos-fe/github-ids](https://chrome.google.com/webstore/detail/cocos-fegithub-ids/eidodebdpdgnbcphggoimbpohochfpoj/related?hl=zh-CN&authuser=0) 安装即可。
-
-大家记得去给插件一个好评，这样我们后期的更新评审会更容易通过。
-
-## 数据安全
-
-我们将插件的发布方式设置为`不公开`，所以外界人员无法直接从商店看到我们的插件。除非我们内部人员把安装地址共享出去，这个安全性和我们把 ID 列表存储在腾讯文档是一致的。
-
-![image](https://user-images.githubusercontent.com/35713518/147624972-40eacd90-4197-4cc0-8950-560f52fcaec5.png)
