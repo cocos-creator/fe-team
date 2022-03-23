@@ -1,6 +1,6 @@
 {
   "name": "@cocos-fe/github-ids",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "cocos 开发人员的 github 中文名映射表",
   "homepage_url": "http://cocos.90s.co",
   "manifest_version": 3,
@@ -10,7 +10,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://github.com/cocos/*"
+        "https://github.com/cocos/*",
+        "https://github.com/cocos-creator/*"
       ],
       "css": [
         "./styles/content.css"
