@@ -10,7 +10,7 @@
 
 ## 数据维护
 
-我们把数据统一在 [github-ids.json)](https://github.com/cocos-creator/fe-team/blob/main/projects/github-ids/github-ids.json) 维护。如果有更新人员名单，往仓库[cocos-fe](https://github.com/cocos-creator/fe-team) 提个 PR 即可。我们的 `Actions` 会触发相应的任务，将最新的 `github-ids.json` 推送到 OSS。
+我们把数据统一在 [github-ids.json](https://github.com/cocos-creator/fe-team/blob/main/projects/github-ids/github-ids.json) 维护。如果有更新人员名单，往仓库[fe-team](https://github.com/cocos-creator/fe-team) 提个 PR 即可。我们的 `Actions` 会触发相应的任务，将最新的 `github-ids.json` 推送到 OSS。
 
 插件那边会获取到最新的数据映射表。通过如下粗暴的方式：
 
@@ -22,6 +22,7 @@ const url = `https://90s.oss-cn-hangzhou.aliyuncs.com/github-ids/github-ids.json
 由于人员 ID 列表是一个不经常更新的数据，所以我们默认都是从本地缓存里拿。如果有更新了远程的数据，手动点击一下更新按钮即可。
 :::
 
+<img width="407" alt="image" src="https://user-images.githubusercontent.com/35713518/159613419-8e4ab822-ea1c-41b8-948d-7b97149deaa3.png">
 
 ## 数据安全
 
