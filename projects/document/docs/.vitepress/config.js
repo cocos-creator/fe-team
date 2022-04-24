@@ -64,6 +64,10 @@ function getArticleSidebar() {
                     text: 'cocos creator',
                     link: '/article/cocos-creator'
                 },
+                {
+                    text: '编辑器项目一些建议-2022',
+                    link: '/article/编辑器项目一些建议-2022'
+                }
                 // {
                 //     text: 'assets',
                 //     link: '/article/assets'
