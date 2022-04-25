@@ -30,19 +30,28 @@ jobs:
 
 
       - name: 安装依赖
+        if: contains(github.event.head_commit.message, 'docs')
         run: npm install
 
       - name: 构建项目
+        if: contains(github.event.head_commit.message, 'docs')
         run: |
-          npm run doc:build
+          npm run docs:build
           echo 构建成功.
           
-      - uses: manyuanrong/setup-ossutil@v2.0
+      - name: 启用 oss-util 工具
+        uses: manyuanrong/setup-ossutil@v2.0
         with:
           endpoint: "oss-cn-hangzhou.aliyuncs.com"
           access-key-id: ${{ secrets.OSS_ID }}
           access-key-secret: ${{ secrets.OSS_SECRET }}
-      - name: 发送到 OSS/90s/
+
+      - name: 项目部署 - docs
+        if: contains(github.event.head_commit.message, 'docs')
         run: |
           ossutil cp -rf ./projects/document/docs/.vitepress/dist oss://website-cocos-fe/
-          ossutil cp -rf ./projects/github-ids/github-ids.json oss://90s/github-ids/
+
+      - name: 项目部署 - githubIds
+        if: contains(github.event.head_commit.message, 'github')
+        run: |
+          ossutil cp -rf ./projects/github-ids/github-ids.json oss://90s/github-ids/     

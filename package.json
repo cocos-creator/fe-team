@@ -9,8 +9,8 @@
   ],
   "scripts": {
     "preinstall": "npx only-allow npm",
-    "doc:dev": "npm run dev -w @cocos-fe/document",
-    "doc:build": "npm run build -w @cocos-fe/document"
+    "docs:dev": "npm run dev -w @cocos-fe/document",
+    "docs:build": "npm run build -w @cocos-fe/document"
   },
   "repository": {
     "type": "git",
