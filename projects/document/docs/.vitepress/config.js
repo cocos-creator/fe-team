@@ -65,8 +65,8 @@ function getArticleSidebar() {
                     link: '/article/cocos-creator'
                 },
                 {
-                    text: '编辑器项目一些建议-2022',
-                    link: '/article/编辑器项目一些建议-2022'
+                    text: '前端项目工程实践建议',
+                    link: '/article/前端项目工程实践建议'
                 }
                 // {
                 //     text: 'assets',

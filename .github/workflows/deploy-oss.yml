@@ -34,7 +34,7 @@ jobs:
 
       - name: 构建项目
         run: |
-          npm run build:docs
+          npm run doc:build
           echo 构建成功.
           
       - uses: manyuanrong/setup-ossutil@v2.0
