@@ -98,6 +98,7 @@ function getCoreSidebar() {
             children: [
                 { text: 'Eslint', link: '/core/eslint' },
                 { text: 'Github ID 翻译', link: '/core/chrome-extension-github-ids' },
+                { text: '弃用css预编译处理语言', link: '/core/弃用css预编译处理语言' },
             ]
         },
     ]
