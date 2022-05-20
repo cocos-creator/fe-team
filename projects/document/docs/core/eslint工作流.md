@@ -22,7 +22,7 @@ wabpack 是全量编译，哪怕你改动的只有文件A，都会进行全量�
 
 ### 区分开发环境和正式环境的规则
 
-Eslint 的存在是为了规范编码提升体验，而不是影响心情的。所以在开发环境中，规则应当比较宽松，在线上对应 `error` 的规则，在开发中只是 `warn`，要不然就会出现如下情况： 当你声明了一个变量，但是由于调试代码的时候，把引用这个变量的地方注释掉了，duang，报错了，「你已声明，但是为读取！」。你还得把声明它的地方一起注释掉，才能正常调试（只是其中一个例子）。这样是非常影响开发体验的。所以对于类似规则都有 dev | prod 两个版本。
+Eslint 的存在是为了规范编码提升体验，而不是影响心情的。所以在开发环境中，规则应当比较宽松，在线上对应 `error` 的规则，在开发中只是 `warn`，要不然就会出现如下情况： 当你声明了一个变量，但是由于调试代码的时候，把引用这个变量的地方注释掉了，duang，报错了，「你已声明，但是未读取！」。你还得把声明它的地方一起注释掉，才能正常调试（只是其中一个例子）。这样是非常影响开发体验的。所以对于类似规则都有 dev | prod 两个版本。
 
 - dev: 在开发中给出 warn 提示，但是不应该代码正常编译、调试。
 - prod: 对应最标准规范的格式，保证代码严谨性。
@@ -81,6 +81,31 @@ package.json
   }
 }
 ```
+
+## 结合 EditorConfig
+
+我们可以通过 eslint 的配置文件来达到项目的`代码校验规则`统一的目的，但是编辑器(vscode)的配置是每个项目成员本地生效的，无法统一配置，于是需要引入[EditorConfig](https://typicode.github.io/husky/#/?id=troubleshoot) 配合 [vscode 插件](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)，确保每个成员在本地编辑的时候格式一致且不会和 eslint 配置冲突。
+
+- editorConfig 统一了编码规则
+- eslintConfig 统一了校验规则
+
+配置示例：
+.editorconfig
+```
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing _whitespace = true
+insert_final_newline = true
+
+[*.md]
+trim_trailing_whitespace = false
+```
+
 
 根据以上原则，搭配 husky 等工具，我们能在开发阶段拥有较为流畅的编码体验，在提交代码时又能及时发现问题。是一个比较折中的方案。
 

@@ -1,5 +1,3 @@
-const base = require('./base');
-
 module.exports = {
   "env": {
     "browser": true,
@@ -11,11 +9,13 @@ module.exports = {
     "Editor": "readonly"
   },
   "extends": [
-    "eslint:recommended",
     "plugin:vue/vue3-recommended",
+    'plugin:@typescript-eslint/recommended',
+    "./extend-editor.js"
   ],
   "parser": "vue-eslint-parser",
   "parserOptions": {
+    parser: "@typescript-eslint/parser",
     ecmaVersion: "latest",
     sourceType: 'module',
     ecmaFeatures: {
@@ -23,18 +23,8 @@ module.exports = {
     }
   },
   "plugins": [
-    "vue"
-  ],
-  "rules": {
-    ...base.rules
-  }
+    "vue",
+    "@typescript-eslint"
+  ]
 };
 
-// "off" or   0 - 关闭规则
-// "warn" or  1 - 将规则视为一个警告（不会影响退出码）
-// "error" or 2 - 将规则视为一个错误 (退出码为1)
-
-// 取消规则验证
-/* eslint-disable no-console */ // 当前文件
-/* eslint-disable-next-line */       // 下一行
-/* eslint-disable-line no-alert */   // 当前行

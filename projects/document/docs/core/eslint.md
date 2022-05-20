@@ -4,8 +4,7 @@ sidebarDepth: 3
 
 # Eslint 配置 
 
-我们在 [@cocos-fe/eslint-config](https://www.npmjs.com/package/@cocos-fe/eslint-config) 中维护了统一的配置文件。并且提供了两种引用方式。
-
+我们在 [@cocos-fe/eslint-config](https://www.npmjs.com/package/@cocos-fe/eslint-config) 中维护了统一的配置文件。
 ## 安装
 ```base
 npm install @cocos-fe/eslint-config --save-dev
@@ -13,13 +12,48 @@ npm install @cocos-fe/eslint-config --save-dev
 
 ## 使用
 
-### 只引用规则
+出于约束规范 & 保持配置灵活性的原则，我们的公共配置里只包含了 `extends` 和 `rules` 两个配置，其他包括 `parser` 、 `plugins` 等一律由具体项目自行配置。
 
-如果你对 `eslint` 比较了解，且希望自己定制配置文件，那么你可以只引用通用的规则
+ 针对引擎项目和编辑器项目分别暴露了独立的拓展配置：
 
-```js{15}
+### 引擎项目
+
+```js{9}
 module.exports = {
   "root": true,
+  "parser": '@typescript-eslint/parser',
+  "plugins": [
+    '@typescript-eslint',
+  ],
+  "extends": [
+    'plugin:@typescript-eslint/recommended',
+    "@cocos-fe/eslint-config/engine",
+  ],
+};
+```
+
+### 编辑器项目
+
+```js{9}
+module.exports = {
+  "root": true,
+  "parser": '@typescript-eslint/parser',
+  "plugins": [
+    '@typescript-eslint',
+  ],
+  "extends": [
+    'plugin:@typescript-eslint/recommended',
+    "@cocos-fe/eslint-config/editor",
+  ],
+};
+```
+
+### 编辑器甜点包
+
+由于编辑器项目会使用到 `vue` 这类非常规后缀的文件，配置上稍显麻烦，所以我们提供了一份完备的针对 `vue3` 的拓展配置如下:
+
+```js {6,12-14, 16, 18}
+module.exports = {
   "env": {
     "browser": true,
     "node": true,
@@ -30,12 +64,13 @@ module.exports = {
     "Editor": "readonly"
   },
   "extends": [
-    "eslint:recommended",
     "plugin:vue/vue3-recommended",
-    "@cocos-fe/eslint-config/base", // 只引用了规则
+    'plugin:@typescript-eslint/recommended',
+    "./extend-editor.js"
   ],
   "parser": "vue-eslint-parser",
   "parserOptions": {
+    parser: "@typescript-eslint/parser",
     ecmaVersion: "latest",
     sourceType: 'module',
     ecmaFeatures: {
@@ -43,24 +78,22 @@ module.exports = {
     }
   },
   "plugins": [
-    "vue"
-  ],
-  "rules": {
-  }
+    "vue",
+    "@typescript-eslint"
+  ]
 };
+
 ```
 
-### 全量引用
+所以编辑器项目如果不想自己做这些繁琐的配置，可以直接按照如下引入：
 
-推荐的方式，这样所有配置项都由基建团队统一提供，更好的统一治理，且其他成员无需了解 `eslint` 的配置。
-```js{4}
+
+```js {4}
 module.exports = {
   "root": true,
   "extends": [
     "@cocos-fe/eslint-config"
   ],
-  "rules": {
-  }
 };
 ```
 
@@ -74,6 +107,7 @@ module.exports = {
 
 - 引入 Eslint 官方推荐的规则
 - 引入 Vue 官方推荐的规则
+- 引入 Ts官方推荐规则 
 - 维护一份少量的自有规则，以达到我们的特殊目的
 
 
@@ -82,8 +116,11 @@ module.exports = {
   "extends": [
     "eslint:recommended",
     "plugin:vue/vue3-recommended",
-    "@cocos-fe/eslint-config/base"
+    'plugin:@typescript-eslint/recommended',
   ],
+  "rules": {
+    // 额外定制一丢丢规则s sss
+  }
 }
 ```
 
