@@ -4,7 +4,13 @@ module.exports = {
     "rules": {
         // ====> 基础
         "no-console": 0,
+        "no-empty": 0, // 编辑器很多 try catch 的 catch 是空的
+        "no-useless-escape": 1, // 太多了，改不动
+        "no-async-promise-executor": 1, // new Promise(async (resolve) => {}) 不允许 async ，但是太多地方用了
+        "no-case-declarations": 1, // case 里面不要定义变量，项目很地方这样用，先给警告
+        "no-unreachable": 1, // return null 给警告
         "eqeqeq": 0,
+        "prefer-const": 1, // 推荐使用 const 但是目前不强制
         "camelcase": ['off', {
             properties: "never", // 属性名称 
             ignoreDestructuring: true, // 忽略解构
@@ -41,6 +47,9 @@ module.exports = {
         "@typescript-eslint/ban-types": 0, // 是否直接使用 Function 等当作 type
         "@typescript-eslint/triple-slash-reference": 0, // ts 三斜线的指令
         "@typescript-eslint/no-namespace": 1, // 有一些工作量，先给警告
+        "@typescript-eslint/no-non-null-asserted-optional-chain": 1, // 使用可选链的时候我运行抛出 undefined 
+        "@typescript-eslint/adjacent-overload-signatures": 0,
+        "@typescript-eslint/no-empty-interface": 1
     }
 };
 
