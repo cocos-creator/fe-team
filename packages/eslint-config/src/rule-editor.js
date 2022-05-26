@@ -19,7 +19,11 @@ module.exports = {
         }],
         "require-await": 0, // 编辑器有大量只声明了 async 的函数为了表明这是一个异步函数
         "consistent-return": 0, // 编辑器有大量只声明了 async 的函数为了表明这是一个异步函数 所以可能没有返回值
-        "space-before-function-paren": ['error', { "anonymous": "always", "named": "never", "asyncArrow": "always" }],
+        "space-before-function-paren": ['error', {
+            "anonymous": "never",
+            "named": "never",
+            "asyncArrow": "always"
+        }],
 
         // ====> https://eslint.vuejs.org/
         "vue/html-closing-bracket-newline": ["error", {
@@ -47,7 +51,7 @@ module.exports = {
         "@typescript-eslint/ban-types": 0, // 是否直接使用 Function 等当作 type
         "@typescript-eslint/triple-slash-reference": 0, // ts 三斜线的指令
         "@typescript-eslint/no-namespace": 1, // 有一些工作量，先给警告
-        "@typescript-eslint/no-non-null-asserted-optional-chain": 1, // 使用可选链的时候我运行抛出 undefined 
+        "@typescript-eslint/no-non-null-asserted-optional-chain": 1, // 使用可选链的时候允许抛出 undefined 
         "@typescript-eslint/adjacent-overload-signatures": 0,
         "@typescript-eslint/no-empty-interface": 1
     }
