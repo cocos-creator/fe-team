@@ -3,6 +3,20 @@ const isProduction = process.env.NODE_ENV === 'production';
 module.exports = {
     "rules": {
         // ====> 基础
+        'semi': 'error',
+        'quotes': ['error', 'single'],
+        "indent": ["error", 4, {
+            "SwitchCase": 1
+        }],
+        "no-multi-spaces": "error", // 不允许多余的空格
+        "no-multiple-empty-lines": ["error", {max: 1}], // 最多允许1行空格
+        "key-spacing": ["error", {
+            mode: "strict", 
+            beforeColon: false,
+            afterColon: true
+        }],
+        "space-infix-ops": "error", // 运算符左右要有空格
+        'keyword-spacing': ['error', {after: true, before: true}], // if else 等前后的空格
         "no-console": 0,
         "no-empty": 0, // 编辑器很多 try catch 的 catch 是空的
         "no-useless-escape": 1, // 太多了，改不动
@@ -41,6 +55,7 @@ module.exports = {
         "vue/no-unused-components": isProduction ? 2 : 0,
 
         // ====> https://typescript-eslint.io/rules/#supported-rules
+        "@typescript-eslint/type-annotation-spacing": ['error', {after: true}], // type 前面要有空格
         "@typescript-eslint/no-var-requires": 0, // 编辑器有大量使用 requires 的地方暂时关闭
         "@typescript-eslint/no-explicit-any": 0, // 我们有大量any 以后再去 
         "@typescript-eslint/no-unused-vars": 0, // TODO: 声明未使用确实不允许，但是量太多，后面单独处理

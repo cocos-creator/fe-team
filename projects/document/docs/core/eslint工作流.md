@@ -109,6 +109,19 @@ trim_trailing_whitespace = false
 
 根据以上原则，搭配 husky 等工具，我们能在开发阶段拥有较为流畅的编码体验，在提交代码时又能及时发现问题。是一个比较折中的方案。
 
+## vscode 的相关配置
+
+确保你的编辑器使用的是 eslint 的规则来格式化代码。这里展示 .vscode/settings.json ，其他 IDE 请自行研究。
+```json
+{
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+}
+```
+
 ## 补充
 
 husky 一般在终端上可以比较顺利的运行，但是编辑器团队大部分同学是使用 Git 图形管理工具，所以可能需要一些额外的配置，[详见](https://typicode.github.io/husky/#/?id=troubleshoot)。
