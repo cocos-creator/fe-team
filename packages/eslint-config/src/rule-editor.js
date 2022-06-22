@@ -17,6 +17,8 @@ module.exports = {
         }],
         "space-infix-ops": "error", // 运算符左右要有空格
         'keyword-spacing': ['error', {after: true, before: true}], // if else 等前后的空格
+        'arrow-spacing': ['error', {before: true, after: true}], // 箭头函数前后空格
+        'comma-spacing': [1, {before: false, after: true}], // 逗号后面空格
         "no-console": 0,
         "no-empty": 0, // 编辑器很多 try catch 的 catch 是空的
         "no-useless-escape": 1, // 太多了，改不动
