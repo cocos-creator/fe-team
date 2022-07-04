@@ -1,13 +1,13 @@
 const base = require('./src/rule-base');
-const engine = require('./src/rule-engine')
+const engine = require('./src/rule-engine');
 
 module.exports = {
-    "extends": [
-        "eslint:recommended",
+    'extends': [
+        'eslint:recommended'
     ],
-    "rules": {
+    'rules': {
         ...base.rules,
-        ...engine.rules
-    }
+        ...engine.rules,
+    },
 };
 

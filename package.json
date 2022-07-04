@@ -10,7 +10,9 @@
   "scripts": {
     "preinstall": "npx only-allow npm",
     "docs:dev": "npm run dev -w @cocos-fe/document",
-    "docs:build": "npm run build -w @cocos-fe/document"
+    "docs:build": "npm run build -w @cocos-fe/document",
+    "lint:js": "cross-env NODE_ENV=production eslint --fix --ext .js,.vue,.ts ./",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -27,8 +29,14 @@
   },
   "homepage": "https://github.com/cocos-creator/cocos-fe#readme",
   "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^8.19.0",
+    "eslint-plugin-vue": "^9.1.1",
+    "husky": "^8.0.1",
     "lerna": "^4.0.0",
-    "only-allow": "^1.0.0"
+    "lint-staged": "^13.0.3",
+    "only-allow": "^1.0.0",
+    "vue-eslint-parser": "^9.0.3"
   },
   "engines": {
     "node": ">=16.0.0"
@@ -36,5 +44,10 @@
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0"
+  },
+  "lint-staged": {
+    "*.{vue,js,ts}": [
+      "npm run lint:js"
+    ]
   }
 }
