@@ -3,11 +3,11 @@ const filesInDirectory = dir => new Promise (resolve =>
         Promise.all(entries.filter(e => e.name[0] !== '.').map(e =>
             e.isDirectory
                 ? filesInDirectory(e)
-                : new Promise(resolve => e.file(resolve))
+                : new Promise(resolve => e.file(resolve)),
         ))
             .then(files => [].concat(...files))
-            .then(resolve)
-    )
+            .then(resolve),
+    ),
 );
 
 const timestampForFilesInDirectory = dir =>

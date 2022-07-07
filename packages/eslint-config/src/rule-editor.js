@@ -4,21 +4,21 @@ module.exports = {
     'rules': {
         // ====> 基础
         'semi': 'error',
-        'quotes': ['error', 'single'],
+        'quotes': ['error', 'single' ],
         'indent': ['error', 4, {
             'SwitchCase': 1,
-        }],
+        } ],
         'no-multi-spaces': 'error', // 不允许多余的空格
-        'no-multiple-empty-lines': ['error', {max: 1}], // 最多允许1行空格
+        'no-multiple-empty-lines': ['error', {max: 1} ], // 最多允许1行空格
         'key-spacing': ['error', {
             mode: 'strict', 
             beforeColon: false,
             afterColon: true,
-        }],
+        } ],
         'space-infix-ops': 'error', // 运算符左右要有空格
-        'keyword-spacing': ['error', {after: true, before: true}], // if else 等前后的空格
-        'arrow-spacing': ['error', {before: true, after: true}], // 箭头函数前后空格
-        'comma-spacing': [1, {before: false, after: true}], // 逗号后面空格
+        'keyword-spacing': ['error', {after: true, before: true} ], // if else 等前后的空格
+        'arrow-spacing': ['error', {before: true, after: true} ], // 箭头函数前后空格
+        'comma-spacing': [1, {before: false, after: true} ], // 逗号后面空格
         'no-console': 0,
         'no-empty': 0, // 编辑器很多 try catch 的 catch 是空的
         'no-useless-escape': 1, // 太多了，改不动
@@ -32,14 +32,15 @@ module.exports = {
             ignoreDestructuring: true, // 忽略解构
             ignoreImports: true, // 忽略导入
             ignoreGlobals: true, // 忽略全局
-        }],
+        } ],
         'require-await': 0, // 编辑器有大量只声明了 async 的函数为了表明这是一个异步函数
         'consistent-return': 0, // 编辑器有大量只声明了 async 的函数为了表明这是一个异步函数 所以可能没有返回值
         'space-before-function-paren': ['error', {
             'anonymous': 'never',
             'named': 'never',
             'asyncArrow': 'always',
-        }],
+        } ],
+        // https://eslint.org/docs/latest/rules/comma-dangle#options
         'comma-dangle': 'off',
         '@typescript-eslint/comma-dangle': ['error', {
             'arrays': 'always-multiline', // 只有多行的情况下，才需要末尾的逗号，这样的目的是减少 commit 的变更行数
@@ -48,13 +49,13 @@ module.exports = {
             'exports': 'always-multiline',
             'functions': 'always-multiline',
             'enums': 'always-multiline',
-        }],
+        } ],
 
         // ====> https://eslint.vuejs.org/
         'vue/html-closing-bracket-newline': ['error', {
             'singleline': 'never',
             'multiline': 'never',
-        }],
+        } ],
         'vue/max-attributes-per-line': ['error', {
             'singleline': {
                 'max': 2,
@@ -62,7 +63,7 @@ module.exports = {
             'multiline': {
                 'max': 1,
             },
-        }],
+        } ],
         'vue/no-unused-components': isProduction ? 2 : 0,
         'vue/html-indent': [
             'error',
@@ -78,7 +79,7 @@ module.exports = {
         'vue/html-self-closing': 0,
 
         // ====> https://typescript-eslint.io/rules/#supported-rules
-        '@typescript-eslint/type-annotation-spacing': ['error', {after: true}], // type 前面要有空格
+        '@typescript-eslint/type-annotation-spacing': ['error', {after: true} ], // type 前面要有空格
         '@typescript-eslint/no-var-requires': 0, // 编辑器有大量使用 requires 的地方暂时关闭
         '@typescript-eslint/no-explicit-any': 0, // 我们有大量any 以后再去 
         '@typescript-eslint/no-unused-vars': 0, // TODO: 声明未使用确实不允许，但是量太多，后面单独处理

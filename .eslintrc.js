@@ -10,7 +10,7 @@ module.exports = {
         'eslint:recommended',
         'plugin:vue/recommended',
         'plugin:@typescript-eslint/recommended',
-        '@cocos-fe/eslint-config/editor'
+        '@cocos-fe/eslint-config/editor',
     ],
     globals: {
         chrome: 'readonly',

@@ -11,7 +11,7 @@ module.exports = {
     'extends': [
         'plugin:vue/vue3-recommended',
         'plugin:@typescript-eslint/recommended',
-        './extend-editor.js'
+        './extend-editor.js',
     ],
     'parser': 'vue-eslint-parser',
     'parserOptions': {
@@ -24,7 +24,7 @@ module.exports = {
     },
     'plugins': [
         'vue',
-        '@typescript-eslint'
+        '@typescript-eslint',
     ],
 };
 

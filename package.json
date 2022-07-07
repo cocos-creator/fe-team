@@ -11,7 +11,7 @@
     "preinstall": "npx only-allow npm",
     "docs:dev": "npm run dev -w @cocos-fe/document",
     "docs:build": "npm run build -w @cocos-fe/document",
-    "lint:js": "cross-env NODE_ENV=production eslint --fix --ext .js,.vue,.ts ./",
+    "lint:js": "cross-env NODE_ENV=production eslint --fix --ext .js,.vue,.ts",
     "prepare": "husky install"
   },
   "repository": {
