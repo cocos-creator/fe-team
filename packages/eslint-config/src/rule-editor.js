@@ -42,11 +42,12 @@ module.exports = {
         }],
         'comma-dangle': 'off',
         '@typescript-eslint/comma-dangle': ['error', {
-            'arrays': 'never',
+            'arrays': 'always-multiline', // 只有多行的情况下，才需要末尾的逗号，这样的目的是减少 commit 的变更行数
             'objects': 'always-multiline',
-            'imports': 'never',
-            'exports': 'never',
-            'functions': 'never',
+            'imports': 'always-multiline',
+            'exports': 'always-multiline',
+            'functions': 'always-multiline',
+            'enums': 'always-multiline',
         }],
 
         // ====> https://eslint.vuejs.org/
@@ -72,7 +73,7 @@ module.exports = {
                 closeBracket: 0,
                 alignAttributesVertically: true,
                 ignores: [],
-            }
+            },
         ],
         'vue/html-self-closing': 0,
 
