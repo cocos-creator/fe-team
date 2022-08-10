@@ -1,6 +1,6 @@
 {
     "name": "@cocos-fe/hello-build",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "cocos editor 插件构建工具",
     "type": "module",
     "exports": {
