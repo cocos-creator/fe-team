@@ -36,6 +36,9 @@ export function createViteBuild(root, filename, filepath) {
             },
             rollupOptions: {
                 external: [...builtinModules, ...preModules],
+                output: {
+                    assetFileNames: '[name].[ext]', // 让 css 文件的命名固定，不要携带 hash
+                },
             },
             minify: false,
         },

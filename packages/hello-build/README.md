@@ -1,6 +1,6 @@
 # hello-build
 
-## install
+## 安装
 
 ```
 npm i @cocos-fe/hello-build -D
