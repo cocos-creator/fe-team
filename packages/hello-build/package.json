@@ -1,6 +1,6 @@
 {
     "name": "@cocos-fe/hello-build",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "cocos editor 插件构建工具",
     "type": "module",
     "exports": {
@@ -16,7 +16,6 @@
     },
     "dependencies": {
         "@vitejs/plugin-vue": "^3.0.1",
-        "builtin-modules": "^3.3.0",
         "chokidar": "^3.5.3",
         "commander": "^9.4.0",
         "less": "^4.1.3",

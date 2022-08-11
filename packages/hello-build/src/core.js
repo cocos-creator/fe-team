@@ -4,10 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import { rm, readFile } from 'fs/promises';
 import { resolve } from 'path';
 import { statSync } from 'fs';
-
-// import { builtinModules } from 'builtin-modules'; 不支持 esm 
-const builtinModules = ['fs', 'path'];
-const preModules = ['fs-extra'];
+import builtinModules from './builtin-modules.js';
 
 export function createViteBuild(root, filename, filepath) {
     // https://vitejs.cn/config/#build-lib
@@ -35,7 +32,7 @@ export function createViteBuild(root, filename, filepath) {
                 fileName: () => `${filename}.js`,
             },
             rollupOptions: {
-                external: [...builtinModules, ...preModules],
+                external: [...builtinModules],
                 output: {
                     assetFileNames: '[name].[ext]', // 让 css 文件的命名固定，不要携带 hash
                 },
