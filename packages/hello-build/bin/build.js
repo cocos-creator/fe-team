@@ -7,8 +7,8 @@ import { creatTask, validateProject } from '../src/core.js';
 
 const root = process.cwd();
 
-async function start() {
-    const buildProjects = await getBuildProjects(process.argv.slice(2)[0]);
+export default async function(plugin) {
+    const buildProjects = await getBuildProjects(plugin);
 
     if (!buildProjects.length) {
         console.log('不存在需要构建的项目!');
@@ -50,4 +50,3 @@ async function getBuildProjects(extensionName) {
     return list;
 }
 
-start();

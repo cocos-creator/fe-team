@@ -37,3 +37,10 @@ hi-cocos build [plugin-name]
 ```
 
 如果传入第二个参数，则只构建指定的插件，否则将全量构建。
+
+## 注意
+
+Windows 需要在命令前面加 npx 如:
+```
+npx hi-cocos
+```
