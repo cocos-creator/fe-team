@@ -16,11 +16,6 @@ module.exports = {
                 activeMatch: '^/article/'
             },
             {
-                text: '踩坑',
-                link: '/experience/index',
-                activeMatch: '^/experience/'
-            },
-            {
                 text: '基建',
                 link: '/core/index',
                 activeMatch: '^/core/'
@@ -29,7 +24,6 @@ module.exports = {
 
         sidebar: {
             '/article/': getArticleSidebar(),
-            '/experience/': getExperienceSidebar(),
             '/core/': getCoreSidebar(),
         }
     }
@@ -50,7 +44,7 @@ function getArticleSidebar() {
                 },
                 {
                     text: 'Git 教程',
-                    link: '/article/Git 教程'
+                    link: '/article/Git教程'
                 },
                 {
                     text: '软链接教程',
@@ -67,7 +61,11 @@ function getArticleSidebar() {
                 {
                     text: '前端项目工程实践建议',
                     link: '/article/前端项目工程实践建议'
-                }
+                },
+                {
+                    text: 'json5',
+                    link: '/article/json5'
+                },
                 // {
                 //     text: 'assets',
                 //     link: '/article/assets'
@@ -77,19 +75,6 @@ function getArticleSidebar() {
     ]
 }
 
-function getExperienceSidebar() {
-    return [
-        {
-            text: '踩坑',
-            children: [
-                {
-                    text: 'json5',
-                    link: '/experience/json5'
-                },
-            ]
-        }
-    ]
-}
 
 function getCoreSidebar() {
     return [
@@ -99,7 +84,8 @@ function getCoreSidebar() {
                 { text: 'Eslint', link: '/core/eslint' },
                 { text: 'Eslint工作流', link: '/core/eslint工作流' },
                 { text: 'Github ID 翻译', link: '/core/chrome-extension-github-ids' },
-                { text: '弃用css预编译处理语言', link: '/core/弃用css预编译处理语言' },
+                { text: '编辑器插件构建', link: '/core/editor-plugin-build' },
+                { text: '提议-弃用css预编译处理语言', link: '/core/弃用css预编译处理语言' },
             ]
         },
     ]

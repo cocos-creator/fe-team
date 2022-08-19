@@ -11,7 +11,7 @@ npm i @cocos-fe/hello-build -D
 安装完成后，在控制台输入 hi-cocos 则会显示帮助信息
 
 ```
-hi-cocos 
+npx hi-cocos 
 ```
 
 ### 生成 dts 文件
@@ -19,13 +19,13 @@ hi-cocos
 插件在构建中，需要用到引擎的 dts，我们封装了一个小脚本用来自动生成，你只需要执行 
 
 ```
-hi-cocos engine-dts
+npx hi-cocos engine-dts
 ```
 
 ### 开发插件
 
 ```
-hi-cocos dev plugin-name
+npx hi-cocos dev plugin-name
 ```
 
 即可开启实时构建，方便开发。
@@ -33,14 +33,14 @@ hi-cocos dev plugin-name
 ### 构建插件
 
 ```
-hi-cocos build [plugin-name]
+npx hi-cocos build [plugin-name]
 ```
 
 如果传入第二个参数，则只构建指定的插件，否则将全量构建。
 
 ## 注意
 
-Windows 需要在命令前面加 npx 如:
+如果你将该 CLI 工具安装在全局，即可在命令前面省略 npx
 ```
-npx hi-cocos
+hi-cocos
 ```
