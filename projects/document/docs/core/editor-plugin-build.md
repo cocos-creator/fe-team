@@ -89,7 +89,7 @@ exports.clear = function() {
 
 我们只要列出主入口文件就好，由于 lib 的打包方式会自己收集依赖项，所以无需在配置文件里体现其他被引用的文件。
 
-## 推荐模式
+## 模版范例
 
 由于我们的 panel 面板有固定的格式如下：
 
@@ -112,6 +112,7 @@ export function colse() {}
 ```js
 import {join} from 'path';
 import {readFileSync} from 'fs';
+import { createApp } from 'vue';
 import App from 'path/to/app.vue';
 
 const weakMap = new WeakMap();
@@ -143,3 +144,7 @@ export function close() {
 ## 使用教程
 
 我们将构建脚本发布成了 npm 包，详细使用方式请看[文档](https://www.npmjs.com/package/@cocos-fe/hello-build)。
+
+:::tip
+由于构建脚本只对内提供，所以我们遵循约定大于配置的原则。比如默认原文件要放置在 `source` 文件夹，所有插件都在 `extensions` 目录下等。
+:::
