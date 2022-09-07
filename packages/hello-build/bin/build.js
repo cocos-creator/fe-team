@@ -24,13 +24,22 @@ async function getBuildProjects(extensionName) {
 
     // 如果指定了构建项目，则只构建当前项目，否则构建 extensions 目录下的所有项目
     if (extensionName) {
-        try {
-            await stat(join(root, './extensions', extensionName));
-        } catch {
-            console.error(`Error: 项目 ${extensionName} 不存在,请查看是否拼写错误！`);
-            return [];
+        // 特殊处理在插件项目执行命令
+        if (extensionName === '.') {
+            const config = await validateProject(root);
+            if (config) {
+                return [config];
+            }
+        } else {
+            try {
+                await stat(join(root, './extensions', extensionName));
+            } catch {
+                console.error(`Error: 项目 ${extensionName} 不存在,请查看是否拼写错误！`);
+                return [];
+            }
+            projects = [extensionName];
         }
-        projects = [extensionName];
+       
     } else {
         projects = readdirSync(join(root, './extensions'));
     }

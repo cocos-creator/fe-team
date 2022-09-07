@@ -8,7 +8,7 @@ export default function(project) {
     const root = process.cwd();
     
     if (project) {
-        const projectPath = join(root, './extensions', project);
+        const projectPath = project === '.' ? root : join(root, './extensions', project);
     
         validateProject(projectPath).then((config) => {
             creatTask(config);

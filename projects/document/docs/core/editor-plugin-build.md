@@ -77,14 +77,28 @@ exports.clear = function() {
 
 为了能使用 vue3 的单文件开发，所以我选择了 [vite](https://vitejs.cn/)，因为它同时支持单文件解析和库模式的打包。
 
-配置文件如下：hello.build.config.json
-```json
-{
+配置文件如下：hello.build.config.js
+```js
+const { defineConfig } = require('vite');
+
+// 用户可以自行修改配置，内部会做合理的合并，也可以完全不自定义，直接走默认配置。
+// 注意： 请勿配置构建入口
+exports.config = defineConfig({
+    build: {
+        outDir: 'dist',
+        rollupOptions: {
+            external: ['electron'],
+        },
+    },
+});
+
+// 声明好的多个构建入口
+exports.libs = {
     "main": "./source/main.ts",
     "panel": "./source/panel.ts",
     "left": "./source/left.ts",
     "right": "./source/right.ts"
-}
+};
 ```
 
 我们只要列出主入口文件就好，由于 lib 的打包方式会自己收集依赖项，所以无需在配置文件里体现其他被引用的文件。

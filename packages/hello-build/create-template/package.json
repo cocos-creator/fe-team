@@ -1,0 +1,32 @@
+{
+    "name": "template",
+    "version": "1.0.0",
+    "main": "./dist/browser.js",
+    "panels": {
+        "default": {
+            "main": "./dist/panel.js"
+        }
+    },
+    "dependencies": {
+        "vue": "^3.2.37"
+    },
+    "devDependencies": {
+        "@types/node": "^18.7.9"
+    },
+    "contributions": {
+        "menu": [
+            {
+                "path": "i18n:menu.panel",
+                "label": "i18n:template.title",
+                "message": "open"
+            }
+        ],
+        "messages": {
+            "open": {
+                "methods": [
+                    "open"
+                ]
+            }
+        }
+    }
+}

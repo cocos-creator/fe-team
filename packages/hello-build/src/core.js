@@ -5,10 +5,12 @@ import { rm, readFile } from 'fs/promises';
 import { resolve } from 'path';
 import { statSync } from 'fs';
 import builtinModules from './builtin-modules.js';
+import { merge } from 'webpack-merge';
 
-export function createViteBuild(root, filename, filepath) {
+export function createViteBuild(filename, filepath, config) {
     // https://vitejs.cn/config/#build-lib
-    return build({
+
+    const c = merge({
         plugins: [
             vue({
                 template: {
@@ -18,7 +20,6 @@ export function createViteBuild(root, filename, filepath) {
                 },
             }),
         ],
-        root: root,
         base: './',
         build: {
             target: 'esnext',
@@ -39,22 +40,29 @@ export function createViteBuild(root, filename, filepath) {
             },
             minify: false,
         },
-    });
+    }, config);
+    return build(c);
 }
 
-export async function creatTask(config) {
-    const { project: extensionPath, configPath } = config;
-    return readFile(configPath, 'utf-8').then(async (data) => {
-        const extensionConfig = JSON.parse(data.toString());
+export async function creatTask(taskConfig) {
+    // eslint-disable-next-line no-async-promise-executor
+    return new Promise(async (res) => {
+        const { project: extensionPath, config = {}, libs } = taskConfig;
+
+        if (!libs) res();
 
         // 手动清空一下 dist
-        await rm(resolve(extensionPath, 'dist'), { force: true, recursive: true, maxRetries: 3 });
+        await rm(resolve(extensionPath, config.dist ?? 'dist'), { force: true, recursive: true, maxRetries: 3 });
+
+        // root 处理
+        config.root = config.root ?? extensionPath;
 
         // 由于 vite 的 lib 只支持单入口，所以这边需要遍历构建
-        const buildEnteries = Object.entries(extensionConfig);
+        const buildEnteries = Object.entries(libs);
         for (const [filename, filepath] of buildEnteries) {
-            await createViteBuild(extensionPath, filename, resolve(extensionPath, filepath));
+            await createViteBuild(filename, resolve(extensionPath, filepath), config);
         }
+        res();
     });
 }
 
@@ -65,13 +73,14 @@ export async function validateProject(projectPath) {
             const stats = statSync(projectPath);
             if (stats.isDirectory()) {
 
-                const configPath = resolve(projectPath, 'hello.build.config.json');
-                const statsConfig = statSync(configPath);
+                const configPath = resolve(projectPath, 'hello.build.config.js');
 
-                if (statsConfig.isFile()) {
-                    res({
-                        project: projectPath,
-                        configPath,
+                if (statSync(configPath).isFile()) {
+                    import(configPath).then((module) => {
+                        res({
+                            project: projectPath,
+                            ...module,
+                        });
                     });
                 } else {
                     rej(new Error('插件构建配置文件不存在!'));
