@@ -118,7 +118,7 @@ export function update() {}
 
 export function ready() {}
 
-export function colse() {}
+export function close() {}
 ```
 
 所以在进行 vue 单文件开发时，可以用下面推荐的模板：

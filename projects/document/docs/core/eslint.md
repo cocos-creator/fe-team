@@ -119,7 +119,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
   ],
   "rules": {
-    // 额外定制一丢丢规则s sss
+    // 额外定制一丢丢规则
   }
 }
 ```
