@@ -2,7 +2,7 @@
 
 import chokidar from 'chokidar';
 import { join } from 'path';
-import { creatTask, validateProject } from '../src/core.js';
+import { creatTask, validateProject } from './core.js';
 
 export default function(project) {
     const root = process.cwd();

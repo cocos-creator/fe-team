@@ -3,7 +3,7 @@
 import { join } from 'path';
 import { stat } from 'fs/promises';
 import { readdirSync } from 'fs';
-import { creatTask, validateProject } from '../src/core.js';
+import { creatTask, validateProject } from './core.js';
 
 const root = process.cwd();
 

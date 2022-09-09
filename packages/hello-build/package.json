@@ -1,15 +1,18 @@
 {
     "name": "@cocos-fe/hello-build",
-    "version": "0.0.9",
+    "version": "0.0.11",
     "description": "cocos editor 插件构建工具",
     "type": "module",
+    "main": "bin/core.cjs",
+    "module": "bin/core.mjs",
     "exports": {
         ".": {
-            "import": "./src/core.js"
+            "require": "./bin/core.cjs",
+            "import": "./bin/core.mjs"
         }
     },
     "bin": {
-        "hi-cocos": "bin/index.js"
+        "hi-cocos": "bin/index.mjs"
     },
     "dependencies": {
         "@vitejs/plugin-vue": "^3.0.1",
@@ -27,5 +30,16 @@
     },
     "engines": {
         "node": "16"
-    }
+    },
+    "devDependencies": {
+        "rollup": "^2.79.0",
+        "rollup-plugin-delete": "^2.0.0",
+        "rollup-plugin-node-externals": "^5.0.0",
+        "rollup-plugin-preserve-shebangs": "^0.2.0"
+    },
+    "files": [
+        "bin",
+        "create-template",
+        "README.md"
+    ]
 }
