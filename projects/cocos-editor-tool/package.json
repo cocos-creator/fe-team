@@ -1,0 +1,38 @@
+{
+  "name": "cocos-editor-tool",
+  "version": "1.0.0",
+  "package_version": 2,
+  "description": "效率加倍的小助手",
+  "main": "./dist/browser.js",
+  "scripts": {
+    "dev": "npx hi-cocos dev .",
+    "build": "npx hi-cocos build ."
+  },
+  "keywords": [],
+  "author": "cocos-fe",
+  "license": "ISC",
+  "devDependencies": {
+    "@cocos-fe/hello-build": "^0.0.13"
+  },
+  "panels": {
+    "default": {
+      "main": "./dist/panel.js"
+    }
+  },
+  "contributions": {
+    "menu": [
+      {
+        "path": "i18n:menu.panel",
+        "label": "小助手",
+        "message": "open"
+      }
+    ],
+    "messages": {
+      "open": {
+        "methods": [
+          "open"
+        ]
+      }
+    }
+  }
+}

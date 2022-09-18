@@ -1,7 +1,12 @@
 {
-    "name": "template",
+    "name": "plugin-demo",
     "version": "1.0.0",
     "main": "./dist/browser.js",
+    "package_version": 2,
+    "scripts": {
+        "dev": "npx hi-cocos dev .",
+        "build": "npx hi-cocos build ."
+    },
     "panels": {
         "default": {
             "main": "./dist/panel.js"
@@ -11,6 +16,7 @@
         "vue": "^3.2.37"
     },
     "devDependencies": {
+        "@cocos-fe/hello-build": "0.0.12",
         "@types/node": "^18.7.9"
     },
     "contributions": {

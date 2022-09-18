@@ -2,7 +2,7 @@
     <div class="hi">
         {{ props.message }} 欢迎使用 vue 3 ，计数器{{ counter }}
         <button @click="clickHandle">
-            click 1
+            click 3
         </button>
         <Test />
     </div>

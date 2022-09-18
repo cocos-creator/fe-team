@@ -12,12 +12,12 @@ export default function(project) {
     
         validateProject(projectPath).then((config) => {
             creatTask(config);
-            chokidar.watch(join(projectPath, 'source')).on('change', (event, path) => {
+            chokidar.watch(join(projectPath, 'source')).on('change', () => {
                 creatTask(config);
             });
         }).catch((error) => console.error(error));
        
     } else {
-        console.warn('没有指定需要开发的插件!');
+        console.warn('没有 指定需要开发的插件!');
     }
 }

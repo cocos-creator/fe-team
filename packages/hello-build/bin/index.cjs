@@ -7,6 +7,7 @@ var chokidar = require('chokidar');
 var node_path = require('node:path');
 var core = require('./core.cjs');
 var promises = require('node:fs/promises');
+var fsExtra = require('fs-extra');
 var node_url = require('node:url');
 require('vite');
 require('@vitejs/plugin-vue');
@@ -24,13 +25,13 @@ function dev(project) {
     
         core.validateProject(projectPath).then((config) => {
             core.creatTask(config);
-            chokidar__default["default"].watch(node_path.join(projectPath, 'source')).on('change', (event, path) => {
+            chokidar__default["default"].watch(node_path.join(projectPath, 'source')).on('change', () => {
                 core.creatTask(config);
             });
         }).catch((error) => console.error(error));
        
     } else {
-        console.warn('没有指定需要开发的插件!');
+        console.warn('没有 指定需要开发的插件!');
     }
 }
 
@@ -90,23 +91,23 @@ async function getBuildProjects(extensionName) {
 
 const root = process.cwd();
 
-function create(project = 'create-template') {
-    const p = node_path.join(root, project);
+function create(project = 'cocos-editor-plugin-demo') {
+    const pluginDemoPath = node_path.join(root, project);
 
     try {
-        const stats = node_fs.statSync(p);
+        const stats = node_fs.statSync(pluginDemoPath);
         if (stats.isDirectory()) {
-            return console.error(`文件夹 ${p} 已经存在!`);
+            return console.error(`文件夹 ${pluginDemoPath} 已经存在!`);
         }
     } catch (error) {
         
     }
    
-    promises.mkdir(p, {recursive: true})
+    fsExtra.mkdirp(pluginDemoPath)
         .then(() => {
-            const __dirname = node_path.dirname(node_url.fileURLToPath((typeof document === 'undefined' ? new (require('u' + 'rl').URL)('file:' + __filename).href : (document.currentScript && document.currentScript.src || new URL('index.cjs', document.baseURI).href))));
+            const __dirname = node_url.fileURLToPath(new URL('.', (typeof document === 'undefined' ? new (require('u' + 'rl').URL)('file:' + __filename).href : (document.currentScript && document.currentScript.src || new URL('index.cjs', document.baseURI).href))));
             
-            promises.cp(node_path.join(__dirname, '../create-template/'), p, {recursive: true});
+            fsExtra.copy(node_path.join(__dirname, '../create-template/'), pluginDemoPath, {recursive: true});
         });
        
 }
@@ -135,7 +136,7 @@ program
     .command('engine-dts')
     .description('生成引擎的 dts 文件，将存入 @types 文件夹中')
     .action(() => {
-        Promise.resolve().then(function () { return require('./create-engine-dts-e222feb9.js'); });
+        Promise.resolve().then(function () { return require('./bin-create-engine-dts-de581779.js'); });
     });
 
 program

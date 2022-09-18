@@ -1,3 +1,3 @@
 module.exports = {
-    title: 'demo-template-en',
+    title: 'demo-英文',
 };

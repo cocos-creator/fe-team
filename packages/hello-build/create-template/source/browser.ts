@@ -1,13 +1,19 @@
-export const methods = {
+const methods = {
     async open() {
         Editor.Panel.open('template'); 
     },
 };
 
-export function load() {
+function load() {
     console.log('load');
 }
 
-export function unload() {
+function unload() {
     console.log('unload');
 }
+
+module.exports = {
+    methods,
+    load,
+    unload,
+};

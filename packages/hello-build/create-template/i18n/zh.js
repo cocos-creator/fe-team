@@ -1,3 +1,3 @@
 module.exports = {
-    title: 'demo-template-zh',
+    title: 'demo-中文',
 };

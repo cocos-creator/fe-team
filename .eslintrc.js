@@ -14,6 +14,7 @@ module.exports = {
     ],
     globals: {
         chrome: 'readonly',
+        Editor: 'readonly',
     },
     parser: 'vue-eslint-parser',
     parserOptions: {

@@ -15,7 +15,7 @@ const $ = {root: '#app'};
 function ready() {
     panel = this;
     // 直接渲染 vue 文件，在 App.vue 里面就可以进行规范的 vue 开发。
-    const app = createApp(App, {message: 'hi cocos'});
+    const app = createApp(App);
     app.mount(panel.$.root);
     weakMap.set(this, app);
 }

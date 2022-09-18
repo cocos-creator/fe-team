@@ -2,9 +2,10 @@
 import { readdirSync, statSync, readFileSync } from 'node:fs';
 import { Command } from 'commander';
 import chokidar from 'chokidar';
-import { join, dirname } from 'node:path';
+import { join } from 'node:path';
 import { validateProject, creatTask } from './core.mjs';
-import { stat, mkdir, cp } from 'node:fs/promises';
+import { stat } from 'node:fs/promises';
+import { mkdirp, copy } from 'fs-extra';
 import { fileURLToPath } from 'node:url';
 import 'vite';
 import '@vitejs/plugin-vue';
@@ -18,13 +19,13 @@ function dev(project) {
     
         validateProject(projectPath).then((config) => {
             creatTask(config);
-            chokidar.watch(join(projectPath, 'source')).on('change', (event, path) => {
+            chokidar.watch(join(projectPath, 'source')).on('change', () => {
                 creatTask(config);
             });
         }).catch((error) => console.error(error));
        
     } else {
-        console.warn('没有指定需要开发的插件!');
+        console.warn('没有 指定需要开发的插件!');
     }
 }
 
@@ -84,23 +85,23 @@ async function getBuildProjects(extensionName) {
 
 const root = process.cwd();
 
-function create(project = 'create-template') {
-    const p = join(root, project);
+function create(project = 'cocos-editor-plugin-demo') {
+    const pluginDemoPath = join(root, project);
 
     try {
-        const stats = statSync(p);
+        const stats = statSync(pluginDemoPath);
         if (stats.isDirectory()) {
-            return console.error(`文件夹 ${p} 已经存在!`);
+            return console.error(`文件夹 ${pluginDemoPath} 已经存在!`);
         }
     } catch (error) {
         
     }
    
-    mkdir(p, {recursive: true})
+    mkdirp(pluginDemoPath)
         .then(() => {
-            const __dirname = dirname(fileURLToPath(import.meta.url));
+            const __dirname = fileURLToPath(new URL('.', import.meta.url));
             
-            cp(join(__dirname, '../create-template/'), p, {recursive: true});
+            copy(join(__dirname, '../create-template/'), pluginDemoPath, {recursive: true});
         });
        
 }
@@ -129,7 +130,7 @@ program
     .command('engine-dts')
     .description('生成引擎的 dts 文件，将存入 @types 文件夹中')
     .action(() => {
-        import('./create-engine-dts-f6aabfc8.js');
+        import('./bin-create-engine-dts-0451d3f8.js');
     });
 
 program

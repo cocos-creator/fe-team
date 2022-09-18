@@ -2,9 +2,9 @@
 
 import {readFileSync} from 'node:fs';
 import { Command } from 'commander';
-import dev from './dev.js';
-import build from './build.js';
-import create from './create-template.js';
+import dev from './bin-dev.js';
+import build from './bin-build.js';
+import create from './bin-create-template.js';
 
 const program = new Command();
 const packageJson = JSON.parse(readFileSync('package.json'));
@@ -30,7 +30,7 @@ program
     .command('engine-dts')
     .description('生成引擎的 dts 文件，将存入 @types 文件夹中')
     .action(() => {
-        import('./create-engine-dts.js');
+        import('./bin-create-engine-dts.js');
     });
 
 program
