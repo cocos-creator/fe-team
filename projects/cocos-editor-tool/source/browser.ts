@@ -7,7 +7,6 @@ const pluginPaths = [
 
 export const methods = {
     async open() {
-        console.log(pkg.name);
         Editor.Panel.open(pkg.name); 
     },
 };
@@ -17,7 +16,6 @@ export async function load() {
         await Editor.Package.register(v);
         await Editor.Package.enable(v);
     }
-    console.log('load');
 }
 
 export function unload() {
