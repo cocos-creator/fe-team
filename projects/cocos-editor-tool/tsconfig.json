@@ -21,5 +21,8 @@
         "source/**/*.d.ts",
         "source/**/*.tsx",
         "source/**/*.vue"
-    ]
+,
+"source/panel.js",
+"source/browser.js"
+]
 }

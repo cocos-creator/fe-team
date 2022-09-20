@@ -1,7 +1,7 @@
 const pkg = require('../package.json');
 
 const pluginPaths = [
-    '/Users/alan/Documents/xr-extensions/extensions/xr-plugin',
+    '/Users/alan/cocos/xr-extensions/extensions/xr-plugin',
     '/Users/alan/cocos/online-x-extensions',   
 ];
 

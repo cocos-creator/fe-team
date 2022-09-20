@@ -10,6 +10,6 @@ exports.config = defineConfig({
 });
 
 exports.libs = {
-    'browser': './source/browser.ts',
-    'panel': './source/panel.ts',
+    'browser': './source/browser.js',
+    'panel': './source/panel.js',
 };
