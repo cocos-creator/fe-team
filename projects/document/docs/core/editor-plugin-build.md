@@ -105,7 +105,6 @@ exports.libs = {
 
 如果你使用的是编辑器现有的构建工作流，那么需要如下的配置: .workflow.build.js
 ```js
-// .workflow.build.js
 
 const { defineConfig } = require('vite');
 
