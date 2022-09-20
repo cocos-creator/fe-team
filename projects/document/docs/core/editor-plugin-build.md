@@ -103,6 +103,33 @@ exports.libs = {
 
 我们只要列出主入口文件就好，由于 lib 的打包方式会自己收集依赖项，所以无需在配置文件里体现其他被引用的文件。
 
+如果你使用的是编辑器现有的构建工作流，那么需要如下的配置: .workflow.build.js
+```js
+// .workflow.build.js
+
+const { defineConfig } = require('vite');
+
+exports.vue3 = function() {
+    return {
+        config: defineConfig({
+            build: {
+                outDir: 'dist',
+                rollupOptions: {
+                    external: ['electron'],
+                },
+            },
+        }),
+        libs: {
+            'browser': './source/browser.js',
+            'panel': './source/panel.js',
+            'preload': './source/preload.js',
+            'build': './source/build.js',
+            'hooks': './source/hooks.js',
+        }
+    };
+};
+```
+
 ## 模版范例
 
 由于我们的 panel 面板有固定的格式如下：
