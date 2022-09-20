@@ -4,6 +4,7 @@ import { rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { statSync } from 'node:fs';
 import { merge } from 'webpack-merge';
+import { pathToFileURL } from 'node:url';
 
 // https://www.npmjs.com/package/builtin-modules 
 
@@ -117,7 +118,7 @@ async function validateProject(projectPath) {
             const stats = statSync(projectPath);
             if (stats.isDirectory()) {
 
-                const configPath = resolve(projectPath, 'hello.build.config.js');
+                const configPath = pathToFileURL(resolve(projectPath, 'hello.build.config.js'));
 
                 if (statSync(configPath).isFile()) {
                     import(configPath).then((module) => {

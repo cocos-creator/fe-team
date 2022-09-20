@@ -5,7 +5,7 @@ heroAlt: Logo image
 heroText: COCOS FE
 tagline: To be the world's cocos !
 actionText: 关于我们
-actionLink: /about/index
+actionLink: /about
 features:
   - title: 团队建设
     details: 雅基软件前端团队的创意聚集地，营造团队凝聚力，团队归属感。

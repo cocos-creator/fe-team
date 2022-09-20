@@ -8,6 +8,7 @@ var promises = require('node:fs/promises');
 var node_path = require('node:path');
 var node_fs = require('node:fs');
 var webpackMerge = require('webpack-merge');
+var node_url = require('node:url');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -143,7 +144,7 @@ async function validateProject(projectPath) {
             const stats = node_fs.statSync(projectPath);
             if (stats.isDirectory()) {
 
-                const configPath = node_path.resolve(projectPath, 'hello.build.config.js');
+                const configPath = node_url.pathToFileURL(node_path.resolve(projectPath, 'hello.build.config.js'));
 
                 if (node_fs.statSync(configPath).isFile()) {
                     (function (t) { return Promise.resolve().then(function () { return /*#__PURE__*/_interopNamespace(require(t)); }); })(configPath).then((module) => {

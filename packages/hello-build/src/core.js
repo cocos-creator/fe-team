@@ -6,6 +6,7 @@ import { resolve } from 'path';
 import { statSync } from 'fs';
 import builtinModules from './builtin-modules.js';
 import { merge } from 'webpack-merge';
+import { pathToFileURL } from 'node:url';
 
 export function createViteBuild(filename, filepath, config) {
     // https://vitejs.cn/config/#build-lib
@@ -73,7 +74,7 @@ export async function validateProject(projectPath) {
             const stats = statSync(projectPath);
             if (stats.isDirectory()) {
 
-                const configPath = resolve(projectPath, 'hello.build.config.js');
+                const configPath = pathToFileURL(resolve(projectPath, 'hello.build.config.js'));
 
                 if (statSync(configPath).isFile()) {
                     import(configPath).then((module) => {
