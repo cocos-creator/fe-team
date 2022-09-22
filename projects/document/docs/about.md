@@ -7,7 +7,7 @@ sidebar: false
 我们是雅基软件旗下的 Cocos Creator 开发团队。
 
 <div class="luxun">
-    <img src="../assets/鲁迅.jpeg" />
+    <img src="./assets/鲁迅.jpeg" />
     <p><i>这是一支牛逼的团队。</i></p>   
 </div>
 
