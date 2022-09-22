@@ -27,13 +27,6 @@ exports.lessc = function() {
     ];
 };
 
-// 清理项目的时候删除的文件
-exports.clear = function() {
-    return [
-        './dist',
-    ];
-};
-
 ```
 
 这样构建思路有如下几个弊端：
