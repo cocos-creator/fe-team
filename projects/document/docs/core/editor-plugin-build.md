@@ -181,3 +181,37 @@ export function close() {
 :::tip
 由于构建脚本只对内提供，所以我们遵循约定大于配置的原则。比如默认原文件要放置在 `source` 文件夹，所有插件都在 `extensions` 目录下等。
 :::
+
+## 常见问题
+
+### require 的代码不能被打包
+
+我们的构建使用 vite，vite 内部使用的是 rollup，它是一个 ESM 规范的打包工具，所以默认不支持 commonjs。如果一定要用需要如下2个插件来支持：
+
+- @rollup/plugin-commonjs
+- @rollup/plugin-node-resolve
+
+配置如下：
+
+```js
+import { defineConfig } from 'vite';
+import commonjs from '@rollup/plugin-commonjs';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+
+export const config = defineConfig({
+    build: {
+        outDir: 'dist',
+        rollupOptions: {
+            external: ['electron'],
+        },
+    },
+    plugins: [nodeResolve(), commonjs()],
+});
+
+export const libs = {
+    'browser': './source/browser.js',
+    'panel': './source/panel.js',
+};
+```
+
+注意，此时你的业务代码就只能使用 commonjs 的方式来写，不能和 ESM 混用，会导致构建失败。
