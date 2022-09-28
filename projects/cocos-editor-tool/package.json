@@ -12,7 +12,7 @@
   "author": "cocos-fe",
   "license": "ISC",
   "devDependencies": {
-    "@cocos-fe/hello-build": "^0.0.16"
+    "@cocos-fe/hello-build": "file:packages/hello-build"
   },
   "panels": {
     "default": {

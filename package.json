@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/cocos-creator/cocos-fe#readme",
   "devDependencies": {
+    "@cocos-fe/eslint-config": "workspace:*",
     "cross-env": "^7.0.3",
     "eslint": "^8.19.0",
     "eslint-plugin-vue": "^9.5.1",
