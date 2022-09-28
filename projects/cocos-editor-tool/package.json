@@ -12,7 +12,7 @@
   "author": "cocos-fe",
   "license": "ISC",
   "devDependencies": {
-    "@cocos-fe/hello-build": "^0.0.13"
+    "@cocos-fe/hello-build": "^0.0.16"
   },
   "panels": {
     "default": {
@@ -34,5 +34,8 @@
         ]
       }
     }
+  },
+  "dependencies": {
+    "vue": "^3.2.40"
   }
 }

@@ -97,10 +97,10 @@ async function creatTask(taskConfig) {
         if (!libs) res();
 
         // 手动清空一下 dist
-        await rm(resolve(extensionPath, config.dist ?? 'dist'), { force: true, recursive: true, maxRetries: 3 });
+        await rm(resolve(extensionPath, config.dist || 'dist'), { force: true, recursive: true, maxRetries: 3 });
 
         // root 处理
-        config.root = config.root ?? extensionPath;
+        config.root = config.root || extensionPath;
 
         // 由于 vite 的 lib 只支持单入口，所以这边需要遍历构建
         const buildEnteries = Object.entries(libs);

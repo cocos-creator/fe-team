@@ -1,5 +1,5 @@
 <template>
-    <div class="hi">
+    <div className="hi">
         {{ props.message }} 欢迎使用 vue 3 ，计数器{{ counter }}
         <button @click="clickHandle">
             click 3

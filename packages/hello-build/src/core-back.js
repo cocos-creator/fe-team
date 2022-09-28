@@ -67,7 +67,7 @@ export async function creatTask(taskConfig, isDev = false) {
     return new Promise(async (res) => {
         const { project: projectPath, config = {} } = taskConfig;
         // root 处理
-        config.root = config.root ?? projectPath;
+        config.root = config.root || projectPath;
 
         // 处理一下入口文件的地址
         const entries = config.build.rollupOptions.input;

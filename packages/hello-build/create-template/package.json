@@ -16,7 +16,7 @@
         "vue": "^3.2.37"
     },
     "devDependencies": {
-        "@cocos-fe/hello-build": "0.0.12",
+        "@cocos-fe/hello-build": "0.0.16",
         "@types/node": "^18.7.9"
     },
     "contributions": {
