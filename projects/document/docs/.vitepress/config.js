@@ -99,7 +99,6 @@ function getExperienceSidebar() {
     ]
 }
 
-
 function getCoreSidebar() {
     return [
         {
