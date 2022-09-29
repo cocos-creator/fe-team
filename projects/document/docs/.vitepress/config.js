@@ -67,11 +67,7 @@ function getArticleSidebar() {
                 {
                     text: '前端项目工程实践建议',
                     link: '/article/前端项目工程实践建议'
-                },
-                {
-                    text: 'json5',
-                    link: '/article/json5'
-                },
+                }
             ]
         }
     ]
