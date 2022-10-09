@@ -22,3 +22,5 @@
 - 当前文件： /* eslint-disable no-console */
 - 下一行：   /* eslint-disable-next-line */
 - 当前行：   /* eslint-disable-line no-alert */
+
+如果规则不生效，一定记得重启一下 vscode ！！！

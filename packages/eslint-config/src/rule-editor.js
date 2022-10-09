@@ -4,7 +4,11 @@ module.exports = {
     'rules': {
         // ====> 基础
         'semi': 'error',
-        'quotes': ['error', 'single' ],
+        'quotes': 'off',
+        '@typescript-eslint/quotes': ['error', 'single', {
+            avoidEscape: false,
+            allowTemplateLiterals: true,
+        }],
         'indent': ['error', 4, {
             'SwitchCase': 1,
         } ],
