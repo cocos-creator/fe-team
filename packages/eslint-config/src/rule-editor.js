@@ -51,9 +51,11 @@ module.exports = {
             'objects': 'always-multiline',
             'imports': 'always-multiline',
             'exports': 'always-multiline',
-            'functions': 'always-multiline',
+            'functions': 'only-multiline',
             'enums': 'always-multiline',
-        } ],
+            'tuples': 'only-multiline',
+            'generics': 'only-multiline',
+        }],
 
         // ====> https://eslint.vuejs.org/
         'vue/html-closing-bracket-newline': ['error', {

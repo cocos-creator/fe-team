@@ -1,6 +1,6 @@
 {
   "name": "@cocos-fe/eslint-config",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "description": "cocos 团队的共享配置",
   "exports": {
     ".": {
