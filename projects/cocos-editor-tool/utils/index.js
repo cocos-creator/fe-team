@@ -6,7 +6,7 @@
  * @param {number} number 需要创建的数量
  * @param {string} uuid 需要复制的资源 uuid
  */
-async function createAssets(treeDom, number, uuid) {
+async function copyAssets(treeDom, number, uuid) {
     await treeDom.__vue__.copy(uuid);
     for (const iterator of Array(number)) {
         await treeDom.__vue__.paste(uuid, [uuid]);
