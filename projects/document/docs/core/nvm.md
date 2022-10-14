@@ -29,6 +29,9 @@ nvm use
 
 它就能根据当前项目的 .nvmrc 文件切换到指定的 node 版本。如此并达到了不同项目可以使用不同 node 版本的目的。
 
+> windows 版本的 nvm 不支持 .nvmrc 文件，所以使用 windows 的同学需要手动补充好完整版本，如执行 nvm use 14.20.1 来指定 node 版本。
+[点击查看具体原因](https://github.com/coreybutler/nvm-windows/wiki/Common-Issues#why-isnt-nvmrc-supported-why-arent-some-nvm-for-macoslinux-features-supported)
+
 ## 安装 nvm 
 
 > 在安装 nvm 之前，需要先将本地的 node 卸载，避免一些莫名其妙的问题，让 nvm 完全接管电脑的 node 
