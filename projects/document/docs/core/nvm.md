@@ -58,7 +58,7 @@ A：以管理员的身份运行终端工具
 ```
 node vv16.17.1 (64-bit) is not installed or cannot be found.
 ```
-A:  windows 的 nvm 不支持省略版本号，把命令改成如:  `nvm use 16.17.1` 即可
+A:  windows 的 nvm 不支持省略版本号，把命令改成如:  `nvm use 16.17.1` 即可 [issue](https://github.com/coreybutler/nvm-windows/issues/708)
 
 
 
