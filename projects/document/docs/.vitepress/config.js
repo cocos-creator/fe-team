@@ -78,18 +78,10 @@ function getExperienceSidebar() {
         {
             text: '踩坑经验',
             children: [
-                {
-                    text: 'JSON5',
-                    link: '/experience/json5'
-                },
-                {
-                    text: 'Gitmodules',
-                    link: '/experience/gitmodules'
-                },
-                {
-                    text: 'Keycode 229',
-                    link: '/experience/keycode-229'
-                },
+                { text: 'JSON5',link: '/experience/json5'},
+                { text: 'Gitmodules',link: '/experience/gitmodules'},
+                { text: 'Keycode 229',link: '/experience/keycode-229'},
+                { text: '脚本切换 nvm ',link: '/experience/spawn-nvm'},
             ]
         }
     ]
