@@ -116,3 +116,5 @@ zsh: command not found: nvm
 ## 方案
 
 似乎没有比较好的方案，因为我们用 node 的 spawn 创建一个新进程的时候，没办法动态先执行一下 "$NVM_DIR/nvm.sh" 让 nvm 这个命令动态加载到新进程去，关于系统命令本来也属于本人盲区，或者有方案可以解决，后续再看吧，我们现在只能把工具流的自动切换改为提示，让用户自己去切换 node 版本。
+
+<img width="737" alt="image" src="https://user-images.githubusercontent.com/35713518/199439965-cf824122-f952-41e3-b7f9-28ea9c64907f.png">
