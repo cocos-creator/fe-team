@@ -4,7 +4,6 @@ import {readFileSync} from 'node:fs';
 import { Command } from 'commander';
 import dev from './bin-dev.js';
 import build from './bin-build.js';
-import create from './bin-create-template.js';
 
 const program = new Command();
 const packageJson = JSON.parse(readFileSync('package.json'));
@@ -32,12 +31,5 @@ program
     .action(() => {
         import('./bin-create-engine-dts.js');
     });
-
-program
-    .command('create [plugin]')
-    .description('创建一个插件模板')
-    .action((plugin) => {
-        create(plugin);
-    });      
 
 program.parse(process.argv);

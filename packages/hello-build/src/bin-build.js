@@ -3,7 +3,7 @@
 import { join } from 'path';
 import { stat } from 'fs/promises';
 import { readdirSync } from 'fs';
-import { creatTask, validateProject } from './core.js';
+import { createViteBuild, validateProject } from './core.js';
 
 const root = process.cwd();
 
@@ -15,7 +15,7 @@ export default async function(plugin) {
         return;
     }
     for (const project of buildProjects) {
-        await creatTask(project);
+        await createViteBuild(project);
     }
 }
 

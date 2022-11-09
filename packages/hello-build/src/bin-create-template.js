@@ -1,6 +1,6 @@
 
 import { mkdirp, copy } from 'fs-extra';
-import { join, dirname} from 'path';
+import { join } from 'path';
 import { fileURLToPath } from 'url';
 import {statSync} from 'fs';
 

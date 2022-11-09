@@ -37,7 +37,7 @@ exports.lessc = function() {
 
 ## 新的构建思路
 
-每个插件的面板配置和拓展配置都是在 package.json 里声明的，如下：
+当前插件系统设计，每个插件的面板配置和拓展配置都是在 package.json 里声明的，如下：
 ```json
 {
     "name": "console",
@@ -75,24 +75,22 @@ exports.lessc = function() {
 const { defineConfig } = require('vite');
 
 // 用户可以自行修改配置，内部会做合理的合并，也可以完全不自定义，直接走默认配置。
-// 注意： 请勿配置构建入口
 exports.config = defineConfig({
     build: {
-        outDir: 'dist',
+        libs: {
+            entry: {
+                "main": "./source/main.ts",
+                "panel": "./source/panel.ts",
+                "left": "./source/left.ts",
+                "right": "./source/right.ts"
+            }
+        }, 
         rollupOptions: {
             external: ['electron'],
         },
     },
 });
 
-// 声明好的多个构建入口
-exports.libs = {
-    "main": "./source/main.ts",
-    "panel": "./source/panel.ts",
-    "left": "./source/left.ts",
-    "right": "./source/right.ts"
-};
-```
 
 我们只要列出主入口文件就好，由于 lib 的打包方式会自己收集依赖项，所以无需在配置文件里体现其他被引用的文件。
 
@@ -105,19 +103,19 @@ exports.vue3 = function() {
     return {
         config: defineConfig({
             build: {
-                outDir: 'dist',
+                libs: {
+                    entry: {
+                        "main": "./source/main.ts",
+                        "panel": "./source/panel.ts",
+                        "left": "./source/left.ts",
+                        "right": "./source/right.ts"
+                    }
+                }, 
                 rollupOptions: {
                     external: ['electron'],
                 },
             },
         }),
-        libs: {
-            'browser': './source/browser.js',
-            'panel': './source/panel.js',
-            'preload': './source/preload.js',
-            'build': './source/build.js',
-            'hooks': './source/hooks.js',
-        }
     };
 };
 ```
@@ -143,8 +141,8 @@ export function close() {}
 所以在进行 vue 单文件开发时，可以用下面推荐的模板：
 
 ```js
-import {join} from 'path';
-import {readFileSync} from 'fs';
+import { join } from 'path';
+import { readFileSync } from 'fs';
 import { createApp } from 'vue';
 import App from 'path/to/app.vue';
 
@@ -200,7 +198,12 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export const config = defineConfig({
     build: {
-        outDir: 'dist',
+        libs: {
+            entry: {
+                browser: './source/browser.js',
+                panel: './source/panel.js',
+            },
+        },
         rollupOptions: {
             external: ['electron'],
         },
@@ -208,10 +211,6 @@ export const config = defineConfig({
     plugins: [nodeResolve(), commonjs()],
 });
 
-export const libs = {
-    'browser': './source/browser.js',
-    'panel': './source/panel.js',
-};
 ```
 
 注意，此时你的业务代码就只能使用 commonjs 的方式来写，不能和 ESM 混用，会导致构建失败。

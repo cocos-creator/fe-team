@@ -7,15 +7,10 @@ var chokidar = require('chokidar');
 var node_path = require('node:path');
 var core = require('./core.cjs');
 var promises = require('node:fs/promises');
-var fsExtra = require('fs-extra');
-var node_url = require('node:url');
 require('vite');
 require('@vitejs/plugin-vue');
 require('webpack-merge');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var chokidar__default = /*#__PURE__*/_interopDefaultLegacy(chokidar);
+require('node:url');
 
 function dev(project) {
     const root = process.cwd();
@@ -24,18 +19,18 @@ function dev(project) {
         const projectPath = project === '.' ? root : node_path.join(root, './extensions', project);
     
         core.validateProject(projectPath).then((config) => {
-            core.creatTask(config);
-            chokidar__default["default"].watch(node_path.join(projectPath, 'source')).on('change', () => {
-                core.creatTask(config);
+            core.createViteBuild(config);
+            chokidar.watch(node_path.join(projectPath, 'source')).on('change', () => {
+                core.createViteBuild(config);
             });
         }).catch((error) => console.error(error));
        
     } else {
-        console.warn('没有 指定需要开发的插件!');
+        console.warn('没有指定需要开发的插件!');
     }
 }
 
-const root$1 = process.cwd();
+const root = process.cwd();
 
 async function build(plugin) {
     const buildProjects = await getBuildProjects(plugin);
@@ -45,7 +40,7 @@ async function build(plugin) {
         return;
     }
     for (const project of buildProjects) {
-        await core.creatTask(project);
+        await core.createViteBuild(project);
     }
 }
 
@@ -56,13 +51,13 @@ async function getBuildProjects(extensionName) {
     if (extensionName) {
         // 特殊处理在插件项目执行命令
         if (extensionName === '.') {
-            const config = await core.validateProject(root$1);
+            const config = await core.validateProject(root);
             if (config) {
                 return [config];
             }
         } else {
             try {
-                await promises.stat(node_path.join(root$1, './extensions', extensionName));
+                await promises.stat(node_path.join(root, './extensions', extensionName));
             } catch {
                 console.error(`Error: 项目 ${extensionName} 不存在,请查看是否拼写错误！`);
                 return [];
@@ -71,12 +66,12 @@ async function getBuildProjects(extensionName) {
         }
        
     } else {
-        projects = node_fs.readdirSync(node_path.join(root$1, './extensions'));
+        projects = node_fs.readdirSync(node_path.join(root, './extensions'));
     }
 
     const list = await projects.reduce(async (res, project) => {
         const result = await res;
-        const projectPath = node_path.join(root$1, './extensions', project);
+        const projectPath = node_path.join(root, './extensions', project);
         try {
             const config = await core.validateProject(projectPath);
             if (config) {
@@ -87,29 +82,6 @@ async function getBuildProjects(extensionName) {
     }, Promise.resolve([]));
 
     return list;
-}
-
-const root = process.cwd();
-
-function create(project = 'cocos-editor-plugin-demo') {
-    const pluginDemoPath = node_path.join(root, project);
-
-    try {
-        const stats = node_fs.statSync(pluginDemoPath);
-        if (stats.isDirectory()) {
-            return console.error(`文件夹 ${pluginDemoPath} 已经存在!`);
-        }
-    } catch (error) {
-        
-    }
-   
-    fsExtra.mkdirp(pluginDemoPath)
-        .then(() => {
-            const __dirname = node_url.fileURLToPath(new URL('.', (typeof document === 'undefined' ? new (require('u' + 'rl').URL)('file:' + __filename).href : (document.currentScript && document.currentScript.src || new URL('index.cjs', document.baseURI).href))));
-            
-            fsExtra.copy(node_path.join(__dirname, '../create-template/'), pluginDemoPath, {recursive: true});
-        });
-       
 }
 
 const program = new commander.Command();
@@ -136,14 +108,7 @@ program
     .command('engine-dts')
     .description('生成引擎的 dts 文件，将存入 @types 文件夹中')
     .action(() => {
-        Promise.resolve().then(function () { return require('./bin-create-engine-dts-de581779.js'); });
+        Promise.resolve().then(function () { return require('./bin-create-engine-dts-31f1396f.js'); });
     });
-
-program
-    .command('create [plugin]')
-    .description('创建一个插件模板')
-    .action((plugin) => {
-        create(plugin);
-    });      
 
 program.parse(process.argv);

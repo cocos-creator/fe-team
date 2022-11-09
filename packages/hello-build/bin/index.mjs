@@ -1,15 +1,14 @@
 #!/usr/bin/env node
-import { readdirSync, statSync, readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { Command } from 'commander';
 import chokidar from 'chokidar';
 import { join } from 'node:path';
-import { validateProject, creatTask } from './core.mjs';
+import { validateProject, createViteBuild } from './core.mjs';
 import { stat } from 'node:fs/promises';
-import { mkdirp, copy } from 'fs-extra';
-import { fileURLToPath } from 'node:url';
 import 'vite';
 import '@vitejs/plugin-vue';
 import 'webpack-merge';
+import 'node:url';
 
 function dev(project) {
     const root = process.cwd();
@@ -18,18 +17,18 @@ function dev(project) {
         const projectPath = project === '.' ? root : join(root, './extensions', project);
     
         validateProject(projectPath).then((config) => {
-            creatTask(config);
+            createViteBuild(config);
             chokidar.watch(join(projectPath, 'source')).on('change', () => {
-                creatTask(config);
+                createViteBuild(config);
             });
         }).catch((error) => console.error(error));
        
     } else {
-        console.warn('没有 指定需要开发的插件!');
+        console.warn('没有指定需要开发的插件!');
     }
 }
 
-const root$1 = process.cwd();
+const root = process.cwd();
 
 async function build(plugin) {
     const buildProjects = await getBuildProjects(plugin);
@@ -39,7 +38,7 @@ async function build(plugin) {
         return;
     }
     for (const project of buildProjects) {
-        await creatTask(project);
+        await createViteBuild(project);
     }
 }
 
@@ -50,13 +49,13 @@ async function getBuildProjects(extensionName) {
     if (extensionName) {
         // 特殊处理在插件项目执行命令
         if (extensionName === '.') {
-            const config = await validateProject(root$1);
+            const config = await validateProject(root);
             if (config) {
                 return [config];
             }
         } else {
             try {
-                await stat(join(root$1, './extensions', extensionName));
+                await stat(join(root, './extensions', extensionName));
             } catch {
                 console.error(`Error: 项目 ${extensionName} 不存在,请查看是否拼写错误！`);
                 return [];
@@ -65,12 +64,12 @@ async function getBuildProjects(extensionName) {
         }
        
     } else {
-        projects = readdirSync(join(root$1, './extensions'));
+        projects = readdirSync(join(root, './extensions'));
     }
 
     const list = await projects.reduce(async (res, project) => {
         const result = await res;
-        const projectPath = join(root$1, './extensions', project);
+        const projectPath = join(root, './extensions', project);
         try {
             const config = await validateProject(projectPath);
             if (config) {
@@ -81,29 +80,6 @@ async function getBuildProjects(extensionName) {
     }, Promise.resolve([]));
 
     return list;
-}
-
-const root = process.cwd();
-
-function create(project = 'cocos-editor-plugin-demo') {
-    const pluginDemoPath = join(root, project);
-
-    try {
-        const stats = statSync(pluginDemoPath);
-        if (stats.isDirectory()) {
-            return console.error(`文件夹 ${pluginDemoPath} 已经存在!`);
-        }
-    } catch (error) {
-        
-    }
-   
-    mkdirp(pluginDemoPath)
-        .then(() => {
-            const __dirname = fileURLToPath(new URL('.', import.meta.url));
-            
-            copy(join(__dirname, '../create-template/'), pluginDemoPath, {recursive: true});
-        });
-       
 }
 
 const program = new Command();
@@ -130,14 +106,7 @@ program
     .command('engine-dts')
     .description('生成引擎的 dts 文件，将存入 @types 文件夹中')
     .action(() => {
-        import('./bin-create-engine-dts-0451d3f8.js');
+        import('./bin-create-engine-dts-eb3088a6.js');
     });
-
-program
-    .command('create [plugin]')
-    .description('创建一个插件模板')
-    .action((plugin) => {
-        create(plugin);
-    });      
 
 program.parse(process.argv);

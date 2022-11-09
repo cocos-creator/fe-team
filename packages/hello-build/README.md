@@ -38,12 +38,6 @@ npx hi-cocos build [plugin-name]
 
 如果传入第二个参数，则只构建指定的插件，否则将全量构建。
 
-### 插件模板
-```
-npx hi-cocos create [plugin/path]
-```
-创建一个插件基础模板。
-
 
 ## 默认约定
 
