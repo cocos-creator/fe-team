@@ -77,7 +77,7 @@ const { defineConfig } = require('vite');
 // 用户可以自行修改配置，内部会做合理的合并，也可以完全不自定义，直接走默认配置。
 exports.config = defineConfig({
     build: {
-        libs: {
+        lib: {
             entry: {
                 "main": "./source/main.ts",
                 "panel": "./source/panel.ts",
@@ -103,7 +103,7 @@ exports.vue3 = function() {
     return {
         config: defineConfig({
             build: {
-                libs: {
+                lib: {
                     entry: {
                         "main": "./source/main.ts",
                         "panel": "./source/panel.ts",
@@ -198,7 +198,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export const config = defineConfig({
     build: {
-        libs: {
+        lib: {
             entry: {
                 browser: './source/browser.js',
                 panel: './source/panel.js',
