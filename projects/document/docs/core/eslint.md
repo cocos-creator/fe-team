@@ -6,7 +6,7 @@ sidebarDepth: 3
 
 我们在 [@cocos-fe/eslint-config](https://www.npmjs.com/package/@cocos-fe/eslint-config) 中维护了统一的配置文件。
 ## 安装
-```base
+```
 npm install @cocos-fe/eslint-config --save-dev
 ```
 
