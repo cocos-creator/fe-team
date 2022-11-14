@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "docs",
   "scripts": {
-    "dev": "vitepress dev docs --host",
+    "dev": "vitepress dev docs --host --port 4444",
     "build": "vitepress build docs",
     "serve": "vitepress serve docs"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "vitepress": "^0.22.4"
+    "vitepress": "^1.0.0-alpha.28"
   }
 }

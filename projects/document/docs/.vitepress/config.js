@@ -1,13 +1,15 @@
-module.exports = {
+import { defineConfig } from 'vitepress'
+
+module.exports = defineConfig({
     title: 'Cocos FE',
     description: 'Cocos FE Team',
     themeConfig: {
-        repo: 'cocos-creator/cocos-fe',
-        docsDir: 'docs',
-        docsBranch: 'main',
-        editLinks: false,
-        editLinkText: 'Edit this page on GitHub',
-        lastUpdated: false,
+        socialLinks: [
+            {
+                icon: 'github',
+                link: 'https://github.com/cocos-creator/fe-team'
+            }
+        ],
 
         nav: [
             {
@@ -31,15 +33,21 @@ module.exports = {
             '/article/': getArticleSidebar(),
             '/experience': getExperienceSidebar(),
             '/core/': getCoreSidebar(),
-        }
-    }
-}
+        },
+
+        footer: {
+            message: '',
+            copyright: 'MIT Licensed | Copyright © 2019-present cocos FE'
+        },
+    },
+    lastUpdated: false
+});
 
 function getArticleSidebar() {
     return [
         {
             text: '文档',
-            children: [
+            items: [
                 {
                     text: 'web-components',
                     link: '/article/web-components'
@@ -77,7 +85,7 @@ function getExperienceSidebar() {
     return [
         {
             text: '踩坑经验',
-            children: [
+            items: [
                 { text: 'JSON5',link: '/experience/json5'},
                 { text: 'Gitmodules',link: '/experience/gitmodules'},
                 { text: 'Keycode 229',link: '/experience/keycode-229'},
@@ -91,7 +99,7 @@ function getCoreSidebar() {
     return [
         {
             text: '基建',
-            children: [
+            items: [
                 { text: 'Eslint', link: '/core/eslint' },
                 { text: 'Eslint工作流', link: '/core/eslint工作流' },
                 { text: 'Github ID 翻译', link: '/core/chrome-extension-github-ids' },
