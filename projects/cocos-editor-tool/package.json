@@ -20,6 +20,7 @@
     }
   },
   "contributions": {
+    "builder": "./dist/build.js",
     "menu": [
       {
         "path": "i18n:menu.panel",
