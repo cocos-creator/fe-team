@@ -73,8 +73,8 @@ function getArticleSidebar() {
             items: [
                 { text: 'JSON5',link: '/docs/experience/json5'},
                 { text: 'Gitmodules',link: '/docs/experience/gitmodules'},
-                { text: 'Keycode 229',link: '/docs/experience/keycode-229'},
-                { text: '脚本切换 nvm ',link: '/docs/experience/spawn-nvm'},
+                { text: 'Keycode 229', link: '/docs/experience/keycode-229' },
+                { text: 'emoji', link: '/docs/experience/emoji' },
             ]
         }
     ]
@@ -90,7 +90,8 @@ function getCoreSidebar() {
                 { text: 'Eslint工作流', link: '/core/eslint工作流' },
                 { text: 'Github ID 翻译', link: '/core/chrome-extension-github-ids' },
                 { text: '编辑器插件构建', link: '/core/editor-plugin-build' },
-                { text: '安装 nvm', link: '/core/nvm' },
+                { text: 'nvm 安装', link: '/core/nvm' },
+                { text: 'nvm 命令行执行', link: '/core/nvm-spawn' },
                 { text: '弃用css预编译处理语言', link: '/core/弃用css预编译处理语言' },
                 { text: '前端项目工程实践建议', link: '/core/前端项目工程实践建议'}
             ]
