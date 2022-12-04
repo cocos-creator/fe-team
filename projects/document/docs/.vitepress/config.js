@@ -93,7 +93,8 @@ function getCoreSidebar() {
                 { text: 'nvm 安装', link: '/core/nvm' },
                 { text: 'nvm 命令行执行', link: '/core/nvm-spawn' },
                 { text: '弃用css预编译处理语言', link: '/core/弃用css预编译处理语言' },
-                { text: '前端项目工程实践建议', link: '/core/前端项目工程实践建议'}
+                { text: '前端项目工程实践建议', link: '/core/前端项目工程实践建议' },
+                { text: '组件封装', link: '/core/component' }
             ]
         },
     ]
