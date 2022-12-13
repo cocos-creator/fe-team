@@ -65,7 +65,7 @@ function getArticleSidebar() {
                 {
                     text: 'cocos creator',
                     link: '/docs/cocos-creator'
-                },
+                }
             ]
         },
         {
@@ -75,6 +75,15 @@ function getArticleSidebar() {
                 { text: 'Gitmodules',link: '/docs/experience/gitmodules'},
                 { text: 'Keycode 229', link: '/docs/experience/keycode-229' },
                 { text: 'emoji', link: '/docs/experience/emoji' },
+            ]
+        },
+        {
+            text: '分享',
+            items: [
+                {
+                    text: 'AST 初探',
+                    link: '/docs/share/ast'
+                },
             ]
         }
     ]
