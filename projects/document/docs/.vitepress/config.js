@@ -14,13 +14,8 @@ module.exports = defineConfig({
         nav: [
             {
                 text: '文档',
-                link: '/article/index',
-                activeMatch: '^/article/'
-            },
-            {
-                text: '踩坑',
-                link: '/experience/index',
-                activeMatch: '^/experience/'
+                link: '/docs/index',
+                activeMatch: '^/docs/'
             },
             {
                 text: '基建',
@@ -30,8 +25,7 @@ module.exports = defineConfig({
         ],
 
         sidebar: {
-            '/article/': getArticleSidebar(),
-            '/experience': getExperienceSidebar(),
+            '/docs/': getArticleSidebar(),
             '/core/': getCoreSidebar(),
         },
 
@@ -50,50 +44,42 @@ function getArticleSidebar() {
             items: [
                 {
                     text: 'web-components',
-                    link: '/article/web-components'
+                    link: '/docs/web-components'
                 },
                 {
                     text: '关于命名的一点建议',
-                    link: '/article/关于命名的一点建议'
+                    link: '/docs/关于命名的一点建议'
                 },
                 {
                     text: 'Git 教程',
-                    link: '/article/Git教程'
+                    link: '/docs/Git教程'
                 },
                 {
                     text: '软链接教程',
-                    link: '/article/软链接'
+                    link: '/docs/软链接'
                 },
                 {
                     text: 'inspector',
-                    link: '/article/inspector'
+                    link: '/docs/inspector'
                 },
                 {
                     text: 'cocos creator',
-                    link: '/article/cocos-creator'
+                    link: '/docs/cocos-creator'
                 },
-                {
-                    text: '前端项目工程实践建议',
-                    link: '/article/前端项目工程实践建议'
-                }
+            ]
+        },
+        {
+            text: '踩坑',
+            items: [
+                { text: 'JSON5',link: '/docs/experience/json5'},
+                { text: 'Gitmodules',link: '/docs/experience/gitmodules'},
+                { text: 'Keycode 229', link: '/docs/experience/keycode-229' },
+                { text: 'emoji', link: '/docs/experience/emoji' },
             ]
         }
     ]
 }
 
-function getExperienceSidebar() {
-    return [
-        {
-            text: '踩坑经验',
-            items: [
-                { text: 'JSON5',link: '/experience/json5'},
-                { text: 'Gitmodules',link: '/experience/gitmodules'},
-                { text: 'Keycode 229',link: '/experience/keycode-229'},
-                { text: '脚本切换 nvm ',link: '/experience/spawn-nvm'},
-            ]
-        }
-    ]
-}
 
 function getCoreSidebar() {
     return [
@@ -104,8 +90,11 @@ function getCoreSidebar() {
                 { text: 'Eslint工作流', link: '/core/eslint工作流' },
                 { text: 'Github ID 翻译', link: '/core/chrome-extension-github-ids' },
                 { text: '编辑器插件构建', link: '/core/editor-plugin-build' },
-                { text: 'nvm', link: '/core/nvm' },
-                { text: '提议-弃用css预编译处理语言', link: '/core/弃用css预编译处理语言' },
+                { text: 'nvm 安装', link: '/core/nvm' },
+                { text: 'nvm 命令行执行', link: '/core/nvm-spawn' },
+                { text: '弃用css预编译处理语言', link: '/core/弃用css预编译处理语言' },
+                { text: '前端项目工程实践建议', link: '/core/前端项目工程实践建议' },
+                { text: '组件封装', link: '/core/component' }
             ]
         },
     ]
