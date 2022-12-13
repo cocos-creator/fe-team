@@ -1,13 +1,16 @@
 const pkg = require('../package.json');
 
 const pluginPaths = [
-    // '/Users/alan/cocos/xr-extensions/extensions/xr-plugin',
+    '/Users/alan/cocos/xr-extensions/extensions/xr-plugin',
     // '/Users/alan/cocos/online-x-extensions',   
 ];
 
 export const methods = {
     async open() {
         Editor.Panel.open(pkg.name); 
+    },
+    'open-webview'() {
+        Editor.Panel.open(`${pkg.name}.webview`); 
     },
 };
 

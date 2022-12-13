@@ -85,7 +85,7 @@ module.exports = {
         'vue/html-self-closing': 0,
 
         // ====> https://typescript-eslint.io/rules/#supported-rules
-        '@typescript-eslint/type-annotation-spacing': ['error', {after: true} ], // type 前面要有空格
+        '@typescript-eslint/type-annotation-spacing': ['warn', { after: true }], // type 前面要有空格
         '@typescript-eslint/no-var-requires': 0, // 编辑器有大量使用 requires 的地方暂时关闭
         '@typescript-eslint/no-explicit-any': 0, // 我们有大量any 以后再去 
         '@typescript-eslint/no-unused-vars': 0, // TODO: 声明未使用确实不允许，但是量太多，后面单独处理

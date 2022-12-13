@@ -6,17 +6,23 @@
   "main": "./dist/browser.js",
   "scripts": {
     "dev": "npx hi-cocos dev .",
-    "build": "npx hi-cocos build ."
+    "build": "npx hi-cocos build .",
+    "www:dev": "npx vite --port 5123 --config vite.config.www.js",
+    "www:build": "npx vite build --config vite.config.www.js"
   },
   "keywords": [],
   "author": "cocos-fe",
   "license": "ISC",
   "devDependencies": {
-    "@cocos-fe/hello-build": "file:packages/hello-build"
+    "@cocos-fe/hello-build": "file:packages/hello-build",
+    "@vitejs/plugin-vue": "^4.0.0"
   },
   "panels": {
     "default": {
       "main": "./dist/panel.js"
+    },
+    "webview": {
+      "main": "./dist/panel-webview.js"
     }
   },
   "contributions": {
@@ -24,8 +30,13 @@
     "menu": [
       {
         "path": "i18n:menu.panel",
-        "label": "小助手",
+        "label": "超级案例",
         "message": "open"
+      },
+      {
+        "path": "i18n:menu.panel",
+        "label": "超级案例-webview",
+        "message": "open-webview"
       }
     ],
     "messages": {
@@ -33,10 +44,27 @@
         "methods": [
           "open"
         ]
+      },
+      "open-webview": {
+        "methods": [
+          "open-webview"
+        ]
       }
+    },
+    "assets": {
+      "localFile": [
+        {
+          "path": "./settings",
+          "type": "project"
+        },
+        {
+          "path": ".",
+          "type": "extension"
+        }
+      ]
     }
   },
   "dependencies": {
-    "vue": "^3.2.43"
+    "vue": "^3.2.45"
   }
 }

@@ -7,7 +7,8 @@
     "module": "bin/core.mjs",
     "scripts": {
         "dev": "npx rollup -c --watch",
-        "build": "npx rollup -c"
+        "build": "npx rollup -c",
+        "postbuild": "sh postbuild.sh"
     },
     "exports": {
         ".": {
@@ -19,11 +20,11 @@
         "hi-cocos": "bin/index.mjs"
     },
     "dependencies": {
-        "@vitejs/plugin-vue": "^3.2.0",
+        "@vitejs/plugin-vue": "^4.0.0",
         "chokidar": "^3.5.3",
         "commander": "^9.4.1",
         "less": "^4.1.3",
-        "vite": "^3.2.3",
+        "vite": "^4.0.1",
         "webpack-merge": "^5.8.0"
     },
     "publishConfig": {
@@ -34,7 +35,7 @@
         "node": ">=16"
     },
     "devDependencies": {
-        "rollup": "^3.2.5",
+        "rollup": "^3.7.4",
         "rollup-plugin-delete": "^2.0.0",
         "rollup-plugin-node-externals": "^5.0.2",
         "rollup-plugin-preserve-shebangs": "^0.2.0"

@@ -6,8 +6,10 @@ exports.config = defineConfig({
             entry: {
                 'browser': './source/browser.ts',
                 'panel': './source/panel.js',
-                build: './source/build.js',
+                'build': './source/build.js',
                 'build-hooks': './source/build-hooks.js',
+                'panel-webview': './source/panel-webview.js',
+                'preload': './source/preload.js',
             },
         },
         outDir: 'dist',

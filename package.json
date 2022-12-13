@@ -11,7 +11,6 @@
     "preinstall": "node ./scripts/preinstall-check-node.js && npx only-allow npm",
     "docs:dev": "npm run dev -w @cocos-fe/document",
     "docs:build": "npm run build -w @cocos-fe/document",
-    "hello-build:clear": "npm run clear -w @cocos-fe/hello-build",
     "hello-build:dev": "npm run dev -w @cocos-fe/hello-build",
     "hello-build:build": "npm run build -w @cocos-fe/hello-build",
     "editor-tool:dev": "npm run dev -w cocos-editor-tool",
@@ -36,11 +35,11 @@
   "devDependencies": {
     "@cocos-fe/eslint-config": "workspace:*",
     "cross-env": "^7.0.3",
-    "eslint": "^8.27.0",
-    "eslint-plugin-vue": "^9.5.1",
+    "eslint": "^8.29.0",
+    "eslint-plugin-vue": "^9.8.0",
     "husky": "^8.0.2",
-    "lint-staged": "^13.0.3",
-    "only-allow": "^1.0.0"
+    "lint-staged": "^13.1.0",
+    "only-allow": "^1.1.1"
   },
   "engines": {
     "node": ">=16.0.0"
