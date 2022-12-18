@@ -2,7 +2,7 @@
 
 ## 需求
 
-cocos creator 的项目设置有一个宏配置，它读取了 [cocos-engine](https://github.com/cocos/cocos-engine/blob/v3.7.0/cocos/core/platform/macro.ts) 项目的某个 ts 脚本动态渲染。如下图的 `ENABLE_ANTIALIAS_FXAA`，hover 某个配置的时候能显示相关 tips 。
+cocos creator 的项目设置有一个宏配置，它读取了 [cocos-engine](https://github.com/cocos/cocos-engine/blob/v3.7.0/cocos/core/platform/macro.ts) 项目的某个 ts 脚本动态渲染。如下图的 `ENABLE_ANTIALIAS_FXAA`，hover 的时候能显示相关 tips 。
 
 <img src="https://user-images.githubusercontent.com/35713518/207286655-24c179e4-315c-4606-9c1a-013c579ee1bc.png">
 
