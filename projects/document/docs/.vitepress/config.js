@@ -43,14 +43,6 @@ function getArticleSidebar() {
             text: '文档',
             items: [
                 {
-                    text: 'web-components',
-                    link: '/docs/web-components'
-                },
-                {
-                    text: '关于命名的一点建议',
-                    link: '/docs/关于命名的一点建议'
-                },
-                {
                     text: 'Git 教程',
                     link: '/docs/Git教程'
                 },
@@ -96,14 +88,16 @@ function getCoreSidebar() {
             text: '基建',
             items: [
                 { text: 'Eslint', link: '/core/eslint' },
-                { text: 'Eslint工作流', link: '/core/eslint工作流' },
-                { text: 'Github ID 翻译', link: '/core/chrome-extension-github-ids' },
-                { text: '编辑器插件构建', link: '/core/editor-plugin-build' },
+                { text: 'Eslint 工作流', link: '/core/eslint-工作流' },
                 { text: 'nvm 安装', link: '/core/nvm' },
                 { text: 'nvm 命令行执行', link: '/core/nvm-spawn' },
-                { text: '弃用css预编译处理语言', link: '/core/弃用css预编译处理语言' },
-                { text: '前端项目工程实践建议', link: '/core/前端项目工程实践建议' },
-                { text: '组件封装', link: '/core/component' }
+                { text: '最佳实践-前端工程', link: '/core/前端项目工程实践建议' },
+                { text: '最佳实践-命名', link: '/core/intitle' },
+                { text: '最佳实践-弃用预处理语言', link: '/core/css-弃用预处理语言' },
+                { text: '最佳实践-webComponents', link: '/core/web-components' },
+                { text: 'Github ID 翻译', link: '/core/github-ids' },
+                { text: '编辑器插件构建', link: '/core/hello-build' },
+                { text: '组件封装', link: '/core/component' },
             ]
         },
     ]
