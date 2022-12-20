@@ -1,6 +1,6 @@
 # AST 初探
 
-## 需求
+## 小试牛刀
 
 cocos creator 的项目设置有一个宏配置，它读取了 [cocos-engine](https://github.com/cocos/cocos-engine/blob/v3.7.0/cocos/core/platform/macro.ts) 项目的某个 ts 脚本动态渲染。如下图的 `ENABLE_ANTIALIAS_FXAA`，hover 的时候能显示相关 tips 。
 
@@ -21,27 +21,9 @@ interface Macro {
 
     /**
      * @en
-     * Used to set bloom, the default value is false.
+     * balabala
      * @zh
-     * 用于开启 bloom, 默认值为 false。
-     * @default false
-     */
-    ENABLE_BLOOM: boolean;
-
-    /**
-     * @en
-     * Whether to clear the original image cache after uploaded a texture to GPU.
-     * If cleared, [Dynamic Atlas](https://docs.cocos.com/creator/manual/en/advanced-topics/dynamic-atlas.html) will not be supported.
-     * Normally you don't need to enable this option on the web platform, because Image object doesn't consume too much memory.
-     * But on Wechat Game platform, the current version cache decoded data in Image object, which has high memory usage.
-     * So we enabled this option by default on Wechat, so that we can release Image cache immediately after uploaded to GPU.
-     * Currently not useful in 3D engine
-     * @zh
-     * 是否在将贴图上传至 GPU 之后删除原始图片缓存，删除之后图片将无法进行 [动态合图](https://docs.cocos.com/creator/manual/zh/advanced-topics/dynamic-atlas.html)。
-     * 在 Web 平台，你通常不需要开启这个选项，因为在 Web 平台 Image 对象所占用的内存很小。
-     * 但是在微信小游戏平台的当前版本，Image 对象会缓存解码后的图片数据，它所占用的内存空间很大。
-     * 所以我们在微信平台默认开启了这个选项，这样我们就可以在上传 GL 贴图之后立即释放 Image 对象的内存，避免过高的内存占用。
-     * 在 3D 引擎中暂时无效。
+     * 巴拉巴拉
      * @default false
      */
     CLEANUP_IMAGE_CACHE: boolean;
@@ -54,7 +36,7 @@ interface Macro {
 
 ```
 
-要在编辑器这边拿到这些数据，并关联显示，就需要用到 AST 了。正则匹配或许可以，但是更复杂，因为我们的预期是得到如下的数据:
+要在编辑器这边拿到这些数据，并关联显示，就需要用到 AST 了。预期是得到如下的数据:
 
 ```json
 [
@@ -64,49 +46,102 @@ interface Macro {
         zh: "用于开启 FXAA 后处理抗锯齿, 默认值为 false。"
     },
     {
-        label: "ENABLE_BLOOM",
-        en: "Used to set bloom, the default value is false.",
-        zh: "用于开启 bloom, 默认值为 false。"
+        label: "CLEANUP_IMAGE_CACHE",
+        en: "balabala",
+        zh: "巴拉巴拉。"
     }
 ]
 ```
 
-## 实现
-
 ### ts.createSourceFile
 
-typescript 为我们提供了一个解析 AST 的 API [createSourceFile](https://github.com/microsoft/TypeScript/wiki/Using-the-Compiler-API)
+typescript 为我们提供了一个解析 AST 的 API [createSourceFile](https://github.com/microsoft/TypeScript/wiki/Using-the-Compiler-API) ,它能将一个 .ts 文本解析成语法树，我们只要了解了树的结构，然后摘取我们需要的数据即可。
 
-```ts
-// 动态读取文件，获得 i18n 信息
-    const macroFilePath = join(enginPath, 'cocos/core/platform/macro.ts');
-    const macroI18nMap: any = {};
-    const language = Editor.I18n.getLanguage();
-    
-    try {
-        if (existsSync(macroFilePath)) {
-        
-            const sourceFile = ts.createSourceFile(macroFilePath, readFileSync(macroFilePath).toString(), ts.ScriptTarget.Latest, true);
-    
-            const macroSource = sourceFile.statements.find((v) => {
-                return ts.isInterfaceDeclaration(v) && v.name.escapedText === 'Macro';
-            }) as ts.InterfaceDeclaration;
+可以通过这个[网站](https://astexplorer.net/)实时查看ts文件对应的语法树:
+<img src="https://user-images.githubusercontent.com/35713518/208662750-15452456-3520-4013-bc7f-762c942f5371.png" />
 
-            if (macroSource) {
-                macroSource.members.filter((v: any) => {
-                    return v.jsDoc?.length && ['en', 'zh'].every(tag => v.jsDoc[0].tags.some((o: ts.JSDocTag) => o.tagName.escapedText === tag));
-                })
-                    .forEach((data: any) => {
-                        const tags = data.jsDoc[0].tags;
-                        macroI18nMap[data.name.escapedText] = {
-                            en: tags.find((v: ts.JSDocTag) => v.tagName.escapedText === 'en').comment,
-                            zh: tags.find((v: ts.JSDocTag) => v.tagName.escapedText === 'zh').comment,
-                        };
-                    });
-            }
+可以看到，我们在 ts 文件里定义了一个  `interface`、 `variable` 和 `function`，那么在语法树里对应着 `statements` 集合里的 `InterfaceDeclaration`、 `VariableStatement` 和 `FunctionDeclaration` :
+<img src="https://user-images.githubusercontent.com/35713518/208664733-c3c6f339-78bf-48bf-9a8e-a817c8828357.png" />
 
-        }
-    } catch (error) {
-        console.error(error);
-    }
+所以我们就可以这样一层层的解剖下去，找到所有我们需要的数据即可。
+
+## 进阶
+上面的需求我们只是读取了 AST ，组装了相关数据用于实现业务。如果要动态修改某个 ts 文件呢，可以用这个工具 [jscodeshift](https://github.com/facebook/jscodeshift)。
+
+举例：
+
+```js
+exports.startup = function() {
+    // ....
+
+    COCOS.init(join(__dirname, '..'), {
+        // source: 'Visual Studio Installer',
+        version: pkg.version,
+    });
+
+    // ...
+};
+
 ```
+
+我们在打包应用的时候，希望给微软打个独立的包，区别只是在个 init 的参数会多一个 soruce 属性，值为 'Visual Studio Installer'。
+> 其实这个业务场景用 env 实现更合适，动态修改文件的场景一般是做业务升级的时候，批量替换一些旧的 api 等，行话叫 `codemod` 。
+
+[jscodeshift](https://github.com/facebook/jscodeshift) 实现示例：
+
+先创建一个 transfomr 脚本:
+```js
+module.exports = function transformer(fileInfo, api) {
+    const j = api.jscodeshift;
+    const root = j(fileInfo.source);
+
+    const result = root
+        .find(j.CallExpression, {
+            callee: { object: { name: 'COCOS' }, property: { name: 'init' } },
+        })
+        .find(j.Property, { key: { name: 'version' } });
+
+    result.insertAfter(j.property('init', j.identifier('source'), j.stringLiteral('Visual Studio Installer')));
+
+    return root.toSource({ quote: 'single' });
+};
+
+```
+
+这段脚本有点类似 JQuery 的操作，找到什么然后做些什么。两个 find 快速找到了准备修改的对象:
+- 第一个 find 找到了 COCOS.init
+- 第二个 find 接着找到了包含 version 的 Property
+
+我们的目标就是在当前这个 Property 里加一个属性 `source: 'Visual Studio Installer`。 用到了 `.insertAfter` API，最难的就是这个  `.insertAfter` ，我们需要知道如何传递正确的参数，才能构建新的 AST 的合法节点。好在 [astexplorer](https://astexplorer.net/) 可以在线调试，在这个网站中开启 Transform 即可。
+
+<img src="https://user-images.githubusercontent.com/35713518/208672523-1ff9d707-b21f-48d6-9c17-523e69a1d7f5.png" />
+
+然后写一段 js 脚本用 node 执行即可
+```js
+const { run: jscodeshift } = require('jscodeshift/src/Runner');
+const { resolve } = require('node:path');
+
+const transformPath = resolve(__dirname, './hack-codemod.js'); // 上面写的 transfrom 脚本地址
+const sourceFile = resolve(__dirname, '../app/utils.js'); // 需要被修改的 js 文件
+
+const options = {
+    dry: false, // false: 写入源文件
+    print: false,
+    verbose: 0,
+};
+
+(async function go() {
+    await jscodeshift(transformPath, [sourceFile], options);
+})();
+
+```        
+
+## 参考链接
+- https://github.com/facebook/jscodeshift
+- https://astexplorer.net/ 
+- https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/jscodeshift/src/core.d.ts 
+- https://gogocode.io/zh/docs/specification/introduction/
+- http://www.alloyteam.com/2020/08/%E5%88%9D%E6%8E%A2-typescript-%E8%A7%A3%E6%9E%90%E5%99%A8/#prettyPhoto
+- https://github.com/microsoft/TypeScript/wiki/Using-the-Compiler-API
+- https://jkchao.github.io/typescript-book-chinese/compiler/overview.html
+- https://ts-morph.com/manipulation/

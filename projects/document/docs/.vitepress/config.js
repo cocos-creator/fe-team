@@ -57,7 +57,11 @@ function getArticleSidebar() {
                 {
                     text: 'cocos creator',
                     link: '/docs/cocos-creator'
-                }
+                },
+                // {
+                //     text: 'history',
+                //     link: '/docs/history'
+                // }
             ]
         },
         {
