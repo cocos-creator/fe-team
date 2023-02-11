@@ -79,6 +79,8 @@ function GitCheckOutMaster {git checkout 'master'}
 function GitBranch {git branch}
 ```
 
+最终效果如下图，界面好看，且支持 gst 等快捷命令。
+
 ![](/setup-windows/windows-terminal.png)
 
 
