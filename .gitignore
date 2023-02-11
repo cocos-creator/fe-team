@@ -107,3 +107,5 @@ dist
 .publish
 .develop
 .electron
+
+projects/document/docs/.vitepress/cache

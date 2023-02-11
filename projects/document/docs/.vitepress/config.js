@@ -80,6 +80,10 @@ function getArticleSidebar() {
                     text: 'AST 初探',
                     link: '/docs/share/ast'
                 },
+                {
+                    text: 'windows 装机指南',
+                    link: '/docs/share/setup-windows'
+                },
             ]
         }
     ]
