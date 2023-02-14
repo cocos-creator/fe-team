@@ -58,10 +58,6 @@ module.exports = {
         }],
 
         // ====> https://eslint.vuejs.org/
-        'vue/html-closing-bracket-newline': ['error', {
-            'singleline': 'never',
-            'multiline': 'never',
-        } ],
         'vue/max-attributes-per-line': ['error', {
             'singleline': {
                 'max': 2,
@@ -100,5 +96,13 @@ module.exports = {
         '@typescript-eslint/adjacent-overload-signatures': 0,
         '@typescript-eslint/no-empty-interface': 1,
     },
+    overrides: [
+        {
+            files: ['*.ts', '*.mts', '*.cts', '*.tsx', '*.vue'],
+            rules: {
+                'no-undef': 'off', // https://typescript-eslint.io/linting/troubleshooting/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
+            },
+        },
+    ],
 };
 

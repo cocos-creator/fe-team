@@ -23,4 +23,4 @@
 - 下一行：   /* eslint-disable-next-line */
 - 当前行：   /* eslint-disable-line no-alert */
 
-如果规则不生效，一定记得重启一下 vscode ！！！
+如果规则不生效，可以按 cmd + p 唤起功能搜索面板，按 F1，选择 Eslint: restart eslint server。

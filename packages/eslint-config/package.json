@@ -1,6 +1,6 @@
 {
   "name": "@cocos-fe/eslint-config",
-  "version": "1.0.30",
+  "version": "1.0.33",
   "description": "cocos 团队的共享配置",
   "exports": {
     ".": {
@@ -23,7 +23,7 @@
   "homepage": "https://www.npmjs.com/package/@cocos-fe/eslint-config-cocos",
   "publishConfig": {
     "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org"
   },
   "license": "MIT",
   "gitHead": "059b8c355c74c75198f32e5632459b7aec23d8b5",

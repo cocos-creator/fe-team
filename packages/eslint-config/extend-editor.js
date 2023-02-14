@@ -9,5 +9,6 @@ module.exports = {
         ...base.rules,
         ...editor.rules,
     },
+    overrides: [...editor.overrides],
 };
 
