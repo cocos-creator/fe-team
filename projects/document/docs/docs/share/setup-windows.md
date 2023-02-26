@@ -10,7 +10,7 @@
 
 ## 快捷键
 
-> 只列出使用频率高的，例如 win + B 跳转系统托盘的就不记录了，感觉对效率没有提升，不增加记忆负担。
+> 只列出使用频率高的，例如 win + B 跳转系统托盘的就不记录了，感觉对效率没有提升，不增加记忆负担。[官方文档](https://support.microsoft.com/zh-cn/windows/windows-%E7%9A%84%E9%94%AE%E7%9B%98%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F-dcc61a57-8ff0-cffe-9796-cb9706c75eec)
 
 | 快捷键 | 功能 |
 | --------- | ---------------- |
@@ -107,3 +107,13 @@ FOR /f "tokens=*" %%z IN ('fnm env --use-on-cd') DO CALL %%z
 ```
 
 这样就能在 cmd 里执行 node 命令了。
+
+## PowerToys
+
+微软官方的实用工具，具体功能有点类似 mac 的聚焦，可以快速搜索。[download](https://learn.microsoft.com/zh-cn/windows/powertoys/)
+
+windows 11 自带一个全局的搜索功能了，下载它的主要目的是为了做键盘映射。由于主要设备是 mac ，切换到 win 最不习惯的就是中英文切换。
+
+mac 中英文切换的快捷键对应在 win 上是 Lock 键（每次我习惯性的按它进行切换语言都是启动了大写锁定）。于是在 windows 上我将 Lock 映射成了 shift，这样在保持肌肉记忆的同时，也可以顺利的进行中英文切换。
+
+> 对于需要输入大写的情况我都是长按 shift 键来实现的，因为日常工作非常少的情况需要连续输入很多大写字母。

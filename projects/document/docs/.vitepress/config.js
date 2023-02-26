@@ -48,7 +48,7 @@ function getArticleSidebar() {
                 },
                 {
                     text: '软链接教程',
-                    link: '/docs/软链接'
+                    link: '/docs/symbolic-link'
                 },
                 {
                     text: 'inspector',
@@ -81,8 +81,12 @@ function getArticleSidebar() {
                     link: '/docs/share/ast'
                 },
                 {
-                    text: 'windows 装机指南',
+                    text: '装机指南-windows',
                     link: '/docs/share/setup-windows'
+                },
+                {
+                    text: '装机指南-mac',
+                    link: '/docs/share/setup-mac'
                 },
             ]
         }
