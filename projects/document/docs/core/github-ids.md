@@ -71,7 +71,7 @@ function replaceIds() {
 
 效果如下：
 
-<video width="100%" controls src="https://website-cocos-fe.oss-cn-hangzhou.aliyuncs.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62021-12-10%2021.12.50.mov" />
+<video width="100%" controls src="https://website-cocos-fe.oss-cn-hangzhou.aliyuncs.com/github-ids.mov" />
 
 我们替换了页面上原本显示 Github ID 的地方，展示为中文名称。并且在右上角放置了一个 ICON，点击可以展开/关闭一个 ID 列表。
 
