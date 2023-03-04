@@ -35,10 +35,10 @@
   "devDependencies": {
     "@cocos-fe/eslint-config": "workspace:*",
     "cross-env": "^7.0.3",
-    "eslint": "^8.34.0",
+    "eslint": "^8.35.0",
     "eslint-plugin-vue": "^9.9.0",
     "husky": "^8.0.3",
-    "lint-staged": "^13.1.1",
+    "lint-staged": "^13.1.2",
     "only-allow": "^1.1.1"
   },
   "engines": {
