@@ -76,10 +76,10 @@ function getArticleSidebar() {
         {
             text: '分享',
             items: [
-                {
-                    text: 'AST 初探',
-                    link: '/docs/share/ast'
-                },
+                // {
+                //     text: 'AST 初探',
+                //     link: '/docs/share/ast'
+                // },
                 {
                     text: '装机指南-windows',
                     link: '/docs/share/setup-windows'
