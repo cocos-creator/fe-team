@@ -15,12 +15,14 @@ vue 单文件组件的出现改善了这个局面，它收拢了 html、Javascri
 
 如下，我们有个切割容器的组件，它的功能是将一个容器分为上下2个部分，然后中间有一条线可以动态调节。可以预见它的 html 结构 和 css 样式都是非常简单的，类似这样的组件，我们就可以考虑全部用 js 实现。
 
+<ClientOnly>
 <div style="height: 200px;background-color: var(--vp-c-bg-alt);">
     <separete-box>
         <template #top="{height}">{{height}}top</template>
         <template #bottom="{height}">{{height}}bottom</template>
     </separete-box>
 </div>
+</ClientOnly>
 
 <<< components/separete-box/index.ts
 
