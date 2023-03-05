@@ -109,7 +109,7 @@ function getCoreSidebar() {
                 { text: '最佳实践-webComponents', link: '/core/web-components' },
                 { text: 'Github ID 翻译', link: '/core/github-ids' },
                 { text: '编辑器插件构建', link: '/core/hello-build' },
-                { text: '组件封装-all-in-js', link: '/core/component-all-in-js' },
+                // { text: '组件封装-all-in-js', link: '/core/component-all-in-js' },
             ]
         },
     ]
