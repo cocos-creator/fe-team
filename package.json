@@ -48,5 +48,8 @@
     "*.{vue,js,ts}": [
       "npm run lint:js"
     ]
+  },
+  "volta": {
+    "node": "18.14.2"
   }
 }
