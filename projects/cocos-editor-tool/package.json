@@ -62,9 +62,19 @@
           "type": "extension"
         }
       ]
+    },
+    "hierarchy": {
+      "menu": {
+          "methods": "./dist/extend-hierarchy.js",
+          "rootMenu": "onRootMenu",
+          "createMenu": "onCreateMenu",
+          "nodeMenu": "onNodeMenu",
+          "panelMenu": "onPanelMenu"
+      }
     }
   },
   "dependencies": {
+    "@editor/asset-db": "^2.6.8",
     "vue": "^3.2.47"
   }
 }
