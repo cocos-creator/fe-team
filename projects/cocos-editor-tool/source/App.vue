@@ -10,7 +10,8 @@
             style="width: 100px;"
             placeholder="查询节点dump"
             show-clear
-            @blur="queryNode"></ui-input>
+            @blur="queryNode"
+        ></ui-input>
     </div>
 </template>
 
