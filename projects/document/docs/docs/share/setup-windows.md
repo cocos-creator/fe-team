@@ -1,5 +1,10 @@
 # Windows 装机指南
 
+## 安装 windows 系统
+- 进入[官方地址](https://www.microsoft.com/zh-cn/software-download/windows11)
+- 选择第二种方式（创建 Windows 11 安装）
+- 准备一个 U 盘即可
+
 ## 登录微软账号
 
 如果链接不上微软服务器，可以按照如下的方式设置一下 DNS 。
