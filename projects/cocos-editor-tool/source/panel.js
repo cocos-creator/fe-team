@@ -2,9 +2,6 @@ import {join} from 'path';
 import {readFileSync} from 'fs';
 import App from './App.vue';
 import { createApp } from 'vue';
-import { Asset } from '@editor/asset-db';
-
-console.log(Asset);
 
 const weakMap = new WeakMap();
 let panel;

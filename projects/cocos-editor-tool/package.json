@@ -74,7 +74,6 @@
     }
   },
   "dependencies": {
-    "@editor/asset-db": "^2.6.8",
     "vue": "^3.2.47"
   }
 }
