@@ -37,14 +37,14 @@
 
 > Windows 系统现在也有官方的 Store 了，常规软件如：微信、QQ音乐等建议优先使用 Store 下载安装，可以最大程度避免垃圾软件。
 
-> 如果是一些开发软件，推荐使用包管理器 [chocolatey](https://chocolatey.org/install#individual) 安装。
+> 如果是一些开发软件，推荐使用包管理器 [winget](https://github.com/microsoft/winget-cli) 安装。
 
-- [chocolatey](https://chocolatey.org/install#individual) window 上的包管理器，类似 Mac OS 的 homebrew 
-- Git
-- vscode
+- [winget](https://github.com/microsoft/winget-cli) window 上的包管理器，类似 Mac OS 的 homebrew 
+- [Git](https://git-scm.com/)
+- [vscode](https://code.visualstudio.com/)
 - [fnm](https://github.com/Schniz/fnm) node 版本管理工具 
-- chrome 
-- 压缩工具 [7z](https://www.7-zip.org/)
+- [chrome](https://www.google.cn/intl/en_uk/chrome/) 
+- [压缩工具7z](https://www.7-zip.org/)
 - clash [下载地址](https://github.com/Fndroid/clash_for_windows_pkg/releases) & [使用教程](https://clashforwindows.top/)
 - [windTerm](https://github.com/kingToolbox/WindTerm) terminal+ssh+sfpt （据说很好用，当前用不到，未验证）
 

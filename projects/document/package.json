@@ -2,6 +2,7 @@
   "name": "@cocos-fe/document",
   "version": "1.0.0",
   "description": "docs",
+  "type": "module",
   "scripts": {
     "dev": "vitepress dev docs --host --port 4444",
     "build": "vitepress build docs",
@@ -10,6 +11,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "vitepress": "^1.0.0-beta.5"
+    "vitepress": "^1.0.0-rc.25"
   }
 }

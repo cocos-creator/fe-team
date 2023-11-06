@@ -1,5 +1,5 @@
 <script setup>
-import SepareteBox from '../../components/separete-box/index.ts'
+import SepareteBox from './components/separete-box/index.ts'
 </script>  
 
 # ALL-IN-JS

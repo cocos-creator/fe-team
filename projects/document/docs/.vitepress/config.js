@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitepress'
 
-module.exports = defineConfig({
+export default defineConfig({
     title: 'Cocos FE',
     description: 'Cocos FE Team',
     themeConfig: {
