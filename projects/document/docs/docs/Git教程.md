@@ -2,52 +2,30 @@
 
 ## Git 文档
 [官方文档](https://git-scm.com/docs)
-## 配置 github ssh 密钥
-```
-// 生成KEY
-ssh-keygen -t rsa -C "GitHub的注册邮箱"
 
-// 生成路径
-Enter file in which to save the key (/Users/${userName}/.ssh/id_rsa):
-
-// 输入密码 可以为空
-Enter passphrase (empty for no passphrase):
-
-// 验证是否成功
-ssh -T git@github.com
-
-// 如果出现这个，是需要在github-settings-SSH里添加dogodo_rsa.pub里的内容
-Permission denied (publickey)
-
-
-Hi yuanweihai! You've successfully authenticated,
-but GitHub does not provide shell access. &nbsp;
-成功
-
-git config --global user.email "GitHub的注册邮箱"
-git config --global user.name "GitHub的注册名称"
-```
+## git alias
+使用 zsh 的 plugin, [zsh-plugins-git](https://gitee.com/mirrors/oh-my-zsh/tree/master/plugins/git)
 
 ## git branch
-git branch 查看本地分支
-git branch -r 查看远程分支
-git branch -a 查看本地&远程分支
-git branch -d xxx 删除本地分支
-git push origin --delete xxxx 删除远程分支
+- git branch 查看本地分支
+- git branch -r 查看远程分支
+- git branch -a 查看本地&远程分支
+- git branch -d xxx 删除本地分支
+- git push origin --delete xxxx 删除远程分支
 
-git branch -r | grep yuanshuai  查看远程的包含 yuanshuai 的分支
-git branch | grep yuanshuai | xargs git branch -D 批量删除本地分支
-git branch -a | grep -v -E 'master|develop' | xargs git branch -D // 只保留 master 等分支
-git branch -r | grep -v -E 'master|develop' | sed 's/origin\///g' | xargs -I {} git push origin :{}
-git branch -r | grep 'yuanshuai' | xargs -I {} basename {} | xargs -I {} git push origin :{} // 批量删除远程分支
-git remote prune origin  // 刷新一下分支列表
+- git branch -r | grep yuanshuai  查看远程的包含 yuanshuai 的分支
+- git branch | grep yuanshuai | xargs git branch -D 批量删除本地分支
+- git branch -a | grep -v -E 'master|develop' | xargs git branch -D // 只保留 master 等分支
+- git branch -r | grep -v -E 'master|develop' | sed 's/origin\///g' | xargs -I {} git push origin :{}
+- git branch -r | grep 'yuanshuai' | xargs -I {} basename {} | xargs -I {} git push origin :{} // 批量删除远程分支
+- git remote prune origin  // 刷新一下分支列表
 
 ## git checkout
-git checkout xxx 切换到某个分支
-git checkout . 放弃本次修改
-git checkout -b xxx origin/xxx 创建一个和远程分支关联的分支
-git checkout -b xxx 创建一个新分支
-git push origin xxx 将本地分支提交到远程
+- git checkout xxx 切换到某个分支
+- git checkout . 放弃本次修改
+- git checkout -b xxx origin/xxx 创建一个和远程分支关联的分支
+- git checkout -b xxx 创建一个新分支
+- git push origin xxx 将本地分支提交到远程
 
 
 ## git  merge 
@@ -55,19 +33,12 @@ git merge --abort 取消上一次合并
 
 ## git tag
 
-git tag -a tagName -m '标签的说明' // -a annotated
-git push origin tagName // 推送到远程
+- git tag -a tagName -m '标签的说明' // -a annotated
+- git push origin tagName // 推送到远程
 
 ## git log
 git log --author=alan // 过滤作者名称
 --oneline // 每条记录只显示一行
-
-## git alias
-```
-git config --global alias.st status
-git config --global alias.co checkout
-git config --global alias.b branch
-```
 
 ## .gitignore
 - 以斜杠“/”开头表示目录
@@ -80,11 +51,11 @@ git config --global alias.b branch
 
 ## git stash
 
-git stash save {name}
-git stash list
-git stash pop 
-git stash apply {index}
-git stash drop {index}
+- git stash save {name}
+- git stash list
+- git stash pop 
+- git stash apply {index}
+- git stash drop {index}
 
 ## git reset
 git reset --soft HEAD~1 撤销上一次的提交
