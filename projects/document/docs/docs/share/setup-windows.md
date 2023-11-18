@@ -42,10 +42,10 @@
 - [winget](https://github.com/microsoft/winget-cli) window 上的包管理器，类似 Mac OS 的 homebrew 
 - [Git](https://git-scm.com/)
 - [vscode](https://code.visualstudio.com/)
-- [fnm](https://github.com/Schniz/fnm) node 版本管理工具 
+- [nvm](https://github.com/coreybutler/nvm-windows) node 版本管理工具 
 - [chrome](https://www.google.cn/intl/en_uk/chrome/) 
-- [压缩工具7z](https://www.7-zip.org/)
-- clash [下载地址](https://github.com/Fndroid/clash_for_windows_pkg/releases) & [使用教程](https://clashforwindows.top/)
+- [压缩工具7z](https://www.7-zip.org/) (可能 windows 12 就不用了，系统都会内置)
+- [Clash](https://github.com/Fndroid/clash_for_windows_pkg/releases) & [使用教程](https://clashforwindows.top/)
 - [windTerm](https://github.com/kingToolbox/WindTerm) terminal+ssh+sfpt （据说很好用，当前用不到，未验证）
 
 ## 终端
@@ -54,14 +54,13 @@
 
 推荐使用 [powershell](https://learn.microsoft.com/zh-cn/powershell/scripting/learn/ps101/01-getting-started?view=powershell-7.3) 当作默认的 shell 工具，抛弃陈旧的 cmd 吧。我们可以在 powershell 中配置一些 [Alias]( https://learn.microsoft.com/zh-cn/powershell/module/microsoft.powershell.utility/set-alias?view=powershell-7.2) 让它的使用体验媲美 mac 上的 zsh .
 
-配置地址： 
+配置地址：
+```bash 
 C:\Users\alan\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
-
+```
 或者启动 powershell 输入 code $PROFILE 即可打开配置文件进行配置。
 
 ```
-# fnm 
-fnm env --use-on-cd | Out-String | Invoke-Expression
 
 # Setup other alias
 Set-Alias open Invoke-Item
@@ -94,28 +93,9 @@ function GitBranch {git branch}
 - open . 将当前的文件地址在资源管理器中打开
 - notepad $profile 打开当前 shell 的配置文件 （notepad 是windows 内置的文本编辑工具）
 
-## Fnm
-
-node 的版本管理工具，需要配合一些设置才能完美使用。具体可以查看[github](https://github.com/Schniz/fnm) 。这里记录一些解决方案。
-
-### cmd
-
-1. 搜索 cmd
-2. 右键：打开文件所在位置
-3. 对`命令提示符` 右键，点击`属性`
-4. 修改 `目标` 为: %windir%\system32\cmd.exe /k %USERPROFILE%\bashrc.cmd
-5. 进入用户目录（%USERPROFILE%） 创建 bashrc.cmd
-6. 写入如下内容
-```
-@echo off
-FOR /f "tokens=*" %%z IN ('fnm env --use-on-cd') DO CALL %%z
-```
-
-这样就能在 cmd 里执行 node 命令了。
-
 ## PowerToys
 
-微软官方的实用工具，具体功能有点类似 mac 的聚焦，可以快速搜索。[download](https://learn.microsoft.com/zh-cn/windows/powertoys/)
+微软官方的实用工具，具体功能有点类似 mac 的聚焦，可以快速搜索。[下载地址](https://learn.microsoft.com/zh-cn/windows/powertoys/)
 
 windows 11 自带一个全局的搜索功能了，下载它的主要目的是为了做键盘映射。由于主要设备是 mac ，切换到 win 最不习惯的就是中英文切换。
 

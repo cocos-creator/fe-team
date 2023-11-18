@@ -21,6 +21,7 @@
 - 提醒事项、
 - keynote、
 - Safari（日常）
+
 苹果的 APP 完成度非常高，相比国内的 APP 而言少了运营模块，整个 APP 完全面向生产力，无广告（零容忍），所以日常的 APP 我基本使用原生的。
 
 
@@ -110,8 +111,10 @@ defaults write -g com.apple.mouse.scaling 12
 ## 开发环境
 
 ### IP地址
-由于屏(bi)蔽(guan)糟(shuo)粕(guo)的政策，我们和外界的沟通渠道被切断，导致在安装一些国外的软件的时候，会无休止的卡在 loading 状态，或者类似报错 Failed to connect to raw.githubusercontent.com port 443: Connection refused 
-
+由于屏(bi)蔽(guan)糟(shuo)粕(guo)的政策，我们和外界的沟通渠道被切断，导致在安装一些国外的软件的时候，会无休止的卡在 loading 状态，或者类似报错: 
+```
+Failed to connect to raw.githubusercontent.com port 443: Connection refused 
+```
 1、 在 [这里](https://www.ipaddress.com) 查询 raw.githubusercontent.com 的真实IP
 
 2、 在 host文 件里配置 IP 映射 （推荐[iHost](https://github.com/toolinbox/iHosts)）
@@ -202,6 +205,8 @@ plugins=(git nvm zsh-syntax-highlighting zsh-autosuggestions)
 ```bash
 source .zshrc
 ```
+
+![](/setup-mac/oh-my-zsh.png)
 
 ### 环境准备
 
