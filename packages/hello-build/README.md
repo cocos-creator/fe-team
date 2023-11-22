@@ -54,7 +54,7 @@ npx hi-cocos build [plugin-name]
 └── tsconfig.json
 ```
 
-在一个仓库里有多个插件项目，插件项目都归拢在 `extensions` 目录中，而我们执行构建等命令是在项目根目录，所以默认情况下，针对 `dev` 和 `build` 你执行 
+在一个仓库里有多个插件项目，插件项目都归拢在 `extensions` 目录中，而我们执行构建等命令是在项目根目录，所以默认情况下，针对 `dev` 和 `build` ，当你执行 
 
 ```
 npx hi-cocos build console
