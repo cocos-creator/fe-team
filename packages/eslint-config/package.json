@@ -1,36 +1,35 @@
 {
-  "name": "@cocos-fe/eslint-config",
-  "version": "1.0.33",
-  "description": "cocos 团队的共享配置",
-  "exports": {
-    ".": {
-      "require": "./index.js"
+    "name": "@cocos-fe/eslint-config",
+    "version": "1.1.0",
+    "description": "cocos 团队的共享配置",
+    "exports": {
+        ".": {
+            "require": "./index.js"
+        },
+        "./editor": {
+            "require": "./extend-editor.js"
+        },
+        "./engine": {
+            "require": "./extend-engine.js"
+        }
     },
-    "./editor": {
-      "require": "./extend-editor.js"
+    "scripts": {},
+    "engines": {
+        "node": ">=16.0.0"
     },
-    "./engine": {
-      "require": "./extend-engine.js"
-    }
-  },
-  "scripts": {},
-  "engines": {
-    "node": "^14.17.0 || >=16.0.0"
-  },
-  "peerDependencies": {
-    "eslint": "^6.2.0 || ^7.0.0 || ^8.0.0"
-  },
-  "homepage": "https://www.npmjs.com/package/@cocos-fe/eslint-config-cocos",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org"
-  },
-  "license": "MIT",
-  "gitHead": "059b8c355c74c75198f32e5632459b7aec23d8b5",
-  "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.25.0",
-    "@typescript-eslint/parser": "^5.25.0",
-    "eslint-plugin-vue": "^8.1.1",
-    "vue-eslint-parser": "^8.0.1"
-  }
+    "peerDependencies": {
+        "@typescript-eslint/eslint-plugin": "^6.13.1",
+        "@typescript-eslint/parser": "^6.13.1",
+        "eslint": "^8.53.0",
+        "eslint-plugin-vue": "^9.18.1",
+        "vue-eslint-parser": "^9.3.2"
+    },
+    "homepage": "https://www.npmjs.com/package/@cocos-fe/eslint-config-cocos",
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org"
+    },
+    "license": "MIT",
+    "gitHead": "059b8c355c74c75198f32e5632459b7aec23d8b5",
+    "dependencies": {}
 }

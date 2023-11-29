@@ -81,6 +81,10 @@ function getArticleSidebar() {
                     link: '/docs/share/ast'
                 },
                 {
+                    text: 'JSON Schema',
+                    link: '/docs/share/json-schema'
+                },
+                {
                     text: '装机指南-windows',
                     link: '/docs/share/setup-windows'
                 },

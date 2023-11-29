@@ -1,4 +1,3 @@
-
 import { build, defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
@@ -11,46 +10,49 @@ export function createViteBuild(taskConfig) {
     const { project: extensionPath, config = {} } = taskConfig;
     config.root = config.root || extensionPath;
 
-    const c = merge(defineConfig({
-        plugins: [
-            vue({
-                template: {
-                    compilerOptions: {
-                        isCustomElement: tag => tag.startsWith('ui-'),
+    const c = merge(
+        defineConfig({
+            plugins: [
+                vue({
+                    template: {
+                        compilerOptions: {
+                            isCustomElement: (tag) => tag.startsWith('ui-'),
+                        },
+                    },
+                }),
+            ],
+            base: './',
+            build: {
+                target: 'esnext',
+                outDir: 'dist',
+                emptyOutDir: true,
+                assetsDir: './', // 直接把所有文件都放 dist
+                cssCodeSplit: true, // 因为是多个入口，所以 css 也应该独立
+                lib: {
+                    formats: ['cjs'],
+                },
+                rollupOptions: {
+                    external: [...builtinModules],
+                    output: {
+                        assetFileNames: '[name].[ext]', // 让 css 文件的命名固定，不要携带 hash
                     },
                 },
-            }),
-        ],
-        base: './',
-        build: {
-            target: 'esnext',
-            outDir: 'dist',
-            emptyOutDir: true,
-            assetsDir: './', // 直接把所有文件都放 dist
-            cssCodeSplit: true, // 因为是多个入口，所以 css 也应该独立
-            lib: {
-                formats: ['cjs'],
+                minify: false,
             },
-            rollupOptions: {
-                external: [...builtinModules],
-                output: {
-                    assetFileNames: '[name].[ext]', // 让 css 文件的命名固定，不要携带 hash
-                },
-            },
-            minify: false,
-        },
-    }), config);
+        }),
+        config
+    );
     return build(c);
 }
 
 export function validateProject(projectPath) {
-
     return new Promise((res, rej) => {
         try {
             const stats = statSync(projectPath);
             if (stats.isDirectory()) {
-
-                const configPath = pathToFileURL(resolve(projectPath, 'hello.build.config.js'));
+                const configPath = pathToFileURL(
+                    resolve(projectPath, 'hello.build.config.js')
+                );
 
                 if (statSync(configPath).isFile()) {
                     import(configPath).then((module) => {

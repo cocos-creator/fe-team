@@ -7,10 +7,10 @@ module.exports = {
         node: true,
     },
     extends: [
-        'eslint:recommended',
-        'plugin:vue/recommended',
-        'plugin:@typescript-eslint/recommended',
-        '@cocos-fe/eslint-config/editor',
+        'eslint:recommended', // eslint 官方
+        'plugin:vue/vue3-recommended', // vue 官方
+        'plugin:@typescript-eslint/recommended', // ts 官方
+        '@cocos-fe/eslint-config/editor', // cocos 官方
     ],
     globals: {
         chrome: 'readonly',
@@ -26,6 +26,7 @@ module.exports = {
         },
     },
     rules: {
-    // 原则上我们各个项目不应该单独定制 rules，想加什么规则请和团队确认。
+        // 原则上我们各个项目不应该单独定制 rules，想加什么规则请和团队确认。
+        semi: 0,
     },
 };
