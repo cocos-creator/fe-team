@@ -58,10 +58,10 @@ function getArticleSidebar() {
                     text: 'cocos creator',
                     link: '/docs/cocos-creator'
                 },
-                // {
-                //     text: 'history',
-                //     link: '/docs/history'
-                // }
+                {
+                    text: 'Dashboard 2.1 重构计划',
+                    link: '/docs/dashboard-v2.1'
+                }
             ]
         },
         {
