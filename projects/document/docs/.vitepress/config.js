@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig } from 'vitepress';
 
 export default defineConfig({
     title: 'Cocos FE',
@@ -7,20 +7,20 @@ export default defineConfig({
         socialLinks: [
             {
                 icon: 'github',
-                link: 'https://github.com/cocos-creator/fe-team'
-            }
+                link: 'https://github.com/cocos-creator/fe-team',
+            },
         ],
 
         nav: [
             {
                 text: '文档',
                 link: '/docs/index',
-                activeMatch: '^/docs/'
+                activeMatch: '^/docs/',
             },
             {
                 text: '基建',
                 link: '/core/index',
-                activeMatch: '^/core/'
+                activeMatch: '^/core/',
             },
         ],
 
@@ -31,10 +31,10 @@ export default defineConfig({
 
         footer: {
             message: '',
-            copyright: 'MIT Licensed | Copyright © 2019-present cocos FE'
+            copyright: 'MIT Licensed | Copyright © 2019-present cocos FE',
         },
     },
-    lastUpdated: false
+    lastUpdated: false,
 });
 
 function getArticleSidebar() {
@@ -42,61 +42,33 @@ function getArticleSidebar() {
         {
             text: '文档',
             items: [
-                {
-                    text: 'Git 教程',
-                    link: '/docs/Git教程'
-                },
-                {
-                    text: '软链接教程',
-                    link: '/docs/symbolic-link'
-                },
-                {
-                    text: 'inspector',
-                    link: '/docs/inspector'
-                },
-                {
-                    text: 'cocos creator',
-                    link: '/docs/cocos-creator'
-                },
-                {
-                    text: 'Dashboard 2.1 重构计划',
-                    link: '/docs/dashboard-v2.1'
-                }
-            ]
+                { text: 'Git 教程', link: '/docs/Git教程' },
+                { text: '软链接教程', link: '/docs/symbolic-link' },
+                { text: 'inspector', link: '/docs/inspector' },
+                { text: 'cocos creator', link: '/docs/cocos-creator' },
+                { ext: 'Dashboard 2.1 重构计划', link: '/docs/dashboard-v2.1' },
+            ],
         },
         {
             text: '踩坑',
             items: [
-                { text: 'JSON5',link: '/docs/experience/json5'},
-                { text: 'Gitmodules',link: '/docs/experience/gitmodules'},
+                { text: 'JSON5', link: '/docs/experience/json5' },
+                { text: 'Gitmodules', link: '/docs/experience/gitmodules' },
                 { text: 'Keycode 229', link: '/docs/experience/keycode-229' },
                 { text: 'emoji', link: '/docs/experience/emoji' },
-            ]
+            ],
         },
         {
             text: '分享',
             items: [
-                {
-                    text: 'AST 初探',
-                    link: '/docs/share/ast'
-                },
-                {
-                    text: 'JSON Schema',
-                    link: '/docs/share/json-schema'
-                },
-                {
-                    text: '装机指南-windows',
-                    link: '/docs/share/setup-windows'
-                },
-                {
-                    text: '装机指南-mac',
-                    link: '/docs/share/setup-mac'
-                },
-            ]
-        }
-    ]
+                { text: 'AST 初探', link: '/docs/share/ast' },
+                { text: 'JSON Schema', link: '/docs/share/json-schema' },
+                { text: '装机指南-windows', link: '/docs/share/setup-windows' },
+                { text: '装机指南-mac', link: '/docs/share/setup-mac' },
+            ],
+        },
+    ];
 }
-
 
 function getCoreSidebar() {
     return [
@@ -114,7 +86,8 @@ function getCoreSidebar() {
                 { text: 'Github ID 翻译', link: '/core/github-ids' },
                 { text: '编辑器插件构建', link: '/core/hello-build' },
                 { text: '组件封装-all-in-js', link: '/core/component-all-in-js' },
-            ]
+                { text: '组件封装-headless', link: '/core/component-headless' },
+            ],
         },
-    ]
+    ];
 }
