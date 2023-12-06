@@ -6,11 +6,16 @@
   "scripts": {
     "dev": "vitepress dev docs --host --port 4444",
     "build": "vitepress build docs",
-    "serve": "vitepress serve docs"
+    "serve": "vitepress serve docs",
+    "documate:upload": "documate upload"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@documate/documate": "^0.2.1",
     "vitepress": "^1.0.0-rc.29"
+  },
+  "dependencies": {
+    "@documate/vue": "^0.3.1"
   }
 }
