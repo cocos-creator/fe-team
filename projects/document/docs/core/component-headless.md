@@ -23,7 +23,7 @@ Slots 定制组件有个很大的限制是我们传入的 Slot 内容，只能�
 
 如下图所示：
 
-<div style="display: flex;align-items: center;justify-content: space-evenly;">
+<div style="display: flex;align-items: center;justify-content: space-evenly;overflow: auto;">
     <img src="/headless/1.png" />
     <img src="/headless/2.png" />
 </div>
