@@ -108,4 +108,4 @@ dist
 .develop
 .electron
 
-projects/document/docs/.vitepress/cache
+.vitepress/cache/
