@@ -46,7 +46,7 @@ function getArticleSidebar() {
                 { text: '软链接教程', link: '/docs/symbolic-link' },
                 { text: 'inspector', link: '/docs/inspector' },
                 { text: 'cocos creator', link: '/docs/cocos-creator' },
-                { ext: 'Dashboard 2.1 重构计划', link: '/docs/dashboard-v2.1' },
+                { text: 'Dashboard 2.1 重构计划', link: '/docs/dashboard-v2.1' },
             ],
         },
         {
