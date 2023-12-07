@@ -2,8 +2,8 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
     rules: {
-        // Eslint@8.53.0 开始废弃基础的格式配置 https://eslint.org/blog/2023/10/deprecating-formatting-rules/ 
-        // 基础的格式都用 prettier 
+        // Eslint@8.53.0 开始废弃基础的格式配置 https://eslint.org/blog/2023/10/deprecating-formatting-rules/
+        // 基础的格式都用 prettier
 
         // ====> 基础
         'no-console': 0,
@@ -12,9 +12,9 @@ module.exports = {
         'no-async-promise-executor': 1, // new Promise(async (resolve) => {}) 不允许 async ，但是太多地方用了
         'no-case-declarations': 1, // case 里面不要定义变量，项目很地方这样用，先给警告
         'no-unreachable': 1, // return null 给警告
-        'eqeqeq': 0,
+        eqeqeq: 0,
         'prefer-const': 1, // 推荐使用 const 但是目前不强制
-        'camelcase': [
+        camelcase: [
             'off',
             {
                 properties: 'never', // 属性名称
@@ -25,19 +25,19 @@ module.exports = {
         ],
         'require-await': 0, // 编辑器有大量只声明了 async 的函数为了表明这是一个异步函数
         'consistent-return': 0, // 编辑器有大量只声明了 async 的函数为了表明这是一个异步函数 所以可能没有返回值
-       
+
         // ====> https://eslint.vuejs.org/
-        'vue/max-attributes-per-line': [
-            'error',
-            {
-                singleline: {
-                    max: 2,
-                },
-                multiline: {
-                    max: 1,
-                },
-            },
-        ],
+        // 'vue/max-attributes-per-line': [
+        //     'error',
+        //     {
+        //         singleline: {
+        //             max: 2,
+        //         },
+        //         multiline: {
+        //             max: 1,
+        //         },
+        //     },
+        // ],
         'vue/no-unused-components': isProduction ? 2 : 0,
         'vue/html-indent': [
             'error',

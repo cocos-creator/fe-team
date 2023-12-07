@@ -13,7 +13,11 @@
   "license": "ISC",
   "devDependencies": {
     "@documate/documate": "^0.2.1",
-    "vitepress": "^1.0.0-rc.29"
+    "flexsearch": "^0.7.31",
+    "mermaid": "^10.6.1",
+    "vitepress": "^1.0.0-rc.29",
+    "vitepress-plugin-mermaid": "^2.0.16",
+    "vitepress-plugin-search": "^1.0.4-alpha.20"
   },
   "dependencies": {
     "@documate/vue": "^0.3.1"

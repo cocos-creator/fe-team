@@ -1,6 +1,8 @@
 import { defineConfig } from 'vitepress';
+import { withMermaid } from 'vitepress-plugin-mermaid';
+import { SearchPlugin } from 'vitepress-plugin-search';
 
-export default defineConfig({
+const config = defineConfig({
     title: 'Cocos FE',
     description: 'Cocos FE Team',
     themeConfig: {
@@ -22,11 +24,17 @@ export default defineConfig({
                 link: '/core/index',
                 activeMatch: '^/core/',
             },
+            {
+                text: '组件',
+                link: '/components/index',
+                activeMatch: '^/components/',
+            },
         ],
 
         sidebar: {
             '/docs/': getArticleSidebar(),
             '/core/': getCoreSidebar(),
+            '/components/': getComponentsSidebar(),
         },
 
         footer: {
@@ -35,6 +43,14 @@ export default defineConfig({
         },
     },
     lastUpdated: false,
+    vite: {
+        plugins: [SearchPlugin()],
+    },
+});
+
+export default withMermaid(config, {
+    mermaid: {},
+    mermaidPlugin: {},
 });
 
 function getArticleSidebar() {
@@ -46,7 +62,9 @@ function getArticleSidebar() {
                 { text: '软链接教程', link: '/docs/symbolic-link' },
                 { text: 'inspector', link: '/docs/inspector' },
                 { text: 'cocos creator', link: '/docs/cocos-creator' },
-                { text: 'Dashboard 2.1 重构计划', link: '/docs/dashboard-v2.1' },
+                { text: 'Dashboard 2.1', link: '/docs/dashboard-v2.1' },
+                { text: 'Dashboard 1.2.6', link: '/docs/dashboard-v1.2.6' },
+                { text: '文档地址中转', link: '/docs/文档地址中转' },
             ],
         },
         {
@@ -88,6 +106,15 @@ function getCoreSidebar() {
                 { text: '组件封装-all-in-js', link: '/core/component-all-in-js' },
                 { text: '组件封装-headless', link: '/core/component-headless' },
             ],
+        },
+    ];
+}
+
+function getComponentsSidebar() {
+    return [
+        {
+            text: '组件',
+            items: [{ text: '虚拟列表', link: '/components/virtual-list/index' }],
         },
     ];
 }
