@@ -5,7 +5,8 @@
     "private": false,
     "workspaces": [
         "packages/*",
-        "projects/*"
+        "projects/*",
+        "demos/*"
     ],
     "scripts": {
         "preinstall": "node ./scripts/preinstall-check-node.js && npx only-allow npm",
