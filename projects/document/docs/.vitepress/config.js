@@ -85,6 +85,10 @@ function getArticleSidebar() {
                 { text: '装机指南-mac', link: '/docs/share/setup-mac' },
             ],
         },
+        {
+            text: 'Typescript',
+            items: [{ text: '笔记', link: '/docs/typescript/index' }],
+        },
     ];
 }
 
