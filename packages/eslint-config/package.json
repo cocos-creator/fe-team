@@ -1,6 +1,6 @@
 {
     "name": "@cocos-fe/eslint-config",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "cocos 团队的共享配置",
     "exports": {
         ".": {
@@ -18,11 +18,11 @@
         "node": ">=16.0.0"
     },
     "peerDependencies": {
-        "@typescript-eslint/eslint-plugin": "^6.13.1",
-        "@typescript-eslint/parser": "^6.13.1",
-        "eslint": "^8.53.0",
-        "eslint-plugin-vue": "^9.18.1",
-        "vue-eslint-parser": "^9.3.2"
+        "@typescript-eslint/eslint-plugin": "^7.1.0",
+        "@typescript-eslint/parser": "^7.1.0",
+        "eslint": "^8.57.0",
+        "eslint-plugin-vue": "^9.22.0",
+        "vue-eslint-parser": "^9.4.2"
     },
     "homepage": "https://www.npmjs.com/package/@cocos-fe/eslint-config-cocos",
     "publishConfig": {
