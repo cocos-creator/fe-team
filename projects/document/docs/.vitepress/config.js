@@ -1,6 +1,5 @@
 import { defineConfig } from 'vitepress';
 import { withMermaid } from 'vitepress-plugin-mermaid';
-import { SearchPlugin } from 'vitepress-plugin-search';
 
 const config = defineConfig({
     title: 'Cocos FE',
@@ -44,7 +43,7 @@ const config = defineConfig({
     },
     lastUpdated: false,
     vite: {
-        plugins: [SearchPlugin()],
+        plugins: [],
     },
 });
 

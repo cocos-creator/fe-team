@@ -27,17 +27,7 @@ module.exports = {
         'consistent-return': 0, // 编辑器有大量只声明了 async 的函数为了表明这是一个异步函数 所以可能没有返回值
 
         // ====> https://eslint.vuejs.org/
-        // 'vue/max-attributes-per-line': [
-        //     'error',
-        //     {
-        //         singleline: {
-        //             max: 2,
-        //         },
-        //         multiline: {
-        //             max: 1,
-        //         },
-        //     },
-        // ],
+        'vue/max-attributes-per-line': 0,
         'vue/no-unused-components': isProduction ? 2 : 0,
         'vue/html-indent': [
             'error',

@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { readFileSync } from 'fs';
 import App from './App.vue';
-import { createApp } from 'vue';
+import Vue from 'vue';
 
 const weakMap = new WeakMap();
 
@@ -12,15 +12,17 @@ export const style = readFileSync(join(__dirname, './panel.css'), 'utf8'); // ç›
 export const $ = { root: '#app' };
 
 export function ready() {
+    // @ts-ignore
     const panel = this;
 
-    const app = createApp(App);
-    app.mount(panel.$.root);
+    const app = new Vue(App);
+    app.$mount(panel.$.root);
 
-    weakMap.set(this, app);
+    weakMap.set(panel, app);
 }
 
 export function close() {
+    // @ts-ignore
     const app = weakMap.get(this);
-    app?.unmount?.();
+    app?.$destroy?.();
 }

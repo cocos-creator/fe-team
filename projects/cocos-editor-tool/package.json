@@ -1,79 +1,78 @@
 {
-  "name": "cocos-editor-tool",
-  "version": "1.0.0",
-  "package_version": 2,
-  "description": "效率加倍的小助手",
-  "main": "./dist/browser.js",
-  "scripts": {
-    "dev": "npx hi-cocos dev .",
-    "build": "npx hi-cocos build .",
-    "www:dev": "npx vite --port 5123 --config vite.config.www.js",
-    "www:build": "npx vite build --config vite.config.www.js"
-  },
-  "keywords": [],
-  "author": "cocos-fe",
-  "license": "ISC",
-  "devDependencies": {
-    "@cocos-fe/hello-build": "file:packages/hello-build",
-    "@vitejs/plugin-vue": "^4.0.0"
-  },
-  "panels": {
-    "default": {
-      "main": "./dist/panel.js"
+    "name": "cocos-editor-tool",
+    "version": "1.0.0",
+    "package_version": 2,
+    "description": "效率加倍的小助手",
+    "main": "./dist/browser.js",
+    "scripts": {
+        "dev": "npx hi-cocos dev .",
+        "build": "npx hi-cocos build .",
+        "www:dev": "npx vite --port 5123 --config vite.config.www.js",
+        "www:build": "npx vite build --config vite.config.www.js"
     },
-    "webview": {
-      "main": "./dist/panel-webview.js"
-    }
-  },
-  "contributions": {
-    "builder": "./dist/build.js",
-    "menu": [
-      {
-        "path": "i18n:menu.panel",
-        "label": "超级案例",
-        "message": "open"
-      },
-      {
-        "path": "i18n:menu.panel",
-        "label": "超级案例-webview",
-        "message": "open-webview"
-      }
-    ],
-    "messages": {
-      "open": {
-        "methods": [
-          "open"
-        ]
-      },
-      "open-webview": {
-        "methods": [
-          "open-webview"
-        ]
-      }
+    "keywords": [],
+    "author": "cocos-fe",
+    "license": "ISC",
+    "devDependencies": {
+        "@cocos-fe/hello-build": "file:packages/hello-build"
     },
-    "assets": {
-      "localFile": [
-        {
-          "path": "./settings",
-          "type": "project"
+    "panels": {
+        "default": {
+            "main": "./dist/panel.js"
         },
-        {
-          "path": ".",
-          "type": "extension"
+        "webview": {
+            "main": "./dist/panel-webview.js"
         }
-      ]
     },
-    "hierarchy": {
-      "menu": {
-          "methods": "./dist/extend-hierarchy.js",
-          "rootMenu": "onRootMenu",
-          "createMenu": "onCreateMenu",
-          "nodeMenu": "onNodeMenu",
-          "panelMenu": "onPanelMenu"
-      }
+    "contributions": {
+        "builder": "./dist/build.js",
+        "menu": [
+            {
+                "path": "i18n:menu.panel",
+                "label": "超级案例",
+                "message": "open"
+            },
+            {
+                "path": "i18n:menu.panel",
+                "label": "超级案例-webview",
+                "message": "open-webview"
+            }
+        ],
+        "messages": {
+            "open": {
+                "methods": [
+                    "open"
+                ]
+            },
+            "open-webview": {
+                "methods": [
+                    "open-webview"
+                ]
+            }
+        },
+        "assets": {
+            "localFile": [
+                {
+                    "path": "./settings",
+                    "type": "project"
+                },
+                {
+                    "path": ".",
+                    "type": "extension"
+                }
+            ]
+        },
+        "hierarchy": {
+            "menu": {
+                "methods": "./dist/extend-hierarchy.js",
+                "rootMenu": "onRootMenu",
+                "createMenu": "onCreateMenu",
+                "nodeMenu": "onNodeMenu",
+                "panelMenu": "onPanelMenu"
+            }
+        }
+    },
+    "dependencies": {
+        "vue": "^3.4.21"
     }
-  },
-  "dependencies": {
-    "vue": "^3.2.47"
-  }
 }

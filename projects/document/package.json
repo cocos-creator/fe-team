@@ -1,25 +1,18 @@
 {
-  "name": "@cocos-fe/document",
-  "version": "1.0.0",
-  "description": "docs",
-  "type": "module",
-  "scripts": {
-    "dev": "vitepress dev docs --host --port 4444",
-    "build": "vitepress build docs",
-    "serve": "vitepress serve docs",
-    "documate:upload": "documate upload"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@documate/documate": "^0.2.1",
-    "flexsearch": "^0.7.31",
-    "mermaid": "^10.6.1",
-    "vitepress": "^1.0.0-rc.29",
-    "vitepress-plugin-mermaid": "^2.0.16",
-    "vitepress-plugin-search": "^1.0.4-alpha.20"
-  },
-  "dependencies": {
-    "@documate/vue": "^0.3.1"
-  }
+    "name": "@cocos-fe/document",
+    "version": "1.0.0",
+    "description": "docs",
+    "type": "module",
+    "scripts": {
+        "dev": "vitepress dev docs --host --port 4444",
+        "build": "vitepress build docs",
+        "serve": "vitepress serve docs"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "mermaid": "^10.9.0",
+        "vitepress": "^1.0.1",
+        "vitepress-plugin-mermaid": "^2.0.16"
+    }
 }

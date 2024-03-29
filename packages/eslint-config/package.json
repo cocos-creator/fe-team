@@ -15,13 +15,13 @@
     },
     "scripts": {},
     "engines": {
-        "node": ">=16.0.0"
+        "node": ">=18.0.0"
     },
     "peerDependencies": {
-        "@typescript-eslint/eslint-plugin": "^7.1.0",
-        "@typescript-eslint/parser": "^7.1.0",
+        "@typescript-eslint/eslint-plugin": "^7.4.0",
+        "@typescript-eslint/parser": "^7.4.0",
         "eslint": "^8.57.0",
-        "eslint-plugin-vue": "^9.22.0",
+        "eslint-plugin-vue": "^9.24.0",
         "vue-eslint-parser": "^9.4.2"
     },
     "homepage": "https://www.npmjs.com/package/@cocos-fe/eslint-config-cocos",

@@ -1,17 +1,12 @@
 <template>
     <div className="cocos-helper">
         <ui-button @click="clearBuildList">
-            清空构建列表
+            清空构建列表1
         </ui-button>
         <ui-button @click="toggleDebugerTracker">
             {{ debugerTracker ? '关闭' : '开启' }}埋点日志
         </ui-button>
-        <ui-input
-            style="width: 100px;"
-            placeholder="查询节点dump"
-            show-clear
-            @blur="queryNode"
-        ></ui-input>
+        <ui-input style="width: 100px" placeholder="查询节点dump" show-clear @blur="queryNode"></ui-input>
     </div>
 </template>
 
@@ -20,13 +15,13 @@ import { ref, onMounted } from 'vue';
 
 // 清空构建列表
 async function clearBuildList() {
-    var {queue} = await Editor.Message.request('builder', 'query-tasks-info');
-    Object.keys(queue).forEach(id => Editor.Message.request('builder', 'remove-task', [id, true]));
+    var { queue } = await Editor.Message.request('builder', 'query-tasks-info');
+    Object.keys(queue).forEach((id) => Editor.Message.request('builder', 'remove-task', [id, true]));
 }
 
 // 埋点日志
 const debugerTracker = ref(false);
-onMounted(async function() {
+onMounted(async function () {
     const value = await Editor.Profile.getConfig('utils', 'features.analytics-debug');
     debugerTracker.value = value;
 });
@@ -43,14 +38,14 @@ async function queryNode(event) {
     const dump = await Editor.Message.request('scene', 'query-node', uuid);
     console.log(dump);
 }
-
 </script>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .cocos-helper {
     padding: 10px;
     display: flex;
-    ui-button, ui-input {
+    ui-button,
+    ui-input {
         margin-left: 8px;
         margin-bottom: 8px;
     }

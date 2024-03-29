@@ -1,5 +1,5 @@
- 
-import { preserveShebangs } from 'rollup-plugin-preserve-shebangs';
+// TODO: 待所有工作流都升级到采用 esm 标准之后，可以剥离对 rollup 的依赖，直接提供 esm 的源文件即可。
+
 import externals from 'rollup-plugin-node-externals';
 import del from 'rollup-plugin-delete';
 
@@ -11,8 +11,7 @@ export default {
     output: [
         {
             dir: 'bin',
-            // entryFileNames: '[name].[format].js',
-            entryFileNames: '[name].cjs',
+            entryFileNames: '[name].cjs', // entryFileNames: '[name].[format].js',
             format: 'cjs',
         },
         {
@@ -21,10 +20,6 @@ export default {
             format: 'es',
         },
     ],
-    plugins: [
-        preserveShebangs(),
-        externals(),
-        del({ targets: 'bin/*' }),
-    ],
+    plugins: [externals(), del({ targets: 'bin/*' })],
     external: [],
 };

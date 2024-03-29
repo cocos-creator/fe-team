@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 
 import { join } from 'path';
-import { stat } from 'fs/promises';
-import { readdirSync } from 'fs';
-import { createViteBuild, validateProject } from './core.js';
+import { stat, readdir } from 'fs/promises';
+import { createViteBuild, validateProject } from '../core.js';
 
 const root = process.cwd();
 
-export default async function(plugin) {
+export default async function (plugin) {
     const buildProjects = await getBuildProjects(plugin);
 
     if (!buildProjects.length) {
@@ -39,9 +38,8 @@ async function getBuildProjects(extensionName) {
             }
             projects = [extensionName];
         }
-       
     } else {
-        projects = readdirSync(join(root, './extensions'));
+        projects = await readdir(join(root, './extensions'));
     }
 
     const list = await projects.reduce(async (res, project) => {
@@ -52,10 +50,9 @@ async function getBuildProjects(extensionName) {
             if (config) {
                 result.push(config);
             }
-        } catch (error) { }
+        } catch (error) {}
         return result;
     }, Promise.resolve([]));
 
     return list;
 }
-

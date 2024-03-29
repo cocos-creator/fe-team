@@ -1,16 +1,16 @@
 {
-  "name": "@cocos-fe/utils",
-  "version": "1.0.8",
-  "description": "工具函数集",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "homepage": "https://www.npmjs.com/package/@cocos-fe/utils",
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "",
-  "license": "MIT",
-  "gitHead": "059b8c355c74c75198f32e5632459b7aec23d8b5"
+    "name": "@cocos-fe/utils",
+    "version": "1.0.8",
+    "description": "工具函数集",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "homepage": "https://www.npmjs.com/package/@cocos-fe/utils",
+    "publishConfig": {
+        "access": "public"
+    },
+    "author": "",
+    "license": "MIT",
+    "gitHead": "059b8c355c74c75198f32e5632459b7aec23d8b5"
 }

@@ -1,12 +1,11 @@
 interface Node {
-    type: string,
-    parent?: string,
-    components: [],
-    uuid: string
-
+    type: string;
+    parent?: string;
+    components: [];
+    uuid: string;
 }
 
-exports.onNodeMenu = async (node: Node) => {
+export const onNodeMenu = async (node: Node) => {
     return [
         {
             label: '拓展节点菜单',
@@ -17,7 +16,7 @@ exports.onNodeMenu = async (node: Node) => {
     ];
 };
 
-exports.onPanelMenu = () => {
+export const onPanelMenu = () => {
     return [
         {
             label: '拓展面板菜单',
@@ -28,7 +27,7 @@ exports.onPanelMenu = () => {
     ];
 };
 
-exports.onCreateMenu = () => {
+export const onCreateMenu = () => {
     return [
         {
             label: '拓展创建菜单',
@@ -39,7 +38,7 @@ exports.onCreateMenu = () => {
     ];
 };
 
-exports.onRootMenu = () => {
+export const onRootMenu = () => {
     return [
         {
             label: '拓展场景节点菜单',

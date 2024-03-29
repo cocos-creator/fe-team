@@ -109,3 +109,6 @@ dist
 .electron
 
 **/.vitepress/cache/
+
+## packages/hello-build
+packages/hello-build/bin/

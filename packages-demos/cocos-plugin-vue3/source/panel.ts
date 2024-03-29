@@ -12,15 +12,17 @@ export const style = readFileSync(join(__dirname, './panel.css'), 'utf8'); // ç›
 export const $ = { root: '#app' };
 
 export function ready() {
+    // @ts-ignore
     const panel = this;
 
     const app = createApp(App);
     app.mount(panel.$.root);
 
-    weakMap.set(this, app);
+    weakMap.set(panel, app);
 }
 
 export function close() {
+    // @ts-ignore
     const app = weakMap.get(this);
     app?.unmount?.();
 }

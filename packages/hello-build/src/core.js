@@ -1,8 +1,9 @@
 import { build, defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import vue2 from '@vitejs/plugin-vue2';
 import { resolve } from 'path';
 import { statSync } from 'fs';
-import builtinModules from './builtin-modules.js';
+import builtinModules from './utils/builtin-modules.js';
 import { merge } from 'webpack-merge';
 import { pathToFileURL } from 'node:url';
 
@@ -10,17 +11,41 @@ export function createViteBuild(taskConfig) {
     const { project: extensionPath, config = {} } = taskConfig;
     config.root = config.root || extensionPath;
 
-    const c = merge(
-        defineConfig({
-            plugins: [
+    // 针对 framework 选择对应的构建插件
+    const { framework = 'vue2' } = config;
+    const plugins = [];
+    switch (framework) {
+        case 'vue2':
+            plugins.push(
+                vue2({
+                    template: {
+                        compilerOptions: {
+                            isCustomElement: (tag) => tag.startsWith('ui-'),
+                        },
+                    },
+                })
+            );
+            break;
+        case 'vue3':
+            plugins.push(
                 vue({
                     template: {
                         compilerOptions: {
                             isCustomElement: (tag) => tag.startsWith('ui-'),
                         },
                     },
-                }),
-            ],
+                })
+            );
+            break;
+        default:
+            break;
+    }
+
+    // 原则上，这些配置应该是由外面传进来，内部不做 default 的配置，已达到灵活的定制需求
+    // 但是我们业务形态比较固定，灵活性 < 简单化
+    const c = merge(
+        defineConfig({
+            plugins: plugins,
             base: './',
             build: {
                 target: 'esnext',
@@ -32,7 +57,7 @@ export function createViteBuild(taskConfig) {
                     formats: ['cjs'],
                 },
                 rollupOptions: {
-                    external: [...builtinModules],
+                    external: [...builtinModules], // 由于是 electron 应用 会用到 node 模块，需要排除
                     output: {
                         assetFileNames: '[name].[ext]', // 让 css 文件的命名固定，不要携带 hash
                     },
@@ -50,9 +75,7 @@ export function validateProject(projectPath) {
         try {
             const stats = statSync(projectPath);
             if (stats.isDirectory()) {
-                const configPath = pathToFileURL(
-                    resolve(projectPath, 'hello.build.config.js')
-                );
+                const configPath = pathToFileURL(resolve(projectPath, 'hello.build.config.js'));
 
                 if (statSync(configPath).isFile()) {
                     import(configPath).then((module) => {
