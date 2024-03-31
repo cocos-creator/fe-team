@@ -10,7 +10,7 @@ hero:
     actions:
         - theme: brand
           text: 关于我们
-          link: /about/index
+          link: /about/home
 
 features:
     - title: 团队建设

@@ -15,17 +15,17 @@ const config = defineConfig({
         nav: [
             {
                 text: '文档',
-                link: '/docs/index',
+                link: '/docs/home',
                 activeMatch: '^/docs/',
             },
             {
                 text: '基建',
-                link: '/core/index',
+                link: '/core/home',
                 activeMatch: '^/core/',
             },
             {
                 text: '组件',
-                link: '/components/index',
+                link: '/components/home',
                 activeMatch: '^/components/',
             },
         ],
