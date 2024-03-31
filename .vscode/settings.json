@@ -6,5 +6,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[vue]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "editor.fontSize": 14
 }
