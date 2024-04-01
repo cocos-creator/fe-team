@@ -1,15 +1,15 @@
 {
-  "name": "demo-jscodeshift",
-  "version": "1.0.0",
-  "description": "jscodeshift 实现 codemod 的 demo",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "jscodeshift": "^0.15.1"
-  }
+    "name": "demo-jscodeshift",
+    "version": "1.0.0",
+    "description": "jscodeshift 实现 codemod 的 demo",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "jscodeshift": "^0.15.1"
+    }
 }
