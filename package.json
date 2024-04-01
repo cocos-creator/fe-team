@@ -16,7 +16,7 @@
         "editor-tool:dev": "npm run dev -w cocos-editor-tool",
         "editor-tool:build": "npm run build -w cocos-editor-tool",
         "lint:js": "cross-env NODE_ENV=production eslint --fix --ext .js,.vue,.ts",
-        "prepare": "husky install"
+        "prepare": "husky"
     },
     "repository": {
         "type": "git",

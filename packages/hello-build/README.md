@@ -6,6 +6,8 @@
 npm i @cocos-fe/hello-build -D
 ```
 
+这是一个纯 ESM 导出的包。不支持 cjs， 如果你需要支持 cjs，那请安装 [0.0.x](https://www.npmjs.com/package/@cocos-fe/hello-build/v/0.0.20) 的版本。
+
 ## 功能
 
 可以通过帮助信息查看提供的功能和具体用法。
@@ -121,34 +123,25 @@ hi-cocos build .
 chmod 777 path/to/node_modules/.bin/hi-cocos
 ```
 
-## TODO
+## 问答
 
-当前为了兼容编辑器工作流的 CJS 导入方式，做了一些牺牲。如果后期工作流支持 ESM 之后，需要做如下工作：
+**Q: 为什么要提供 0.0.x 和 1.x.x 两个版本分支？**
+**A:** 因为编辑器当前的工作流必须使用 cjs，而 cjs 在我看来并不值得长期投入。所以主要精力会放在面向标准和未来的 ESM 版本上。
 
--   升级 rollup 到 4.x 或者 最新
--   升级 rollup-plugin-node-externals 到 7.x 或者最新
--   删除 rollup-plugin-preserve-shebangs
+在提供 CJS 和 ESM 上会有较大的依赖差异，原因如下：
 
-具体原因：因为 rollup-plugin-node-externals 从 v6 开始就只提供 esm 的导出方式，所以不得不降低版本到 v5，而 v5 最高只兼容 rollup 的 v3，于是只能将 rollup 从 v4 降低到 v3
+#### 关于 rollup 的依赖
 
-而 rollup 从 v4 才开始支持 [# 开头的声明语句](https://github.com/rollup/rollup/blob/master/CHANGELOG.md#400) ，降级到 v3 之后导致需要多安装一个 rollup-plugin-preserve-shebangs 包。
+esm 可以不需要依赖 rollup，直接源码发布，而 cjs 的需要依赖 rollup 来同时构建 2 个格式的产物。
 
-以上。
+#### rollup-plugin-node-externals@7 不支持 cjs
 
-a few minutes later
+[rollup-plugin-node-externals@7](https://www.npmjs.com/package/rollup-plugin-node-externals/v/7.1.1) 开始支持 vite 插件规范，所以 esm 的版本可以利用它智能的排除 node_modules 的依赖，但是它从 v6 开始就只提供纯 esm 的格式了。所以 cjs 不能使用。而 cjs 目前依然通过使用 [builtin-modules](https://www.npmjs.com/package/builtin-modules) 来排除 node 的内置模块，至于 node_modules 的依赖还是手动声明。
 
-fuck!!!!
+#### bin 文件的声明语句
 
-rollup-plugin-node-externals@5 在配合 vite 的 config 时不生效。[v7](https://www.npmjs.com/package/rollup-plugin-node-externals/v/7.1.1) 开始才支持 vite 和 rollup 2 个插件机制。 如果要排除 node 内置模块，需要使用之前的 https://www.npmjs.com/package/builtin-modules 。
+[rollup-plugin-preserve-shebangs](https://www.npmjs.com/package/rollup-plugin-preserve-shebangs) 是一个构建 bin 脚本的插件，而 rollup@4 之后已经[默认支持](https://github.com/rollup/rollup/blob/master/CHANGELOG.md#400)。（ps: 我实际验证 3.29.4 也支持）
 
-毁灭吧！！！
+综合以上原因，打算对于 cjs 的兼容在 0.0.x 上维护。
 
-a few minutes later
-
-那么是否意味着，如果我只提供 esm 的包，我已经可以抛弃 rollup 了。目前用 rollup 打包 hello-build 只是为了 esm 和 cjs 两种格式的输出。
-
-就这么干！！
-
-版本以 1.0.0 开始的只提供 esm 版本，且该包的构建剥离 rollup ，直接源码发布。
-
-为了防止后续必须提供 cjs 的版本，我们将继续 从 0.0.19 开始提供。 在 hello_build_cjs 这个分支进行发布。
+而纯 esm 的维护直接从 1.x.x. 开始。
