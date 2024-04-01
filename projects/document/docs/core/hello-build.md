@@ -29,9 +29,9 @@ exports.lessc = function () {
 
 这样构建思路有如下几个弊端：
 
--   你需要保持 js 、css 的文件层级结构的关系，要不然会有文件引用错误的问题
+-   你需要保持 js 、css 的文件层级结构的关系，否则会有文件引用错误的问题
 -   你的构建配置和 package.json 里声明的入口不是一一对应的
--   不能使用 .vue 单文件开发，必须将 vue 组件分散成多个文件，不利于代码维护和阅读。
+-   不能使用 .vue 单文件开发，必须将 vue 组件分散成多个文件 [css, js, html]，不利于代码维护和阅读。
 
 ## 新的构建思路
 
@@ -68,15 +68,14 @@ exports.lessc = function () {
 
 所以我们打包应该是只要声明这 4 个入口文件就好，相当于一个库模式有 4 个入口供用户加载。
 
-为了能使用 vue3 的单文件开发，所以我选择了 [vite](https://vitejs.cn/)，因为它同时支持单文件解析和库模式的打包。
+为了能使用 vue 的单文件开发，所以我选择了 [vite](https://vitejs.cn/)，因为它同时支持单文件解析和库模式的打包。
 
 ## 配置参考
 
-在插件的根目录创建 hello.build.config.js
+在插件的根目录创建 hello.build.config.cjs
 
 ```js
-// for vue2
-const { defineConfig } = require('vite');
+const { defineConfig } = require('@cocos-fe/hello-build');
 
 exports.config = defineConfig({
     build: {
@@ -89,34 +88,9 @@ exports.config = defineConfig({
             },
         },
         outDir: 'dist',
-        rollupOptions: {
-            external: ['electron', 'vue'], // 可以和编辑器里面的 vue2.7 共用
-        },
+        rollupOptions: {},
     },
     framework: 'vue2', // 可以不配置，因为内部默认是 vue2 （编辑器大量插件都是基于 vue2）
-});
-```
-
-```js
-// for vue3
-const { defineConfig } = require('vite');
-
-exports.config = defineConfig({
-    build: {
-        lib: {
-            entry: {
-                main: './source/main.ts',
-                panel: './source/panel.ts',
-                left: './source/left.ts',
-                right: './source/right.ts',
-            },
-        },
-        outDir: 'dist',
-        rollupOptions: {
-            external: ['electron'],
-        },
-    },
-    framework: 'vue3',
 });
 ```
 
@@ -125,29 +99,21 @@ exports.config = defineConfig({
 如果你使用的是编辑器现有的构建工作流，那么需要如下的配置: .workflow.build.js
 
 ```js
-const { defineConfig } = require('vite');
+const { config } = require('./hello.build.config.cjs');
 
+// 我们已经在编辑器的 workflow 中 注册好 vue 的 task 了。
 exports.vue = function () {
-    return {
-        config: defineConfig({
-            build: {
-                lib: {
-                    entry: {
-                        main: './source/main.ts',
-                        panel: './source/panel.ts',
-                        left: './source/left.ts',
-                        right: './source/right.ts',
-                    },
-                },
-                rollupOptions: {
-                    external: ['electron'],
-                },
-            },
-            framework: 'vue2', // 默认
-        }),
-    };
+    return config;
+};
+
+exports.npm = function () {
+    // other task
 };
 ```
+
+原则上在使用现有的 workflow 流程时，可以不需要 `hello.build.config.cjs` 文件，但是我依然推荐你保留它并且将配置写在该文件，在 `.workflow.build.js` 导入使用即可。
+
+因为这样你依然可以在开发阶段，使用 `hi-cocos dev .` 来监听文件变化且实时构建。
 
 ## 模版范例
 
@@ -240,4 +206,5 @@ export const config = defineConfig({
 ```
 
 注意，此时你的业务代码就只能使用 commonjs 的方式来写，不能和 ESM 混用，会导致构建失败。
+
 ps: 都 2024 年了，还是迁移到标准的 ESM 规范来吧！

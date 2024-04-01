@@ -2,9 +2,10 @@
 
 ## 官方文档
 
--   [vue2.7.16](https://v2.cn.vuejs.org/v2/guide/installation.html)
--   [vite-plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
+-   [vue3.x](https://cn.vuejs.org/)
+-   [vite-plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue#readme)
 -   [vite](https://cn.vitejs.dev/guide/)
+-   [vueUse](https://vueuse.org/)
 
 ## Recommended Setup
 

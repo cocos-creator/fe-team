@@ -12,5 +12,6 @@ cocos creator FE team
  npm config get registry 查看当前是哪个源
 ```
 
-发布要切换到官方源 （发布之后在 https://npmmirror.com/ 这里看下是否有被淘宝同步到。）
-安装要切换到淘宝源
+发布要切换到[官方源](https://registry.npmjs.org)
+发布之后在 https://npmmirror.com/ 这里看下是否有被淘宝同步到。
+安装要切换到[淘宝源](https://registry.npmmirror.com)

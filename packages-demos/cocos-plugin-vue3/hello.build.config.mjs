@@ -1,6 +1,5 @@
-const { defineConfig } = require('vite');
-
-exports.config = defineConfig({
+import { defineConfig } from '@cocos-fe/hello-build';
+export const config = defineConfig({
     build: {
         lib: {
             entry: {
@@ -9,9 +8,7 @@ exports.config = defineConfig({
             },
         },
         outDir: 'dist',
-        rollupOptions: {
-            external: ['electron'],
-        },
+        rollupOptions: {},
     },
     framework: 'vue3',
 });

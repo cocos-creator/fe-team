@@ -6,12 +6,12 @@
 npm i @cocos-fe/hello-build -D
 ```
 
-## 使用
+## 功能
 
-安装完成后，在控制台输入 hi-cocos 则会显示帮助信息
+可以通过帮助信息查看提供的功能和具体用法。
 
 ```
-npx hi-cocos
+hi-cocos -h
 ```
 
 ### 生成 dts 文件
@@ -19,13 +19,56 @@ npx hi-cocos
 插件在构建中，需要用到引擎的 dts，我们封装了一个小脚本用来自动生成，你只需要执行
 
 ```
-npx hi-cocos engine-dts
+hi-cocos engine-dts
 ```
 
 ### 开发插件
 
+创建 `hello.build.config.mjs` 或者 `hello.build.config.cjs` 配置文件。
+
+_优先使用 .mjs 的配置文件，.cjs 是为了配合编辑器现有的 workflow 而存在的，后期可能删除_
+
+**hello.build.config.mjs**
+
+```js
+import { defineConfig } from '@cocos-fe/hello-build'; // 其实是 从 vite 导出的，为了外面减少安装 vite，直接从内部导出
+
+export const config = defineConfig({
+    build: {
+        lib: {
+            entry: {
+                browser: './source/browser.ts',
+                panel: './source/panel.ts',
+            },
+        },
+        outDir: 'dist',
+    },
+    framework: 'vue2', // 可省略，默认值
+});
 ```
-npx hi-cocos dev plugin-name
+
+**hello.build.config.cjs**
+
+```js
+const { defineConfig } = require('@cocos-fe/hello-build');
+
+exports.config = defineConfig({
+    build: {
+        lib: {
+            entry: {
+                browser: './source/browser.ts',
+                panel: './source/panel.ts',
+            },
+        },
+        outDir: 'dist',
+        rollupOptions: {},
+    },
+    framework: 'vue3', // 必须声明
+});
+```
+
+```
+hi-cocos dev plugin-name
 ```
 
 即可开启实时构建，方便开发。
@@ -33,7 +76,7 @@ npx hi-cocos dev plugin-name
 ### 构建插件
 
 ```
-npx hi-cocos build [plugin-name]
+hi-cocos build [plugin-name]
 ```
 
 如果传入第二个参数，则只构建指定的插件，否则将全量构建。
@@ -57,7 +100,7 @@ npx hi-cocos build [plugin-name]
 在一个仓库里有多个插件项目，插件项目都归拢在 `extensions` 目录中，而我们执行构建等命令是在项目根目录，所以默认情况下，针对 `dev` 和 `build` ，当你执行
 
 ```
-npx hi-cocos build console
+hi-cocos build console
 ```
 
 构建命令内部会去 `extensions` 中找寻 `console` 插件。
@@ -65,53 +108,33 @@ npx hi-cocos build console
 假如你的项目结构不是这样的，也想构建某个插件，那么你应该 `cd` 到该插件，然后执行
 
 ```
-npx hi-cocos build .
+hi-cocos build .
 ```
 
 命令中 `.` 代表了当前插件。
 
-## 配置参考
+## TODO
 
-在插件的根目录创建 hello.build.config.js
+当前为了兼容编辑器工作流的 CJS 导入方式，做了一些牺牲。如果后期工作流支持 ESM 之后，需要做如下工作：
 
-```js
-// for vue2
-const { defineConfig } = require('vite');
+-   升级 rollup 到 4.x 或者 最新
+-   升级 rollup-plugin-node-externals 到 7.x 或者最新
+-   删除 rollup-plugin-preserve-shebangs
 
-exports.config = defineConfig({
-    build: {
-        lib: {
-            entry: {
-                browser: './source/browser.ts',
-                panel: './source/panel.ts',
-            },
-        },
-        outDir: 'dist',
-        rollupOptions: {
-            external: ['electron', 'vue'], // 可以和编辑器里面的 vue2.7 共用
-        },
-    },
-    framework: 'vue2', // 可以不配置，因为内部默认是 vue2 （编辑器大量插件都是基于 vue2）
-});
-```
+具体原因：因为 rollup-plugin-node-externals 从 v6 开始就只提供 esm 的导出方式，所以不得不降低版本到 v5，而 v5 最高只兼容 rollup 的 v3，于是只能将 rollup 从 v4 降低到 v3
 
-```js
-// for vue3
-const { defineConfig } = require('vite');
+而 rollup 从 v4 才开始支持 [# 开头的声明语句](https://github.com/rollup/rollup/blob/master/CHANGELOG.md#400) ，降级到 v3 之后导致需要多安装一个 rollup-plugin-preserve-shebangs 包。
 
-exports.config = defineConfig({
-    build: {
-        lib: {
-            entry: {
-                browser: './source/browser.ts',
-                panel: './source/panel.ts',
-            },
-        },
-        outDir: 'dist',
-        rollupOptions: {
-            external: ['electron'],
-        },
-    },
-    framework: 'vue3',
-});
-```
+以上。
+
+a few minutes later
+
+fuck!!!!
+
+rollup-plugin-node-externals@5 在配合 vite 的 config 时不生效。[v7](https://www.npmjs.com/package/rollup-plugin-node-externals/v/7.1.1) 开始才支持 vite 和 rollup 2 个插件机制。 如果要排除 node 内置模块，需要使用之前的 https://www.npmjs.com/package/builtin-modules 。
+
+毁灭吧！！！
+
+a few minutes later
+
+那么是否意味着，如果我只提供 esm 的包，我已经可以抛弃 rollup 了。目前用 rollup 打包 hello-build 只是为了 esm 和 cjs 两种格式的输出。

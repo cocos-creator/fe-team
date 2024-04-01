@@ -1,6 +1,6 @@
-const { defineConfig } = require('vite');
+import { defineConfig } from '@cocos-fe/hello-build';
 
-exports.config = defineConfig({
+export const config = defineConfig({
     build: {
         lib: {
             entry: {
@@ -9,8 +9,5 @@ exports.config = defineConfig({
             },
         },
         outDir: 'dist',
-        rollupOptions: {
-            external: ['electron', 'vue'], // 可以和编辑器里面的 vue2.7 共用
-        },
     },
 });

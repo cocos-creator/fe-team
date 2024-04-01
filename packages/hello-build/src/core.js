@@ -2,18 +2,33 @@ import { build, defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vue2 from '@vitejs/plugin-vue2';
 import { resolve } from 'path';
-import { statSync } from 'fs';
-import builtinModules from './utils/builtin-modules.js';
+import { statSync, existsSync } from 'fs';
+import { nodeExternals } from 'rollup-plugin-node-externals';
 import { merge } from 'webpack-merge';
 import { pathToFileURL } from 'node:url';
+
+export { defineConfig } from 'vite';
 
 export function createViteBuild(taskConfig) {
     const { project: extensionPath, config = {} } = taskConfig;
     config.root = config.root || extensionPath;
 
-    // 针对 framework 选择对应的构建插件
     const { framework = 'vue2' } = config;
-    const plugins = [];
+    // 现状导致: 编辑器内置了 vue@2，所以如果是 vue@2 则可以排除 vue 的打包
+    // 如果该插件使用的是 vue@3 ，则需要明确声明不能排除，需要将 vue 一起打包到构建产物去
+    const excludes = framework === 'vue3' ? ['vue'] : [];
+    const plugins = [
+        // 我们发布插件是跟随编辑器一起打包的，不会删除 node_modules ，所以在打包的时候，不要把依赖捆绑进去
+        nodeExternals({
+            builtins: true, // 排除 node 的内置模块
+            deps: true,
+            devDeps: true,
+            peerDeps: true,
+            optDeps: true,
+            exclude: [...excludes],
+        }),
+    ];
+    // 针对 framework 选择对应的构建插件
     switch (framework) {
         case 'vue2':
             plugins.push(
@@ -57,7 +72,7 @@ export function createViteBuild(taskConfig) {
                     formats: ['cjs'],
                 },
                 rollupOptions: {
-                    external: [...builtinModules], // 由于是 electron 应用 会用到 node 模块，需要排除
+                    external: [],
                     output: {
                         assetFileNames: '[name].[ext]', // 让 css 文件的命名固定，不要携带 hash
                     },
@@ -75,15 +90,22 @@ export function validateProject(projectPath) {
         try {
             const stats = statSync(projectPath);
             if (stats.isDirectory()) {
-                const configPath = pathToFileURL(resolve(projectPath, 'hello.build.config.js'));
+                const configFilePathEsm = resolve(projectPath, 'hello.build.config.mjs');
+                const configFilePathCjs = resolve(projectPath, 'hello.build.config.cjs');
+                const configFilePath = existsSync(configFilePathEsm) ? configFilePathEsm : configFilePathCjs;
 
-                if (statSync(configPath).isFile()) {
-                    import(configPath).then((module) => {
-                        res({
-                            project: projectPath,
-                            ...module,
+                if (existsSync(configFilePath)) {
+                    const configPath = pathToFileURL(configFilePath);
+                    if (statSync(configPath).isFile()) {
+                        import(configPath).then((module) => {
+                            res({
+                                project: projectPath,
+                                ...module,
+                            });
                         });
-                    });
+                    } else {
+                        rej(new Error('插件构建配置文件不存在!'));
+                    }
                 } else {
                     rej(new Error('插件构建配置文件不存在!'));
                 }

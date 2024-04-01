@@ -11,6 +11,7 @@
     },
     "devDependencies": {
         "@cocos-fe/hello-build": "file:packages/hello-build",
+        "rollup-plugin-node-externals": "^7.1.1",
         "typescript": "^5.4.3",
         "vue-tsc": "^2.0.7"
     },
