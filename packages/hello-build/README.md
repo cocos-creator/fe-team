@@ -113,6 +113,14 @@ hi-cocos build .
 
 命令中 `.` 代表了当前插件。
 
+## 问题
+
+如果报错 bin 文件没有执行权限，可以
+
+```sh
+chmod 777 path/to/node_modules/.bin/hi-cocos
+```
+
 ## TODO
 
 当前为了兼容编辑器工作流的 CJS 导入方式，做了一些牺牲。如果后期工作流支持 ESM 之后，需要做如下工作：
@@ -138,3 +146,9 @@ rollup-plugin-node-externals@5 在配合 vite 的 config 时不生效。[v7](htt
 a few minutes later
 
 那么是否意味着，如果我只提供 esm 的包，我已经可以抛弃 rollup 了。目前用 rollup 打包 hello-build 只是为了 esm 和 cjs 两种格式的输出。
+
+就这么干！！
+
+版本以 1.0.0 开始的只提供 esm 版本，且该包的构建剥离 rollup ，直接源码发布。
+
+为了防止后续必须提供 cjs 的版本，我们将继续 从 0.0.19 开始提供。 在 hello_build_cjs 这个分支进行发布。
