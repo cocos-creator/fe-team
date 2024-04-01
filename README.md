@@ -1,4 +1,4 @@
-# cocos-fe
+# cocos-FE
 
 cocos creator FE team
 
@@ -44,6 +44,7 @@ import xxx from '@cocos-fe/xxx';
 ```
 
 如果不按照格式命名，辨识度会降低很多：
+
 ![workspaces](./assets/workspaces-2.png)
 
 ## 发包线上
@@ -53,5 +54,7 @@ import xxx from '@cocos-fe/xxx';
 ```
 
 发布要切换到[官方源](https://registry.npmjs.org)
+
 发布之后在 https://npmmirror.com/ 这里看下是否有被淘宝同步到。
+
 安装要切换到[淘宝源](https://registry.npmmirror.com)，如果淘宝源没有及时更新，可以切到官方源进行下载。
