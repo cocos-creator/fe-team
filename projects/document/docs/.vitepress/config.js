@@ -59,35 +59,26 @@ function getArticleSidebar() {
             items: [
                 { text: 'Git 教程', link: '/docs/git/index' },
                 { text: '软链接教程', link: '/docs/symbolic-link/index' },
-                { text: 'inspector', link: '/docs/inspector' },
                 { text: 'cocos creator', link: '/docs/cocos-creator/' },
-                { text: 'Dashboard 2.1', link: '/docs/dashboard-v2.1' },
-                { text: 'Dashboard 1.2.6', link: '/docs/dashboard-v1.2.6' },
+                // { text: 'Dashboard 2.1', link: '/docs/dashboard-v2.1' },
+                // { text: 'Dashboard 1.2.6', link: '/docs/dashboard-v1.2.6' },
                 { text: '文档地址中转', link: '/docs/url-manger/index' },
-            ],
-        },
-        {
-            text: '踩坑',
-            items: [
-                { text: 'JSON5', link: '/docs/experience/json5' },
-                { text: 'Gitmodules', link: '/docs/experience/gitmodules' },
-                { text: 'Keycode 229', link: '/docs/experience/keycode-229' },
-                { text: 'emoji', link: '/docs/experience/emoji' },
             ],
         },
         {
             text: '分享',
             items: [
+                { text: 'Emoji', link: '/docs/share/emoji' },
                 { text: 'AST 初探', link: '/docs/share/ast/index' },
                 { text: 'JSON Schema', link: '/docs/share/json-schema/index' },
                 { text: '装机指南-windows', link: '/docs/share/setup-windows/index' },
                 { text: '装机指南-mac', link: '/docs/share/setup-mac/index' },
             ],
         },
-        {
-            text: 'Typescript',
-            items: [{ text: '笔记', link: '/docs/typescript/index' }],
-        },
+        // {
+        //     text: 'Typescript',
+        //     items: [{ text: '笔记', link: '/docs/typescript/index' }],
+        // },
     ];
 }
 
