@@ -4,6 +4,7 @@ import { withMermaid } from 'vitepress-plugin-mermaid';
 const config = defineConfig({
     title: 'Cocos FE',
     description: 'Cocos FE Team',
+    head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
     themeConfig: {
         socialLinks: [
             {
@@ -39,6 +40,15 @@ const config = defineConfig({
         footer: {
             message: '',
             copyright: 'MIT Licensed | Copyright © 2019-present cocos FE',
+        },
+
+        docFooter: {
+            prev: '上一篇',
+            next: '下一篇',
+        },
+
+        outline: {
+            label: '摘要',
         },
     },
     lastUpdated: false,
