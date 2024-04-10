@@ -10,7 +10,8 @@
         }
     },
     "bin": {
-        "hi-cocos": "src/index.js"
+        "hi-cocos": "src/index.js",
+        "hi-cocos-icns": "shell/icns.sh"
     },
     "dependencies": {
         "@vitejs/plugin-vue": "^5.0.4",
@@ -33,6 +34,7 @@
     },
     "files": [
         "src",
+        "shell",
         "README.md"
     ]
 }

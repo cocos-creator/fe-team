@@ -145,3 +145,9 @@ esm 可以不需要依赖 rollup，直接源码发布，而 cjs 的需要依赖 
 综合以上原因，打算对于 cjs 的兼容在 0.0.x 上维护。
 
 而纯 esm 的维护直接从 1.x.x. 开始。
+
+## 创建 .icns 文件
+
+```sh
+npx hi-cocos-icns [logo.png]
+```
