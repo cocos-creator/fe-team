@@ -7,7 +7,7 @@ const transporter = nodemailer.createTransport({
     secure: false, // 使用 SSL/TLS 连接，如果是非标准端口，通常应设为 true
     auth: {
         user: '741484865@qq.com', // 替换为您的邮箱用户名或邮箱地址
-        pass: 'lfqvfktuspembbbc', // 替换为您的邮箱密码或应用生成的授权码
+        pass: '12345', // 替换为您的邮箱密码或应用生成的授权码
     },
     // 其他可选配置，如 TLS 特定选项、代理设置等
 });
