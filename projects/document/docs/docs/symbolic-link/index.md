@@ -11,7 +11,7 @@
 /Users/alan/.CocosCreator/extensions/your-plugin
 ```
 
-这样不方便维护，你需要不断的复制同步代码。通过软链，你可以把 `your-plugin` 放置在你平时的开发文件夹。然后通过配置软链接让两个环境下的 extensions 文件夹都有 `your-plugin` 的引用。
+这样不方便维护，你需要不断的复制同步代码。通过软链，你可以把 `your-plugin` 放置在你平时的开发文件夹。然后通过配置软链接让两个环境下的 extensions 文件夹都有 `your-plugin` 的引用。 **需要使用绝对路径**
 
 ```bash
 ln -s /Users/alan/cocos/auto-register /Users/alan/.CocosCreator_Develop/extensions/auto-register
