@@ -46,9 +46,15 @@ jobs:
               run: ossutil cp -rf ./projects/document/docs/.vitepress/dist oss://website-cocos-fe/
 
     github-ids:
-      if: contains(github.event.head_commit.message, 'github')
-      runs-on: ubuntu-latest
-      steps:
-         - name: 项目部署 - githubIds
-              if:contains(github.event.head_commit.message, 'github')
-              run:ossutil cp -rf ./projects/github-ids/github-ids.json oss://90s/github-ids/              
+        if: contains(github.event.head_commit.message, 'github')
+        runs-on: ubuntu-latest
+        steps:
+            - name: 启用 oss-util 工具
+              uses: manyuanrong/setup-ossutil@v2.0
+              with:
+                  endpoint: 'oss-cn-hangzhou.aliyuncs.com'
+                  access-key-id: ${{ secrets.OSS_ID }}
+                  access-key-secret: ${{ secrets.OSS_SECRET }}
+
+            - name: 项目部署 - githubIds
+              run: ossutil cp -rf ./projects/github-ids/github-ids.json oss://90s/github-ids/
