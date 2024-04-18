@@ -1,120 +1,120 @@
-
-#github-ids {
-  position: fixed;
-  top: 126px;
-  right: -204px;
-  z-index: 999999;
-  width: 200px;
-  height: 300px;
-  background-color: var(--color-canvas-default);
-  border:1px solid var(--color-border-default);
-  border-radius: 5px;
-  transition: right .2s linear;
-  padding: 40px 0 30px;
-  color: var(--color-fg-default);
-}
-
-#github-ids.show {
-  right: 8px;
-}
-
-#github-ids .icon {
-  position: absolute;
-  top: 0;
-  left: -50px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--color-canvas-default);
-  border:1px solid var(--color-border-default);
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-#github-ids .icon img {
-  width: 30px;
-  transition: width .2s linear;
-}
-
-#github-ids .icon img:hover {
-  width: 34px;
-}
-
-#github-ids ul {
-  padding: 0;
-  margin: 0;
-  height: 100%;
-  overflow-y: scroll;
-}
-
-#github-ids li {
-  list-style: none;
-  display: flex;
-  height: 30px;
-  line-height: 30px;
-  cursor: pointer;
-}
-#github-ids li .en {
-  text-align: right;
-  flex: 1;
-}
-#github-ids li .zh {
-  width: 80px;
-  text-align: left;
-  padding-left: 6px;
-}
-
-#github-ids input {
-  position: absolute;
-  display: block;
-  width: 90%;
-  top: 6px;
-  left: 5%;
-  height; 24px;
-  border: 1px solid #ccc;
-  background: none;
-  box-shadow: none;
-  border-radius: 4px;
-}
-
-#github-ids .tip {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
-  height: 24px;
-  line-height: 24px;
-  border-top: 1px solid var(--color-border-default);
-  color: var(--color-fg-muted);
-  font-size: 12px;
-}
-
-#github-ids .tip img {
-  position: absolute;
-  right: 4px;
-  top: 4px;
-  cursor: pointer;
-}
-
-/* 实现图片的切换显示 */
 :root {
+    /* 实现图片的切换显示 */
     --visible-update: block;
     --visible-update-dark: none;
+
+    /* 借用 GitHub 的css 变量，实现主体切换 */
+    --borderColor-default: var(--borderColor-default, #ccc);
+    --bgColor-default: var(--bgColor-default, #fff);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-      --visible-update: none;
-      --visible-update-dark: block;
+        --visible-update: none;
+        --visible-update-dark: block;
     }
 }
 
-.tip .update {
-  display: var(--visible-update);
-}
-.tip .update-dark {
-  display: var(--visible-update-dark);
+#github-ids {
+    position: fixed;
+    top: 126px;
+    right: -204px;
+    z-index: 999999;
+    width: 200px;
+    height: 300px;
+    background-color: var(--bgColor-default);
+    border: 1px solid var(--borderColor-default);
+    border-radius: 5px;
+    transition: right 0.2s linear;
+    padding: 40px 0 30px;
+    color: var(--color-fg-default);
+    &.show {
+        right: 8px;
+    }
+
+    & .icon {
+        position: absolute;
+        top: 0;
+        left: -50px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--bgColor-default);
+        border: 1px solid var(--borderColor-default);
+        border-radius: 6px;
+        cursor: pointer;
+        & img {
+            width: 30px;
+            transition: width 0.2s linear;
+            &:hover {
+                width: 34px;
+            }
+        }
+    }
+
+    & input {
+        position: absolute;
+        display: block;
+        width: 90%;
+        top: 6px;
+        left: 5%;
+        height: 24px;
+        border: 1px solid #ccc;
+        background: none;
+        box-shadow: none;
+        border-radius: 4px;
+    }
+
+    & ul {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        overflow-y: scroll;
+
+        & li {
+            list-style: none;
+            display: flex;
+            height: 30px;
+            line-height: 30px;
+            cursor: pointer;
+
+            & .en {
+                text-align: right;
+                flex: 1;
+            }
+
+            & .zh {
+                width: 80px;
+                text-align: left;
+                padding-left: 6px;
+            }
+        }
+    }
+    & .tip {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        height: 24px;
+        line-height: 24px;
+        border-top: 1px solid var(--borderColor-default);
+        color: var(--color-fg-muted);
+        font-size: 12px;
+        & img {
+            position: absolute;
+            right: 4px;
+            top: 4px;
+            cursor: pointer;
+        }
+
+        & .update {
+            display: var(--visible-update);
+        }
+        & .update-dark {
+            display: var(--visible-update-dark);
+        }
+    }
 }

@@ -29,9 +29,13 @@ function createPanel() {
     </div>
   `;
 
-    $panel.querySelector('.icon').addEventListener('click', () => {
-        $panel.classList.toggle('show');
-    }, false);
+    $panel.querySelector('.icon').addEventListener(
+        'click',
+        () => {
+            $panel.classList.toggle('show');
+        },
+        false
+    );
 
     $panel.querySelector('input').addEventListener('input', (e) => {
         search(e.target.value);
@@ -47,7 +51,7 @@ function createPanel() {
         update();
     });
 
-    $panel.addEventListener('click', e => {
+    $panel.addEventListener('click', (e) => {
         e.stopPropagation();
     });
     document.body.addEventListener('click', () => {
@@ -97,13 +101,15 @@ function createList(list) {
 function fetchList() {
     const url = `https://90s.oss-cn-hangzhou.aliyuncs.com/github-ids/github-ids.json?v=${Date.now()}`;
     console.log('fetch', url);
-    return fetch(url).then(res => res.json()).then(data => {
-        idsMap = data;
-        chrome.storage.sync.set({ [storageKey]: data }, () => {
-            console.log('storage.set:', data);
+    return fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+            idsMap = data;
+            chrome.storage.sync.set({ [storageKey]: data }, () => {
+                console.log('storage.set:', data);
+            });
+            return data;
         });
-        return data;
-    });
 }
 
 // 替换页面id
@@ -117,20 +123,19 @@ function replaceIds() {
         'a[rel="contributor"]',
         '.opened-by a.Link--muted',
     ].join();
-    Array.from(document.querySelectorAll(selector))
-        .forEach(ele => {
-            const text = ele.innerText;
-            const textZH = idsMap[text];
-            if (textZH) {
-                ele.innerText = textZH;
-            }
-        });
+    Array.from(document.querySelectorAll(selector)).forEach((ele) => {
+        const text = ele.innerText;
+        const textZH = idsMap[text];
+        if (textZH) {
+            ele.innerText = textZH;
+        }
+    });
 }
 
 // 通过监听 github 的页面切换进度条来判断是否完成路由切换
 function observerProgress() {
     const $progress = document.querySelector('.Progress-item');
-    const callback = function(mutationsList) {
+    const callback = function (mutationsList) {
         for (const mutation of mutationsList) {
             if (mutation.type === 'attributes') {
                 const press = parseInt($progress.style.width, 10);
@@ -190,7 +195,7 @@ function message() {
 }
 
 // 监听路由等事件
-['hashchange', 'popstate', 'load'].forEach(ev => {
+['hashchange', 'popstate', 'load'].forEach((ev) => {
     window.addEventListener(ev, async () => {
         if (!idsMap || Object.keys(idsMap).length === 0) {
             await fetchList();

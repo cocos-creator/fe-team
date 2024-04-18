@@ -11,7 +11,7 @@ app.get('/download', (req, res) => {
     const fileName = path.basename(zipFilePath);
     res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
     res.setHeader('Content-Type', 'application/zip');
-    res.setHeader('Content-Length', 1000000000000);
+    // res.setHeader('Content-Length', 1000000000000);
 
     // 创建可读流，读取 ZIP 文件
     const readStream = fs.createReadStream(zipFilePath);

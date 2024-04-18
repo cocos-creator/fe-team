@@ -2,7 +2,7 @@
 
 ## 使用
 
-点击 [@cocos-fe/github-ids](https://chrome.google.com/webstore/detail/cocos-fegithub-ids/eidodebdpdgnbcphggoimbpohochfpoj/related?hl=zh-CN) 安装即可。
+点击 [@cocos-fe/github-ids](https://chromewebstore.google.com/detail/cocos-fegithub-ids/eidodebdpdgnbcphggoimbpohochfpoj?hl=zh-CN&authuser=0) 安装即可。
 
 大家记得去给插件一个好评，这样我们后期的更新评审会更容易通过。
 

@@ -1,51 +1,37 @@
 {
-  "name": "@cocos-fe/github-ids",
-  "version": "1.0.5",
-  "description": "cocos 开发人员的 github 中文名映射表",
-  "homepage_url": "http://cocos.90s.co",
-  "manifest_version": 3,
-  "permissions": [
-    "storage"
-  ],
-  "content_scripts": [
-    {
-      "matches": [
-        "https://github.com/cocos/*",
-        "https://github.com/cocos-creator/*"
-      ],
-      "css": [
-        "./styles/content.css"
-      ],
-      "js": [
-        "./scripts/content.js"
-      ],
-      "run_at": "document_end"
-    }
-  ],
-  "action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "images/logo.png",
-      "32": "images/logo.png",
-      "48": "images/logo.png",
-      "128": "images/logo.png"
-    }
-  },
-  "icons": {
-    "16": "images/logo.png",
-    "32": "images/logo.png",
-    "48": "images/logo.png",
-    "128": "images/logo.png"
-  },
-  "web_accessible_resources": [
-    {
-      "resources": [
-        "images/*.png",
-        "styles/*.css"
-      ],
-      "matches": [
-        "<all_urls>"
-      ]
-    }
-  ]
+    "name": "@cocos-fe/github-ids",
+    "version": "1.0.6",
+    "description": "cocos 开发人员的 github 中文名映射表",
+    "homepage_url": "http://cocos.90s.co",
+    "manifest_version": 3,
+    "permissions": ["storage"],
+    "content_scripts": [
+        {
+            "matches": ["https://github.com/cocos/*", "https://github.com/cocos-creator/*"],
+            "css": ["./styles/content.css"],
+            "js": ["./scripts/content.js"],
+            "run_at": "document_end"
+        }
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "images/logo.png",
+            "32": "images/logo.png",
+            "48": "images/logo.png",
+            "128": "images/logo.png"
+        }
+    },
+    "icons": {
+        "16": "images/logo.png",
+        "32": "images/logo.png",
+        "48": "images/logo.png",
+        "128": "images/logo.png"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": ["images/*.png", "styles/*.css"],
+            "matches": ["<all_urls>"]
+        }
+    ]
 }
