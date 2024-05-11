@@ -5,6 +5,7 @@
 -   进入[官方地址](https://www.microsoft.com/zh-cn/software-download/windows11)
 -   选择第二种方式（创建 Windows 11 安装）
 -   准备一个 U 盘即可
+-   [激活工具](https://github.com/zbezj/HEU_KMS_Activator/releases)
 
 ## 登录微软账号
 

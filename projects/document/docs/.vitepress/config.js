@@ -50,6 +50,10 @@ const config = defineConfig({
         outline: {
             label: '摘要',
         },
+
+        search: {
+            provider: 'local',
+        },
     },
     lastUpdated: false,
     vite: {
