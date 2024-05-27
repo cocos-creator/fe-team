@@ -1,0 +1,49 @@
+name: 发布到 GitPage
+
+on:
+    push:
+        branches: ['master']
+    pull_request:
+        branches: ['master']
+
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        if: contains(github.event.head_commit.message, 'docs')
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: npm
+
+            - name: 安装依赖
+              run: npm install
+
+            - name: 构建
+              run: npm run docs:build
+
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  path: ./projects/document/docs/.vitepress/dist
+
+    deploy:
+        needs: build
+
+        permissions:
+            pages: write
+            id-token: write
+
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+
+        runs-on: ubuntu-latest
+        steps:
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4
