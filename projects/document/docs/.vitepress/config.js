@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress';
 import { withMermaid } from 'vitepress-plugin-mermaid';
 
 const config = defineConfig({
+    base: '/fe-team/',
     title: 'Cocos FE',
     description: 'Cocos FE Team',
     head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
