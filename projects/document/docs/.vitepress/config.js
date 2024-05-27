@@ -5,7 +5,7 @@ const config = defineConfig({
     base: '/fe-team/',
     title: 'Cocos FE',
     description: 'Cocos FE Team',
-    head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+    head: [['link', { rel: 'icon', href: '/fe-team/favicon.ico' }]],
     themeConfig: {
         socialLinks: [
             {
