@@ -1,4 +1,4 @@
-name: CI
+name: 发布到 oss
 
 on:
     push:

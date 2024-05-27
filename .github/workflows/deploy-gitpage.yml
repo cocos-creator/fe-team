@@ -2,9 +2,9 @@ name: 发布到 GitPage
 
 on:
     push:
-        branches: ['master']
+        branches: ['main']
     pull_request:
-        branches: ['master']
+        branches: ['main']
 
     workflow_dispatch:
 
