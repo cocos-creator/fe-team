@@ -71,29 +71,8 @@ function getArticleSidebar() {
     return [
         {
             text: '文档',
-            items: [
-                { text: 'Git 教程', link: '/docs/git/' },
-                { text: '软链接教程', link: '/docs/symbolic-link/' },
-                { text: 'cocos creator', link: '/docs/cocos-creator/' },
-                // { text: 'Dashboard 2.1', link: '/docs/dashboard-v2.1' },
-                // { text: 'Dashboard 1.2.6', link: '/docs/dashboard-v1.2.6' },
-                { text: '文档地址中转', link: '/docs/url-manger/' },
-            ],
+            items: [{ text: 'cocos creator', link: '/docs/cocos-creator/' }],
         },
-        {
-            text: '分享',
-            items: [
-                { text: 'Emoji', link: '/docs/share/emoji' },
-                { text: 'AST 初探', link: '/docs/share/ast/' },
-                { text: 'JSON Schema', link: '/docs/share/json-schema/' },
-                { text: '装机指南-windows', link: '/docs/share/setup-windows/' },
-                { text: '装机指南-mac', link: '/docs/share/setup-mac/' },
-            ],
-        },
-        // {
-        //     text: 'Typescript',
-        //     items: [{ text: '笔记', link: '/docs/typescript/' }],
-        // },
     ];
 }
 
