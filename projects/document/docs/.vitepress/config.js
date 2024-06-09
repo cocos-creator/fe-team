@@ -20,16 +20,10 @@ const config = defineConfig({
                 link: '/docs/',
                 activeMatch: '^/docs/',
             },
-            {
-                text: '基建',
-                link: '/core/',
-                activeMatch: '^/core/',
-            },
         ],
 
         sidebar: {
             '/docs/': getArticleSidebar(),
-            '/core/': getCoreSidebar(),
         },
 
         footer: {
@@ -62,21 +56,6 @@ function getArticleSidebar() {
         {
             text: '文档',
             items: [{ text: 'cocos creator', link: '/docs/cocos-creator/' }],
-        },
-    ];
-}
-
-function getCoreSidebar() {
-    return [
-        {
-            text: '基建',
-            items: [
-                { text: 'Eslint', link: '/core/eslint' },
-                { text: 'Eslint 工作流', link: '/core/eslint-工作流' },
-                { text: 'nvm 安装', link: '/core/nvm/install' },
-                { text: 'nvm 命令行执行', link: '/core/nvm/nvm-spawn' },
-                { text: '编辑器插件构建', link: '/core/hello-build' },
-            ],
         },
     ];
 }
