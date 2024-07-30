@@ -1,16 +1,33 @@
 {
     "name": "@cocos-fe/utils",
-    "version": "1.0.8",
+    "version": "1.0.10",
     "description": "工具函数集",
-    "main": "index.js",
+    "type": "module",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build": "npm run build:common & npm run build:node & npm run build:render",
+        "build:common": "cd ./common && tsc",
+        "build:node": "cd ./node && tsc",
+        "build:render": "cd ./render && tsc"
     },
-    "homepage": "https://www.npmjs.com/package/@cocos-fe/utils",
-    "publishConfig": {
-        "access": "public"
+    "types": "./common/dist/index.d.ts",
+    "exports": {
+        ".": "./common/dist/index.js",
+        "./render": {
+            "types": "./render/dist/index.d.ts",
+            "import": "./render/dist/index.js"
+        },
+        "./node": {
+            "types": "./node/dist/index.d.ts",
+            "import": "./node/dist/index.js"
+        }
     },
-    "author": "",
-    "license": "MIT",
-    "gitHead": "059b8c355c74c75198f32e5632459b7aec23d8b5"
+    "files": ["**/dist/*"],
+    "license": "ISC",
+    "engines": {
+        "node": ">=20"
+    },
+    "devDependencies": {
+        "@types/node": "^22.0.0",
+        "typescript": "^5.5.4"
+    }
 }
