@@ -21,10 +21,12 @@
             "import": "./node/dist/index.js"
         }
     },
-    "files": ["**/dist/*"],
+    "files": [
+        "**/dist/*"
+    ],
     "license": "ISC",
     "engines": {
-        "node": ">=20"
+        "node": ">=18"
     },
     "devDependencies": {
         "@types/node": "^22.0.0",

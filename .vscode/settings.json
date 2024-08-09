@@ -7,5 +7,6 @@
     "[vue]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "editor.fontSize": 14
+    "editor.fontSize": 14,
+    "typescript.tsdk": "${workspaceFolder}/node_modules/typescript/lib"
 }
