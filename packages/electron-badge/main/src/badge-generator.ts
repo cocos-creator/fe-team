@@ -32,8 +32,8 @@ export default class BadgeGenerator {
 
     generate(value: string, opts?: Partial<IbadgeStyleOpt>) {
         const styleOpts = JSON.stringify({ ...this.style, ...opts });
-
-        return this.win.webContents.executeJavaScript(`window.drawBadge(${value}, ${styleOpts});`, true);
+        // 注意：字符串需要用 '' 包裹， 对象用 JSON.stringify
+        return this.win.webContents.executeJavaScript(`window.drawBadge('${value}', ${styleOpts});`);
     }
 
     // 这个函数会被注入到渲染进程
