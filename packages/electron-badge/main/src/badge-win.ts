@@ -10,7 +10,7 @@ export class BadgeWin extends Badge {
     generator: BadgeGenerator;
 
     constructor(max: number, win: BrowserWindow, style?: Partial<IbadgeStyleOpt>) {
-        super(max);
+        super(max, win);
         this.win = win;
         this.generator = new BadgeGenerator(win, style);
     }

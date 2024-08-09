@@ -1,6 +1,7 @@
-import { BadgeUnix } from './badge-unix.js';
-import { BadgeWin } from './badge-win.js';
+import { BadgeUnix } from './badge-unix';
+import { BadgeWin } from './badge-win';
+export { Badge } from './badge';
 
-const badge = process.platform === 'win32' ? BadgeWin : BadgeUnix;
+export default process.platform === 'win32' ? BadgeWin : BadgeUnix;
 
-export default badge;
+export { BadgeUnix, BadgeWin };

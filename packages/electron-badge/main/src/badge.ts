@@ -1,7 +1,10 @@
+import { IbadgeStyleOpt } from './badge-generator';
+import type { BrowserWindow } from 'electron';
+
 export abstract class Badge {
     max = 99;
 
-    constructor(max = 99) {
+    constructor(max: number, win: BrowserWindow, style?: Partial<IbadgeStyleOpt>) {
         this.max = max;
     }
 
