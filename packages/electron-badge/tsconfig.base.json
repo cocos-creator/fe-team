@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "outDir": "./dist",
         "declaration": true,
         "skipLibCheck": true,
         "target": "ESNEXT",
@@ -11,3 +12,7 @@
         "inlineSources": true /* Emit the source alongside the sourcemaps within a single file; requires '--inlineSourceMap' or '--sourceMap' to be set. */
     }
 }
+
+// 注意！！！！！
+// 能将 main 和 render 的代码分别打到 ./dist/main 和 ./dist/render 中是因为 在 main 和 render 中都引用了 common 的代码，ts 才会自动保持目录结构。
+// 否则会将 mian 的代码直接到到 dist，render 也直接打到 dist，如果重名的文件，那么将会相互覆盖。

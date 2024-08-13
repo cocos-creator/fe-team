@@ -1,28 +1,28 @@
 {
     "name": "@cocos-fe/electron-badge",
     "version": "0.0.1",
-    "description": "Electron badge for Windows and Mac",
+    "description": "Electron badge for win32 and Unix",
     "type": "commonjs",
     "scripts": {
         "build": "npm run build:main & npm run build:render",
         "build:main": "cd ./main && tsc",
         "build:render": "cd ./render && tsc"
     },
-    "main": "./main/dist/index.js",
-    "types": "./main/dist/index.d.ts",
+    "main": "./dist/main/index.js",
+    "types": "./dist/main/index.d.ts",
     "exports": {
-        ".": "./main/dist/index.js",
+        ".": "./dist/main/index.js",
         "./main": {
-            "types": "./main/dist/index.d.ts",
-            "require": "./main/dist/index.js"
+            "types": "./dist/main/index.d.ts",
+            "require": "./dist/main/index.js"
         },
         "./render": {
-            "types": "./render/dist/index.d.ts",
-            "require": "./render/dist/index.js"
+            "types": "./dist/render/index.d.ts",
+            "require": "./dist/render/index.js"
         }
     },
     "files": [
-        "**/dist/*"
+        "./dist/*"
     ],
     "license": "ISC",
     "engines": {
