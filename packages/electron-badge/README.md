@@ -14,7 +14,7 @@ npm install @cocos-fe/electron-badge
 
 ## API
 
-### new ElectronBadge(max, win, [styleOpt]);
+### new ElectronBadge(max, win[,styleOpt]);
 
 -   max: 角标的最大值，假设设置最大值为 99， 当 update 传入 100 时，会显示为： `99+`
 -   win: BrowserWindow， win32 平台是通过 win.setOverlayIcon() 来实现角标的。
