@@ -55,7 +55,10 @@ function getArticleSidebar() {
     return [
         {
             text: '文档',
-            items: [{ text: 'cocos creator', link: '/docs/cocos-creator/' }],
+            items: [
+                { text: 'cocos creator', link: '/docs/cocos-creator/' },
+                { text: '解压 zip', link: '/docs/unzip/index.md' },
+            ],
         },
     ];
 }
