@@ -35,7 +35,7 @@ export function unzipWin32(src, dist) {
     return new Promise((resolve, reject) => {
         //const child = spawn(join(root, 'unzip.exe'),['-n', src, '-d', dist]);
 
-        const child = spawn(join(root, '7za.exe'), ['x', '-y', '-aoa', src, `-o${dist}`]);
+        const child = spawn(join(root, '7za-2408.exe'), ['x', '-y', '-aoa', src, `-o${dist}`]);
 
         child.stdout.on('data', () => {});
         child.stderr.on('data', console.error);

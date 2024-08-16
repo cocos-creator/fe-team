@@ -11,7 +11,9 @@
 | GitHub stars       |  [![][ystar]][ygit]   |  [![][estar]][egit]   |  [![][astar]][agit]   |  [![][ustar]][ugit]   |  [![][arstar]][argit]   |
 | TypeScript support |   [![][yts]][ygit]    |   [![][ets]][egit]    |   [![][ats]][agit]    |   [![][uts]][ugit]    |   [![][arts]][argit]    |
 | Last commit        |   [![][ycm]][ycm_a]   |   [![][ecm]][ecm_a]   |   [![][acm]][acm_a]   |   [![][ucm]][ucm_a]   |   [![][arcm]][arcm_a]   |
-| symlink support    |  :heavy_check_mark:   |  :heavy_check_mark:   |          :x:          |           ?           |            ?            |
+| symlink support    |  :heavy_check_mark:   |  :heavy_check_mark:   |          :x:          |      :question:       |       :question:        |
+
+<!-- https://gist.github.com/rxaviers/7360908 图标编码参考 -->
 
 <!-- GITHUB -->
 
@@ -128,7 +130,7 @@
 [ucm_a]: https://github.com/ZJONSSON/node-unzipper/commits
 [arcm_a]: https://github.com/archiverjs/node-archiver/commits
 
-选择的依据：
+### 选择的依据：
 
 -   软连接的支持（编辑器内部有软连接）
 -   较少的依赖
