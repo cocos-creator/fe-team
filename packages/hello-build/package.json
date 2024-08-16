@@ -1,6 +1,6 @@
 {
     "name": "@cocos-fe/hello-build",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "cocos editor 插件构建工具",
     "type": "module",
     "module": "src/core.js",
@@ -14,13 +14,13 @@
         "hi-cocos-icns": "shell/icns.sh"
     },
     "dependencies": {
-        "@vitejs/plugin-vue": "^5.0.4",
+        "@vitejs/plugin-vue": "^5.1.2",
         "@vitejs/plugin-vue2": "^2.3.1",
         "chokidar": "^3.6.0",
-        "commander": "^12.0.0",
+        "commander": "^12.1.0",
         "less": "^4.2.0",
-        "vite": "^5.2.6",
-        "webpack-merge": "^5.10.0"
+        "rollup-plugin-node-externals": "^7.1.2",
+        "vite": "^5.4.1"
     },
     "publishConfig": {
         "access": "public",
@@ -28,9 +28,6 @@
     },
     "engines": {
         "node": ">=18"
-    },
-    "devDependencies": {
-        "rollup-plugin-node-externals": "^7.1.1"
     },
     "files": [
         "src",

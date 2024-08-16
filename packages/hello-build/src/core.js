@@ -1,10 +1,9 @@
-import { build, defineConfig } from 'vite';
+import { build, defineConfig, mergeConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vue2 from '@vitejs/plugin-vue2';
 import { resolve } from 'path';
 import { statSync, existsSync } from 'fs';
 import { nodeExternals } from 'rollup-plugin-node-externals';
-import { merge } from 'webpack-merge';
 import { pathToFileURL } from 'node:url';
 
 export { defineConfig } from 'vite';
@@ -58,7 +57,7 @@ export function createViteBuild(taskConfig) {
 
     // 原则上，这些配置应该是由外面传进来，内部不做 default 的配置，已达到灵活的定制需求
     // 但是我们业务形态比较固定，灵活性 < 简单化
-    const c = merge(
+    const c = mergeConfig(
         defineConfig({
             plugins: plugins,
             base: './',
