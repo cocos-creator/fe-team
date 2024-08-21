@@ -1,6 +1,6 @@
 {
     "name": "@cocos-fe/electron-badge",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Electron badge for win32 and Unix",
     "type": "commonjs",
     "scripts": {
@@ -39,5 +39,12 @@
     "publishConfig": {
         "access": "public",
         "registry": "https://registry.npmjs.org"
-    }
+    },
+    "keywords": [
+        "electron",
+        "badge",
+        "dock",
+        "setOverlayIcon",
+        "setBadge"
+    ]
 }
