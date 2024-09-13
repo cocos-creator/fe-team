@@ -18,10 +18,22 @@
     },
     "panels": {
         "default": {
-            "main": "./dist/panel.js"
+            "main": "./dist/panel.js",
+            "size": {
+                "min-width": 400,
+                "min-height": 300,
+                "width": 600,
+                "height": 500
+            }
         },
         "webview": {
-            "main": "./dist/panel-webview.js"
+            "main": "./dist/panel-webview.js",
+            "size": {
+                "min-width": 400,
+                "min-height": 300,
+                "width": 600,
+                "height": 500
+            }
         }
     },
     "contributions": {

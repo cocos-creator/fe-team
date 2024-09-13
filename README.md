@@ -6,11 +6,15 @@ cocos creator FE team [官网](https://cocos-creator.github.io/fe-team/)
 
 ## Eslint
 
-[npm 下载地址](https://www.npmjs.com/package/@cocos-fe/eslint-config)
+[@cocos-fe/eslint-config](https://www.npmjs.com/package/@cocos-fe/eslint-config)
 
 ## 构建插件
 
-[ npm 下载地址 ](https://www.npmjs.com/package/@cocos-fe/hello-build)
+[@cocos-fe/hello-build](https://www.npmjs.com/package/@cocos-fe/hello-build)
+
+## 创建 creator 插件
+
+[create-cocos-plugin](https://www.npmjs.com/package/create-cocos-plugin)
 
 ## 发布包
 
