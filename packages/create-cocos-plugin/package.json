@@ -1,0 +1,53 @@
+{
+    "name": "create-cocos-plugin",
+    "version": "1.0.2",
+    "type": "module",
+    "license": "MIT",
+    "author": "cocos fe-team",
+    "keywords": [
+        "cocos",
+        "cocos-creator",
+        "cocos-creator-plugin",
+        "cocos-creator-extension",
+        "cocos-creator-packages"
+    ],
+    "bin": {
+        "create-cocos-plugin": "index.js"
+    },
+    "files": [
+        "index.js",
+        "templates/",
+        "dist"
+    ],
+    "scripts": {
+        "test": "vitest run",
+        "dev": "unbuild --stub",
+        "build": "unbuild",
+        "typecheck": "tsc --noEmit",
+        "prepublishOnly": "npm run build"
+    },
+    "engines": {
+        "node": "^18.0.0 || >=20.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cocos-creator/cocos-fe.git",
+        "directory": "packages/create-cocos-plugin"
+    },
+    "bugs": {
+        "url": "https://github.com/cocos-creator/cocos-fe/issues"
+    },
+    "homepage": "https://github.com/cocos-creator/cocos-fe#readme",
+    "devDependencies": {
+        "@types/cross-spawn": "^6.0.6",
+        "@types/minimist": "^1.2.5",
+        "@types/prompts": "^2.4.9",
+        "cross-spawn": "^7.0.3",
+        "execa": "^9.3.1",
+        "kolorist": "^1.8.0",
+        "minimist": "^1.2.8",
+        "prompts": "^2.4.2",
+        "unbuild": "^2.0.0",
+        "vitest": "^2.0.5"
+    }
+}

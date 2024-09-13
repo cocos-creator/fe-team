@@ -29,11 +29,4 @@ program
         build(plugin);
     });
 
-program
-    .command('engine-dts')
-    .description('生成引擎的 dts 文件，将存入 @types 文件夹中')
-    .action(() => {
-        import('./tasks/bin-create-engine-dts.js');
-    });
-
 program.parse(process.argv);

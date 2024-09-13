@@ -17,11 +17,6 @@ npm 包是 nodejs 的实现，本来就是跨平台的，没有兼容性问题�
 
 ## 测试代码
 
-::: code-group
-<<< ../../../../packages/unzip/unzip.js
-<<< ../../../../packages/unzip/index.js
-:::
-
 ## 结论
 
 个人偏向直接使用 npm 包的方式，选择 `extract-zip` 来当做唯一的解压包。

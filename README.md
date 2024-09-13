@@ -28,31 +28,6 @@ cocos creator FE team [官网](https://cocos-creator.github.io/fe-team/)
 
 此时执行 `npm install` 会在 `node_modules` 里生成命中的包的软连接。
 
-比如 packages/\* 的文件夹结构如下：
-
-```sh
-- packages
--- eslint-config
--- hell-build
--- utils
-```
-
-且它们的 package.json 的名称符合格式： `@cocos-fe/xxx`，那么 node_modules 中将生成如下的结构：
-
-![workspaces](./assets/workspaces-1.png)
-
-所以推荐需要对外发布的统一以 `@cocos-fe/xxx` 的格式命名。
-
-这样在当前项目范围内，就可以直接
-
-```js
-import xxx from '@cocos-fe/xxx';
-```
-
-如果不按照格式命名，辨识度会降低很多：
-
-![workspaces](./assets/workspaces-2.png)
-
 ## 发包线上
 
 ```bash

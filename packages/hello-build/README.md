@@ -16,14 +16,6 @@ npm i @cocos-fe/hello-build -D
 hi-cocos -h
 ```
 
-### 生成 dts 文件
-
-插件在构建中，需要用到引擎的 dts，我们封装了一个小脚本用来自动生成，你只需要执行
-
-```
-hi-cocos engine-dts
-```
-
 ### 开发插件
 
 创建 `hello.build.config.mjs` 或者 `hello.build.config.cjs` 配置文件。
@@ -45,7 +37,6 @@ export const config = defineConfig({
         },
         outDir: 'dist',
     },
-    framework: 'vue2', // 可省略，默认值
 });
 ```
 
@@ -65,7 +56,6 @@ exports.config = defineConfig({
         outDir: 'dist',
         rollupOptions: {},
     },
-    framework: 'vue3', // 必须声明
 });
 ```
 
@@ -107,7 +97,7 @@ hi-cocos build console
 
 构建命令内部会去 `extensions` 中找寻 `console` 插件。
 
-假如你的项目结构不是这样的，也想构建某个插件，那么你应该 `cd` 到该插件，然后执行
+假如你的项目结构不是这样的，也想构建某个插件，那么你应该 `cd` 到该插件目录，然后执行
 
 ```
 hi-cocos build .
@@ -126,6 +116,7 @@ chmod 777 path/to/node_modules/.bin/hi-cocos
 ## 问答
 
 **Q: 为什么要提供 0.0.x 和 1.x.x 两个版本分支？**
+
 **A:** 因为编辑器当前的工作流必须使用 cjs，而 cjs 在我看来并不值得长期投入。所以主要精力会放在面向标准和未来的 ESM 版本上。
 
 在提供 CJS 和 ESM 上会有较大的依赖差异，原因如下：
@@ -149,5 +140,5 @@ esm 可以不需要依赖 rollup，直接源码发布，而 cjs 的需要依赖 
 ## 创建 .icns 文件
 
 ```sh
-npx hi-cocos-icns [logo.png]
+npx make-icns [logo.png]
 ```

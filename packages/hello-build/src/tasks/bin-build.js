@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { join } from 'path';
-import { stat, readdir } from 'fs/promises';
+import { join } from 'node:path';
+import { stat, readdir } from 'node:fs/promises';
 import { createViteBuild, validateProject } from '../core.js';
 
 const root = process.cwd();

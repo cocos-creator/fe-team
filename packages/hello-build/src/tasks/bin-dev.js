@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import chokidar from 'chokidar';
-import { join } from 'path';
+import { join } from 'node:path';
 import { createViteBuild, validateProject } from '../core.js';
 
 export default function (project) {

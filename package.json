@@ -1,12 +1,10 @@
 {
     "name": "cocos-fe",
-    "version": "1.0.0",
     "description": "cocos fe team",
     "private": false,
     "workspaces": [
         "packages/*",
-        "projects/*",
-        "packages-demos/*"
+        "projects/*"
     ],
     "scripts": {
         "preinstall": "node ./scripts/preinstall-check-node.js",
@@ -48,8 +46,5 @@
         "*.{vue,js,ts}": [
             "npm run lint:js"
         ]
-    },
-    "volta": {
-        "node": "20.12.0"
     }
 }
