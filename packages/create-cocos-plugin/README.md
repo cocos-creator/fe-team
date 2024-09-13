@@ -50,7 +50,6 @@ bun create cocos-plugin my-cocos-plugin --template vue
 Currently supported template presets include:
 
 -   `vanilla`
--   `vanilla-ts`
 -   `vue`
 -   `vue-ts`
 -   `react`

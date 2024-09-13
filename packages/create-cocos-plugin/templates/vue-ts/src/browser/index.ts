@@ -1,9 +1,8 @@
-import { name } from '../package.json' with {type: 'json'};
+import { name } from '../../package.json' with {type: 'json'};
 
 export const methods = {
     async open() {
         console.log('open vue3');
-        // @ts-ignore
         Editor.Panel.open(name);
     },
 };

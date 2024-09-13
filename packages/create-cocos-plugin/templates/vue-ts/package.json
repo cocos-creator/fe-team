@@ -6,11 +6,13 @@
     "type": "module",
     "main": "./dist/browser.cjs",
     "scripts": {
+        "dev": "npm run build -- --mode development",
         "build": "vue-tsc -b && vite build"
     },
     "devDependencies": {
-        "rollup-plugin-node-externals": "^7.1.3",
+        "@cocos/creator-types": "^3.8.3",
         "@vitejs/plugin-vue": "^5.1.2",
+        "rollup-plugin-node-externals": "^7.1.3",
         "typescript": "^5.5.3",
         "vite": "^5.4.1",
         "vue-tsc": "^2.0.29"
@@ -36,7 +38,7 @@
     },
     "panels": {
         "default": {
-            "main": "./dist/panel.cjs",
+            "main": "./dist/panel_default.cjs",
             "size": {
                 "min-width": 400,
                 "min-height": 300,
