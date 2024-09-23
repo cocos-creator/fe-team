@@ -5,11 +5,28 @@ import { walk } from 'estree-walker'; // walk ast
 import { generate } from 'astring'; // ast to code
 import { extname, basename } from 'node:path';
 
-export default function (): Plugin {
+export function cocosPanelConfig(): Plugin {
+    return {
+        name: 'cocos-panel-config',
+        version: '0.0.1',
+        apply: 'build',
+        enforce: 'pre',
+
+        config() {
+            return {
+                build: {
+                    cssCodeSplit: true, // 重要：按每个 panel 入口拆分 css，下面的插件将依据这个特性将对应的 css 塞到 panel 的 style 去。
+                },
+            };
+        },
+    };
+}
+
+export function cocosPanelCss(): Plugin {
     const styleMap: { [k: string]: string } = {};
 
     return {
-        name: 'cocos-panel',
+        name: 'cocos-panel-css',
         version: '0.0.1',
         apply: 'build',
         enforce: 'post',
@@ -25,7 +42,7 @@ export default function (): Plugin {
                     const css_chunk = bundle[css_key];
 
                     // 注意:只有当某个 js 入口文件具备自己的 css 样式时，它才会有对应的 css 入口
-                    // 如果某个 js 只导入了公共 css，是不会有样式的。这点算是一点点限制，但是不会影响具体业务
+                    // 如果某个 js 只导入了公共 css，是不会有样式的。
                     if (css_chunk?.type === 'asset' && css_chunk.fileName.includes('.css')) {
                         styleMap[key] = '\n' + css_chunk.source;
                         delete bundle[css_key];

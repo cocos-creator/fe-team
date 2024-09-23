@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import { nodeExternals } from 'rollup-plugin-node-externals';
 import vue from '@vitejs/plugin-vue';
-import cocosPanel from './rollup-plugin-cocos-panel';
+import { cocosPanelConfig, cocosPanelCss } from './vite-plugin-cocos-panel';
 
 export default defineConfig(({ mode }) => {
     /**
@@ -14,13 +14,12 @@ export default defineConfig(({ mode }) => {
     const isDev = mode === 'development';
 
     return {
-        base: './',
         build: {
             lib: {
                 entry: {
                     browser: './src/browser/index.ts',
-                    panel_1: './src/panels/panel1.ts',
-                    panel_2: './src/panels/panel2.ts',
+                    panel1: './src/panels/panel1.ts',
+                    panel2: './src/panels/panel2.ts',
                 },
                 formats: ['cjs'],
                 fileName: (format, entryName) => `${entryName}.${format}`,
@@ -30,21 +29,7 @@ export default defineConfig(({ mode }) => {
                       include: ['./src/**/*.ts', './src/**/*.vue', './src/**/*.css'],
                   }
                 : null,
-            rollupOptions: {
-                output: {
-                    assetFileNames: '[name].[ext]', // 让 css 文件的命名固定，不要携带 hash
-                    // manualChunks(id) {
-                    //     if (/\.css$/.test(id)) {
-                    //         return id;
-                    //     }
-                    // },
-                },
-            },
             target: 'esnext',
-            assetsDir: './', // 直接把所有文件都放 dist
-            cssCodeSplit: true, // 因为是多个入口，所以 css 也应该独立
-            emptyOutDir: true,
-            outDir: 'dist',
             minify: false,
         },
         plugins: [
@@ -58,11 +43,12 @@ export default defineConfig(({ mode }) => {
             nodeExternals({
                 builtins: true, // 排除 node 的内置模块
                 deps: true,
-                devDeps: false,
-                peerDeps: false,
-                optDeps: false,
+                devDeps: true,
+                peerDeps: true,
+                optDeps: true,
             }),
-            cocosPanel(),
+            cocosPanelConfig(),
+            cocosPanelCss(),
         ],
     };
 });
