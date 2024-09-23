@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import { nodeExternals } from 'rollup-plugin-node-externals';
 import vue from '@vitejs/plugin-vue';
+import cocosPanel from './rollup-plugin-cocos-panel';
 
 export default defineConfig(({ mode }) => {
     /**
@@ -18,7 +19,8 @@ export default defineConfig(({ mode }) => {
             lib: {
                 entry: {
                     browser: './src/browser/index.ts',
-                    panel_default: './src/panels/default.ts',
+                    panel_1: './src/panels/panel1.ts',
+                    panel_2: './src/panels/panel2.ts',
                 },
                 formats: ['cjs'],
                 fileName: (format, entryName) => `${entryName}.${format}`,
@@ -31,6 +33,11 @@ export default defineConfig(({ mode }) => {
             rollupOptions: {
                 output: {
                     assetFileNames: '[name].[ext]', // 让 css 文件的命名固定，不要携带 hash
+                    // manualChunks(id) {
+                    //     if (/\.css$/.test(id)) {
+                    //         return id;
+                    //     }
+                    // },
                 },
             },
             target: 'esnext',
@@ -55,6 +62,7 @@ export default defineConfig(({ mode }) => {
                 peerDeps: false,
                 optDeps: false,
             }),
+            cocosPanel(),
         ],
     };
 });
