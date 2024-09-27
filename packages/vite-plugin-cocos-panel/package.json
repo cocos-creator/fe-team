@@ -1,0 +1,37 @@
+{
+    "name": "@cocos-fe/vite-plugin-cocos-panel",
+    "version": "0.0.1-beta.1",
+    "description": "a vite plugin for build cocos panel",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "scripts": {
+        "dev": "npx tsc --watch",
+        "build": "npx tsc"
+    },
+    "keywords": [
+        "vite-plugin-cocos-panel",
+        "cocos-panel",
+        "vite-plugin",
+        "cocos-plugin",
+        "cocos-extend"
+    ],
+    "author": "cocos-fe",
+    "license": "ISC",
+    "devDependencies": {
+        "acorn": "^8.12.1",
+        "astring": "^1.9.0",
+        "estree-walker": "^3.0.3",
+        "typescript": "^5.6.2"
+    },
+    "peerDependencies": {
+        "vite": "^5.0.0"
+    },
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org"
+    },
+    "files": [
+        "dist/"
+    ]
+}

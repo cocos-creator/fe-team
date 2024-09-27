@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import { nodeExternals } from 'rollup-plugin-node-externals';
 import vue from '@vitejs/plugin-vue';
-import { cocosPanelConfig, cocosPanelCss } from './vite-plugin-cocos-panel';
+import { cocosPanelConfig, cocosPanelCss } from '@cocos-fe/vite-plugin-cocos-panel';
 
 export default defineConfig(({ mode }) => {
     /**
