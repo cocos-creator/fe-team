@@ -1,18 +1,50 @@
 {
-  "name": "vite-vue-starter",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "vue": "^3.4.37"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^5.1.2",
-    "vite": "^5.4.1"
-  }
+    "name": "cocos-plugin-vue",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "main": "./dist/browser.cjs",
+    "scripts": {
+        "dev": "npm run build -- --mode development",
+        "build": "vite build"
+    },
+    "dependencies": {
+        "vue": "^3.4.37"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^5.1.2",
+        "@cocos-fe/vite-plugin-cocos-panel": "^0.0.1-beta.1",
+        "@cocos/creator-types": "^3.8.3",
+        "rollup-plugin-node-externals": "^7.1.3",
+        "typescript": "^5.5.3",
+        "vite": "^5.4.1",
+        "vue-tsc": "^2.0.29"
+    },
+    "contributions": {
+        "menu": [
+            {
+                "path": "i18n:menu.panel",
+                "label": "i18n:cocos-plugin-vue.title",
+                "message": "open"
+            }
+        ],
+        "messages": {
+            "open": {
+                "methods": [
+                    "open"
+                ]
+            }
+        }
+    },
+    "panels": {
+        "default": {
+            "main": "./dist/panel.cjs",
+            "size": {
+                "min-width": 400,
+                "min-height": 300,
+                "width": 600,
+                "height": 500
+            }
+        }
+    }
 }

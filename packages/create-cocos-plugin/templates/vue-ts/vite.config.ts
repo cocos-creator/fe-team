@@ -18,8 +18,7 @@ export default defineConfig(({ mode }) => {
             lib: {
                 entry: {
                     browser: './src/browser/index.ts',
-                    panel1: './src/panels/panel1.ts',
-                    panel2: './src/panels/panel2.ts',
+                    panel: './src/panels/panel.ts',
                 },
                 formats: ['cjs'],
                 fileName: (format, entryName) => `${entryName}.${format}`,
@@ -42,7 +41,7 @@ export default defineConfig(({ mode }) => {
             }),
             nodeExternals({
                 builtins: true, // 排除 node 的内置模块
-                deps: true,
+                deps: false, // 将依赖打入 dist，发布的时候可以删除 node_modules
                 devDeps: true,
                 peerDeps: true,
                 optDeps: true,

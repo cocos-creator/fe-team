@@ -1,5 +1,5 @@
 {
-    "name": "cocos-plugin-vue3",
+    "name": "cocos-plugin-vue-ts",
     "private": true,
     "version": "0.0.1",
     "package_version": 2,
@@ -25,7 +25,7 @@
         "menu": [
             {
                 "path": "i18n:menu.panel",
-                "label": "打开 vue3 面板",
+                "label": "i18n:cocos-plugin-vue-ts.title",
                 "message": "open"
             }
         ],
@@ -39,7 +39,7 @@
     },
     "panels": {
         "default": {
-            "main": "./dist/panel1.cjs",
+            "main": "./dist/panel.cjs",
             "size": {
                 "min-width": 400,
                 "min-height": 300,
