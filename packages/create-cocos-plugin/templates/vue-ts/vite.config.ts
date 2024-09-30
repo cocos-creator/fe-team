@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => {
                       include: ['./src/**/*.ts', './src/**/*.vue', './src/**/*.css'],
                   }
                 : null,
-            target: 'esnext',
+            target: 'modules',
             minify: false,
         },
         plugins: [

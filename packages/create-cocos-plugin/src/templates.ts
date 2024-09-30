@@ -38,21 +38,21 @@ export const FRAMEWORKS: Framework[] = [
         ],
     },
     {
-        name: 'react',
+        name: 'react-ts',
         display: 'React',
         color: cyan,
-        variants: [
-            {
-                name: 'react-ts',
-                display: 'TypeScript',
-                color: blue,
-            },
-            {
-                name: 'react',
-                display: 'JavaScript',
-                color: yellow,
-            },
-        ],
+        // variants: [
+        //     {
+        //         name: 'react-ts',
+        //         display: 'TypeScript',
+        //         color: blue,
+        //     },
+        //     {
+        //         name: 'react',
+        //         display: 'JavaScript',
+        //         color: yellow,
+        //     },
+        // ],
     },
 ];
 
