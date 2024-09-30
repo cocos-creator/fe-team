@@ -37,7 +37,7 @@
     "bugs": {
         "url": "https://github.com/cocos-creator/cocos-fe/issues"
     },
-    "homepage": "https://github.com/cocos-creator/cocos-fe#readme",
+    "homepage": "https://github.com/cocos-creator/fe-team/tree/main/packages/create-cocos-plugin",
     "devDependencies": {
         "@types/cross-spawn": "^6.0.6",
         "@types/minimist": "^1.2.5",
