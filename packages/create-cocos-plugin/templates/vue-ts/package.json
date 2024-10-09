@@ -10,7 +10,7 @@
         "build": "vue-tsc -b && vite build"
     },
     "devDependencies": {
-        "@cocos-fe/vite-plugin-cocos-panel": "^0.0.1-beta.1",
+        "@cocos-fe/vite-plugin-cocos-panel": "^0.0.1-beta.2",
         "@cocos/creator-types": "^3.8.3",
         "@vitejs/plugin-vue": "^5.1.2",
         "rollup-plugin-node-externals": "^7.1.3",

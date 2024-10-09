@@ -6,14 +6,14 @@
     "main": "./dist/browser.cjs",
     "scripts": {
         "dev": "npm run build -- --mode development",
-        "build": "vue-tsc -b && vite build"
+        "build": "tsc -b && vite build"
     },
     "dependencies": {
         "react": "^18.3.1",
         "react-dom": "^18.3.1"
     },
     "devDependencies": {
-        "@cocos-fe/vite-plugin-cocos-panel": "^0.0.1-beta.1",
+        "@cocos-fe/vite-plugin-cocos-panel": "^0.0.1-beta.2",
         "@cocos/creator-types": "^3.8.3",
         "@eslint/js": "^9.9.0",
         "@types/react": "^18.3.3",

@@ -1,6 +1,6 @@
 {
     "name": "create-cocos-plugin",
-    "version": "1.0.3",
+    "version": "1.0.7",
     "type": "module",
     "license": "MIT",
     "author": "cocos fe-team",
@@ -15,9 +15,13 @@
         "create-cocos-plugin": "index.js"
     },
     "files": [
+        "./dist",
         "index.js",
         "templates/",
-        "dist"
+        "!templates/**/dist",
+        "!templates/**/node_modules",
+        "!templates/**/package-lock.json",
+        "!templates/**/*.tsbuildinfo"
     ],
     "scripts": {
         "test": "vitest run",
