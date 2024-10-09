@@ -1,3 +1,3 @@
 module.exports = {
-    title: 'creator plugin： 原生开发',
+    title: 'creator 插件: 原生开发',
 };

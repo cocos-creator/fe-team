@@ -1,7 +1,7 @@
 {
     "name": "cocos-plugin-react",
-    "private": true,
     "version": "0.0.1",
+    "package_version": 2,
     "type": "module",
     "main": "./dist/browser.cjs",
     "scripts": {

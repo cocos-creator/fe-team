@@ -1,3 +1,3 @@
 module.exports = {
-    title: 'creator plugin： react + ts',
+    title: 'creator 插件: react + ts',
 };

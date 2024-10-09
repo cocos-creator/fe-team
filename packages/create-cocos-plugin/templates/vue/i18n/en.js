@@ -1,3 +1,3 @@
 module.exports = {
-    title: 'creator 插件： vue + js',
+    title: 'creator plugin: vue + js',
 };

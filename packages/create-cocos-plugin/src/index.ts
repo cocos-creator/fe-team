@@ -248,6 +248,8 @@ async function init() {
 
     pkg.name = packageName || getProjectName();
 
+    pkg.contributions.menu[0].label = `i18n:${pkg.name}.title`;
+
     write('package.json', JSON.stringify(pkg, null, 2) + '\n');
 
     if (isReactSwc) {
