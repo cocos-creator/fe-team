@@ -25,59 +25,60 @@ export default class BadgeGenerator {
     constructor(win: BrowserWindow, styleOpts: Partial<IbadgeStyleOpt> = {}) {
         this.win = win;
         this.style = Object.assign(defaultStyle, styleOpts);
-
-        // 往渲染进程注册一个函数
-        this.win.webContents.executeJavaScript(`window.drawBadge = function ${this.drawBadge};`);
     }
 
-    generate(value: string, opts?: Partial<IbadgeStyleOpt>) {
+    async generate(value: string, opts?: Partial<IbadgeStyleOpt>) {
         const styleOpts = JSON.stringify({ ...this.style, ...opts });
-        // 注意：字符串需要用 '' 包裹， 对象用 JSON.stringify
-        return this.win.webContents.executeJavaScript(`window.drawBadge('${value}', ${styleOpts});`);
-    }
 
-    // 这个函数会被注入到渲染进程
-    private drawBadge(value: string, styleOpt: IbadgeStyleOpt) {
-        const { color, background, radius, fontFamily, fontWeight } = styleOpt;
-        let { fontSize } = styleOpt;
+        // IIFE 用于定义并立即执行 drawBadge 函数，并返回结果
+        const iifeCode = `
+            (function() {
+                const drawBadge = function(value, styleOpt) {
+                    const { color, background, radius, fontFamily, fontWeight } = styleOpt;
+                    let { fontSize } = styleOpt;
+    
+                    if (value.includes('+')) {
+                        fontSize = '11px';
+                    }
+    
+                    const badgeSvg = \`
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="\${radius * 2}" height="\${radius * 2}">
+                            <circle cx="\${radius}" cy="\${radius}" r="\${radius}" fill="\${background}" />
+                            <text x="50%" y="50%" text-anchor="middle" fill="\${color}" font-size="\${fontSize}" font-family="\${fontFamily}" font-weight="\${fontWeight}" dy=".3em">\${value}</text>
+                        </svg>\`;
+    
+                    const DOMURL = self.URL || self.webkitURL;
+                    const img = new Image();
+                    const svg = new Blob([badgeSvg], { type: 'image/svg+xml;charset=utf-8' });
+                    const url = DOMURL.createObjectURL(svg);
+    
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = 16;
+                    canvas.height = 16;
+    
+                    return new Promise((resolve, reject) => {
+                        img.onload = () => {
+                            ctx.drawImage(img, 0, 0, 16, 16);
+                            const png = canvas.toDataURL('image/png');
+    
+                            DOMURL.revokeObjectURL(png);
+    
+                            resolve(png);
+                        };
+    
+                        img.onerror = reject;
+    
+                        img.src = url;
+                    });
+                };
+    
+                // 调用 drawBadge 函数并返回结果
+                return drawBadge('${value}', ${styleOpts});
+            })();
+        `;
 
-        if (value.includes('+')) {
-            fontSize = '11px';
-        }
-
-        const badgeSvg = `
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="${radius * 2}" height="${radius * 2}">
-                <circle cx="${radius}" cy="${radius}" r="${radius}" fill="${background}" />
-                <text x="50%" y="50%" text-anchor="middle" fill="${color}" font-size="${fontSize}" font-family="${fontFamily}" font-weight="${fontWeight}" dy=".3em">${value}</text>
-            </svg>`;
-
-        // @ts-ignore 如下代码会注入到渲染进程，所以 self 是存在的
-        const DOMURL = self.URL || self.webkitURL;
-
-        // @ts-ignore 如下代码会注入到渲染进程，所以 Image 是存在的
-        const img = new Image();
-        const svg = new Blob([badgeSvg], { type: 'image/svg+xml;charset=utf-8' });
-        const url = DOMURL.createObjectURL(svg);
-
-        // @ts-ignore 如下代码会注入到渲染进程，所以 document 是存在的
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = 16;
-        canvas.height = 16;
-
-        return new Promise((resolve, reject) => {
-            img.onload = () => {
-                ctx.drawImage(img, 0, 0, 16, 16);
-                const png = canvas.toDataURL('image/png');
-
-                DOMURL.revokeObjectURL(png);
-
-                resolve(png);
-            };
-
-            img.onerror = reject;
-
-            img.src = url;
-        });
+        // 执行 IIFE 并获取返回结果
+        return this.win.webContents.executeJavaScript(iifeCode).catch((e) => console.error(e));
     }
 }

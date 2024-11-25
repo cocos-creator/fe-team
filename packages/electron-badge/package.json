@@ -1,6 +1,6 @@
 {
     "name": "@cocos-fe/electron-badge",
-    "version": "0.0.2",
+    "version": "0.0.6",
     "description": "Electron badge for win32 and Unix",
     "type": "commonjs",
     "scripts": {
