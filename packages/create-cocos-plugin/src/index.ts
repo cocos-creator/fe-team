@@ -250,7 +250,7 @@ async function init() {
 
     pkg.contributions.menu[0].label = `i18n:${pkg.name}.title`;
 
-    write('package.json', JSON.stringify(pkg, null, 2) + '\n');
+    write('package.json', JSON.stringify(pkg, null, 4) + '\n');
 
     if (isReactSwc) {
         setupReactSwc(root, template.endsWith('-ts'));

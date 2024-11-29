@@ -2,7 +2,7 @@
     "name": "@cocos-fe/github-ids",
     "version": "1.0.6",
     "description": "cocos 开发人员的 github 中文名映射表",
-    "homepage_url": "http://cocos.90s.co",
+    "homepage_url": "https://cocos-creator.github.io/fe-team/",
     "manifest_version": 3,
     "permissions": ["storage"],
     "content_scripts": [

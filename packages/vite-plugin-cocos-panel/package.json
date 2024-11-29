@@ -1,6 +1,6 @@
 {
     "name": "@cocos-fe/vite-plugin-cocos-panel",
-    "version": "0.0.1-beta.2",
+    "version": "0.0.1-beta.4",
     "description": "a vite plugin for build cocos panel",
     "type": "module",
     "main": "./dist/index.js",
@@ -19,7 +19,7 @@
     "author": "cocos-fe",
     "license": "ISC",
     "dependencies": {
-        "acorn": "^8.12.1",
+        "acorn": "^8.14.0",
         "astring": "^1.9.0",
         "estree-walker": "^3.0.3"
     },

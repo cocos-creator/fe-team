@@ -26,13 +26,13 @@ export const FRAMEWORKS: Framework[] = [
         color: green,
         variants: [
             {
-                name: 'vue-ts',
-                display: 'TypeScript',
+                name: 'vue-element-plus',
+                display: 'vue + element plus',
                 color: blue,
             },
             {
                 name: 'vue',
-                display: 'JavaScript',
+                display: 'vue only',
                 color: yellow,
             },
         ],

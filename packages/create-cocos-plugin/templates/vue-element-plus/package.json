@@ -1,38 +1,33 @@
 {
-    "name": "cocos-plugin-react",
-    "version": "0.0.1",
+    "name": "cocos-plugin-vue-element-plus",
+    "version": "0.0.0",
     "package_version": 2,
     "type": "module",
     "main": "./dist/browser.cjs",
     "scripts": {
         "dev": "npm run build -- --mode development",
-        "build": "tsc -b && vite build"
+        "build": "vite build"
     },
     "dependencies": {
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1"
+        "element-plus": "^2.8.6",
+        "vue": "^3.4.37"
     },
     "devDependencies": {
         "@cocos-fe/vite-plugin-cocos-panel": "^0.0.1-beta.4",
         "@cocos/creator-types": "^3.8.4",
-        "@eslint/js": "^9.9.0",
-        "@types/react": "^18.3.3",
-        "@types/react-dom": "^18.3.0",
-        "@vitejs/plugin-react": "^4.3.1",
-        "eslint": "^9.9.0",
-        "eslint-plugin-react-hooks": "^5.1.0-rc.0",
-        "eslint-plugin-react-refresh": "^0.4.9",
-        "globals": "^15.9.0",
+        "@vitejs/plugin-vue": "^5.2.1",
         "rollup-plugin-node-externals": "^7.1.3",
         "typescript": "^5.5.3",
-        "typescript-eslint": "^8.0.1",
-        "vite": "^5.4.1"
+        "unplugin-auto-import": "^0.18.6",
+        "unplugin-vue-components": "^0.27.5",
+        "vite": "^5.4.1",
+        "vue-tsc": "^2.1.10"
     },
     "contributions": {
         "menu": [
             {
                 "path": "i18n:menu.panel",
-                "label": "i18n:cocos-plugin-react.title",
+                "label": "i18n:cocos-plugin-vue-element-plus.title",
                 "message": "open"
             }
         ],

@@ -2,6 +2,34 @@
 
 一个专为 vite 构建 cocos 面板的插件，它能将每个面板用到的 css 收集，并在输出构建文件的时候，将收集到的 css 塞入 panel 的 style 属性中。
 
+## 用法
+
+```js
+import { defineConfig } from 'vite';
+import { cocosPanelConfig, cocosPanelCss } from '@cocos-fe/vite-plugin-cocos-panel';
+
+export default defineConfig(({ mode }) => {
+    return {
+        build: {
+            lib: {
+                entry: {
+                    browser: './src/browser/index.js',
+                    panel: './src/panels/panel.js',
+                },
+                formats: ['cjs'],
+                fileName: (format, entryName) => `${entryName}.cjs`,
+            },
+        },
+        plugins: [
+            cocosPanelConfig(), // 调整配置文件
+            cocosPanelCss({ ui: 'element-plus' }), // 处理第三方组件库的 css
+        ],
+    };
+});
+```
+
+## 效果
+
 假设如下的源码，我们在 面板的入口文件里导入了 css
 
 ```ts

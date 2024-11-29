@@ -1,6 +1,6 @@
 {
     "name": "create-cocos-plugin",
-    "version": "1.0.10",
+    "version": "1.0.12",
     "type": "module",
     "license": "MIT",
     "author": "cocos fe-team",
@@ -28,7 +28,8 @@
         "dev": "unbuild --stub",
         "build": "unbuild",
         "typecheck": "tsc --noEmit",
-        "prepublishOnly": "npm run build"
+        "prepublishOnly": "npm run build",
+        "syncDependenciesVersion": "node ./scripts/sync-dependencies-version.mjs"
     },
     "engines": {
         "node": "^18.0.0 || >=20.0.0"

@@ -1,6 +1,10 @@
 import { defineConfig } from 'vite';
 import { nodeExternals } from 'rollup-plugin-node-externals';
+import vue from '@vitejs/plugin-vue';
 import { cocosPanelConfig, cocosPanelCss } from '@cocos-fe/vite-plugin-cocos-panel';
+import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 
 export default defineConfig(({ mode }) => {
     /**
@@ -17,20 +21,27 @@ export default defineConfig(({ mode }) => {
             lib: {
                 entry: {
                     browser: './src/browser/index.js',
-                    panel: './src/panel.js',
+                    panel: './src/panels/panel.js',
                 },
                 formats: ['cjs'],
-                fileName: (_, entryName) => `${entryName}.cjs`,
+                fileName: (format, entryName) => `${entryName}.cjs`,
             },
             watch: isDev
                 ? {
-                      include: ['./src/**/*.js', './src/**/*.css'],
+                      include: ['./src/**/*.js', './src/**/*.vue', './src/**/*.css'],
                   }
                 : null,
             target: 'modules',
             minify: false,
         },
         plugins: [
+            vue({
+                template: {
+                    compilerOptions: {
+                        isCustomElement: (tag) => tag.startsWith('ui-'),
+                    },
+                },
+            }),
             nodeExternals({
                 builtins: true, // 排除 node 的内置模块
                 deps: false, // 将依赖打入 dist，发布的时候可以删除 node_modules
@@ -39,7 +50,13 @@ export default defineConfig(({ mode }) => {
                 optDeps: true,
             }),
             cocosPanelConfig(),
-            cocosPanelCss(),
+            cocosPanelCss({ ui: 'element-plus' }),
+            AutoImport({
+                resolvers: [ElementPlusResolver()],
+            }),
+            Components({
+                resolvers: [ElementPlusResolver()],
+            }),
         ],
     };
 });

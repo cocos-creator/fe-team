@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
                     panel: './src/panels/panel.tsx',
                 },
                 formats: ['cjs'],
-                fileName: (format, entryName) => `${entryName}.${format}`,
+                fileName: (_, entryName) => `${entryName}.cjs`,
             },
             watch: isDev
                 ? {
