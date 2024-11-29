@@ -145,6 +145,7 @@ export const $ = { root: '#app' };
 export function update() {}
 
 export function ready() {
+    // 看我，它还是 html 分离的方式，没有采用单文件
     const vueTpl = readFileSync(join(__dirname, 'path/to/panel.html'), 'utf8');
 
     new Vue({
@@ -219,7 +220,7 @@ export default defineConfig(({ mode }) => {
 
 然后我们的 panel.js 就可以这样写：
 
-```js
+```js {13}
 import App from './App.vue';
 import { createApp } from 'vue';
 import { readFileSync } from 'fs';
@@ -263,7 +264,7 @@ export default Editor.Panel.define({
 我们希望能像 vite 构建 index.html 入口文件一样，自动将 css 等依赖，自动的打入到最终的 index.html 去。
 ![](./assets/vite-build.png)
 
-也就是我们比如我们的 panel.ts 是这样的：
+也就是比如我们的 panel.ts 是这样的：
 
 ```ts
 import App from './App.vue';
@@ -303,7 +304,7 @@ export default Editor.Panel.define({
 
 -   2、 需要将分离出来的 css 样式，自动写入到 panel.js 的 style 属性中去。
 
-在拥有这个插件之后，我们就解决了在源码里面去引入构建产物的问题，且一切都是自动完成。就像你使用的是常规的构建模式一样。
+在拥有这个插件之后，我们就解决了在源码里面去引入构建产物的问题，且一切都是自动完成。
 
 ### 最终形态
 
@@ -435,11 +436,11 @@ import HelloWorld from './components/HelloWorld.vue';
 
 ## 结合第三方 UI 框架
 
-有的同学希望在使用 vue 的同时，可以使用 element-plus 等框架，理论上这些东西在我们支持通过 vite 去构建单文件之后就自然的支持的，但是由于我们的 panle 最终是在一个 web-component 里面渲染的，所以需要对第三方的框架做点处理。
+有的同学希望在使用 vue 的同时，可以使用 element-plus 等框架，理论上这些框架在我们支持通过 vite 去构建单文件之后就自然的支持的，但是由于我们的 panle 最终是在一个 web-component 里面渲染的，所以需要对第三方的框架做点处理。
 
--   配置的 :root 的样式需要改成 :host 这样我们才能在 web-component 里面让 elment-plus 的样式生效
+-   css 样式里的 :root 需要改成 :host 这样我们才能在 web-component 里面让 elment-plus 的样式生效
 
-    我们在 [@cocos-fe/vite-plugin-cocos-panel](https://www.npmjs.com/package/@cocos-fe/vite-plugin-cocos-panel) 里做了针对 element-plus 的处理， ant-design 还没时间去弄，原则上原理是一样的。
+    我们在 [@cocos-fe/vite-plugin-cocos-panel](https://www.npmjs.com/package/@cocos-fe/vite-plugin-cocos-panel) 里做了针对 element-plus 的样式处理， ant-design 还没时间去弄，原则上原理是一样的。
     你可以配置里面加如下的参数：
 
     ```js {8}
@@ -624,7 +625,11 @@ function open2() {
 
 ## create-cocos-plugin
 
-如果以上的文字看着不太明白，不如直接通过我们提供的 CLI 工具，创建一个本地模板来体验下 [create-cocos-plugin](https://www.npmjs.com/package/create-cocos-plugin)
+以上，我们介绍了如何使用单文件 .vue 来编写编辑器面板，也介绍了我们封装的 vite 插件 [@cocos-fe/vite-plugin-cocos-panel](https://www.npmjs.com/package/@cocos-fe/vite-plugin-cocos-panel) 用于自动挂载样式到 panel 上。
+
+为了方便大家快速使用，我们还准备了几个快速使用的模板。大家可以创建一个本地模板来体验下。
+
+[create-cocos-plugin](https://www.npmjs.com/package/create-cocos-plugin) 是我们提供的 CLI 工具。它几乎完成借（chao）鉴(xi) 了 vite 的 [create-vite](https://www.npmjs.com/package/create-vite)
 
 你只需要在终端里执行
 
