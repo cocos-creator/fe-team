@@ -627,9 +627,9 @@ function open2() {
 
 以上，我们介绍了如何使用单文件 .vue 来编写编辑器面板，也介绍了我们封装的 vite 插件 [@cocos-fe/vite-plugin-cocos-panel](https://www.npmjs.com/package/@cocos-fe/vite-plugin-cocos-panel) 用于自动挂载样式到 panel 上。
 
-为了方便大家快速使用，我们还准备了几个快速使用的模板。大家可以创建一个本地模板来体验下。
+为了方便大家快速使用，我们还准备了几个预设的模板。大家可以创建一个本地插件来体验下。
 
-[create-cocos-plugin](https://www.npmjs.com/package/create-cocos-plugin) 是我们提供的 CLI 工具。它几乎完成借（chao）鉴(xi) 了 vite 的 [create-vite](https://www.npmjs.com/package/create-vite)
+[create-cocos-plugin](https://www.npmjs.com/package/create-cocos-plugin) 是我们提供的 CLI 工具。它几乎完全借（chao）鉴(xi) 了 vite 的 [create-vite](https://www.npmjs.com/package/create-vite)
 
 你只需要在终端里执行
 
