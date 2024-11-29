@@ -312,7 +312,7 @@ export default Editor.Panel.define({
 
 ::: code-group
 
-```ts [vite.config.ts]
+```ts {4,49,50} [vite.config.ts]
 import { defineConfig } from 'vite';
 import { nodeExternals } from 'rollup-plugin-node-externals';
 import vue from '@vitejs/plugin-vue';
@@ -368,8 +368,8 @@ export default defineConfig(({ mode }) => {
 });
 ```
 
-```ts [panel.ts]
-import App from './App.vue';
+```ts [panel.ts] {1}
+import App from './App.vue'; // 你的所有业务逻辑都在这个 app.vue 里面，是个常规的 vue 项目
 import { createApp } from 'vue';
 import './style.css';
 
