@@ -1,6 +1,6 @@
 {
     "name": "create-cocos-plugin",
-    "version": "1.0.12",
+    "version": "1.0.13",
     "type": "module",
     "license": "MIT",
     "author": "cocos fe-team",

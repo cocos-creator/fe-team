@@ -22,7 +22,14 @@ export default defineConfig(({ mode }) => {
         },
         plugins: [
             cocosPanelConfig(), // 调整配置文件
-            cocosPanelCss({ ui: 'element-plus' }), // 处理第三方组件库的 css
+            cocosPanelCss({
+                transform: (css) => {
+                    // 如果使用了 element-plus 等 UI 库，需要做些 css 的转换工作
+                    // element-plus 的全局变量是作用在 :root , 需要改成 :host
+                    // 黑暗模式它是在 html 添加 dark 类名，我们应该在最外层的 #app 添加 class="dark"
+                    return css.replaceAll(':root', ':host').replaceAll('html.dark', '#app.dark');
+                },
+            }),
         ],
     };
 });

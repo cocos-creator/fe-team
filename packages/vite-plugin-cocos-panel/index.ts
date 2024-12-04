@@ -5,8 +5,6 @@ import { walk } from 'estree-walker'; // walk ast
 import { generate } from 'astring'; // ast to code
 import { extname, basename } from 'node:path';
 
-import { cssTransform } from './ui-hack-element-plus.js';
-
 export function cocosPanelConfig(): Plugin {
     return {
         name: 'cocos-panel-config',
@@ -24,7 +22,7 @@ export function cocosPanelConfig(): Plugin {
     };
 }
 
-export function cocosPanelCss(option: { ui?: 'element-plus' } = {}): Plugin {
+export function cocosPanelCss(option: { transform?: (css: string) => string } = {}): Plugin {
     const styleMap: { [k: string]: string } = {};
 
     return {
@@ -68,14 +66,8 @@ export function cocosPanelCss(option: { ui?: 'element-plus' } = {}): Plugin {
                 let styleCode = styleMap[key];
 
                 if (styleCode) {
-                    if (typeof option.ui === 'string') {
-                        switch (option.ui) {
-                            case 'element-plus':
-                                styleCode = cssTransform(styleCode);
-                                break;
-                            default:
-                                break;
-                        }
+                    if (typeof option.transform === 'function') {
+                        styleCode = option.transform(styleCode);
                     }
                 }
                 if (

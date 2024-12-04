@@ -13,7 +13,7 @@
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^5.1.2",
-        "@cocos-fe/vite-plugin-cocos-panel": "^0.0.1-beta.4",
+        "@cocos-fe/vite-plugin-cocos-panel": "^0.0.1-beta.5",
         "@cocos/creator-types": "^3.8.4",
         "rollup-plugin-node-externals": "^7.1.3",
         "typescript": "^5.5.3",

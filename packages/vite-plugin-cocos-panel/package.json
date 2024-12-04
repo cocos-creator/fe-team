@@ -1,6 +1,6 @@
 {
     "name": "@cocos-fe/vite-plugin-cocos-panel",
-    "version": "0.0.1-beta.4",
+    "version": "0.0.1-beta.5",
     "description": "a vite plugin for build cocos panel",
     "type": "module",
     "main": "./dist/index.js",

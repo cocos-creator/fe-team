@@ -440,10 +440,10 @@ import HelloWorld from './components/HelloWorld.vue';
 
 -   css 样式里的 :root 需要改成 :host 这样我们才能在 web-component 里面让 elment-plus 的样式生效
 
-    我们在 [@cocos-fe/vite-plugin-cocos-panel](https://www.npmjs.com/package/@cocos-fe/vite-plugin-cocos-panel) 里做了针对 element-plus 的样式处理， ant-design 还没时间去弄，原则上原理是一样的。
+    我们在 [@cocos-fe/vite-plugin-cocos-panel](https://www.npmjs.com/package/@cocos-fe/vite-plugin-cocos-panel) 里提供了 css 的转换钩子，如果你需要使用 element-plus，你需要传入 `transform` 来转换它，使其能够在 web-component 里正常渲染 。
     你可以配置里面加如下的参数：
 
-    ```js {8}
+    ```js {8-14}
     import { defineConfig } from 'vite';
     import { cocosPanelConfig, cocosPanelCss } from '@cocos-fe/vite-plugin-cocos-panel';
 
@@ -451,7 +451,13 @@ import HelloWorld from './components/HelloWorld.vue';
         return {
             plugins: [
                 cocosPanelConfig(), // 调整配置文件
-                cocosPanelCss({ ui: 'element-plus' }), // 处理第三方组件库的 css
+                cocosPanelCss({
+                    transform: (css) => {
+                        // element-plus 的全局变量是作用在 :root , 需要改成 :host
+                        // 黑暗模式它是在 html 添加 dark 类名，我们应该在最外层的 #app 添加 class="dark"
+                        return css.replaceAll(':root', ':host').replaceAll('html.dark', '#app.dark');
+                    },
+                }),
             ],
         };
     });
@@ -461,7 +467,7 @@ import HelloWorld from './components/HelloWorld.vue';
 
 ::: code-group
 
-```js [vite.config.js] {53}
+```js [vite.config.js] {53-59}
 import { defineConfig } from 'vite';
 import { nodeExternals } from 'rollup-plugin-node-externals';
 import vue from '@vitejs/plugin-vue';
@@ -514,7 +520,13 @@ export default defineConfig(({ mode }) => {
                 optDeps: true,
             }),
             cocosPanelConfig(),
-            cocosPanelCss({ ui: 'element-plus' }),
+            cocosPanelCss({
+                transform: (css) => {
+                    // element-plus 的全局变量是作用在 :root , 需要改成 :host
+                    // 黑暗模式它是在 html 添加 dark 类名，我们应该在最外层的 #app 添加 class="dark"
+                    return css.replaceAll(':root', ':host').replaceAll('html.dark', '#app.dark');
+                },
+            }),
             AutoImport({
                 resolvers: [ElementPlusResolver()],
             }),
@@ -526,7 +538,7 @@ export default defineConfig(({ mode }) => {
 });
 ```
 
-```js [panel.js] {19-26}
+```js [panel.js] {11,19-26}
 import App from './App.vue';
 import { createApp } from 'vue';
 import './style.css';
@@ -537,7 +549,7 @@ import { ElMessage } from 'element-plus';
 const weakMap = new WeakMap();
 
 export default Editor.Panel.define({
-    template: '<div id="app" class="dark"></div>', // 只留一个 div 用于 vue 的挂载
+    template: '<div id="app" class="dark"></div>', // 加了 dark 类名，模拟黑暗模式
     $: {
         root: '#app',
     },
