@@ -1,4 +1,5 @@
 import type { InjectionKey } from 'vue';
+
 import type { MessageOptions, MessageHandler } from 'element-plus';
 
 export const keyAppRoot = Symbol() as InjectionKey<HTMLElement>;
