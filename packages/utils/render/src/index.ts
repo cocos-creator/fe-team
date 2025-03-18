@@ -1,4 +1,3 @@
-
-export function fnbrowser(a: number, b: number) {
+export function fnrender(a: number, b: number) {
     return a + b;
 }

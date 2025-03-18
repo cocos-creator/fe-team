@@ -1,30 +1,32 @@
 {
-    "name": "cocos-plugin-vue",
-    "version": "0.0.0",
+    "name": "cocos-plugin-vue-ts",
+    "private": true,
+    "version": "0.0.1",
     "package_version": 2,
     "type": "module",
     "main": "./dist/browser.cjs",
     "scripts": {
         "dev": "npm run build -- --mode development",
-        "build": "vite build"
+        "build": "vue-tsc -b && vite build"
+    },
+    "devDependencies": {
+        "@cocos-fe/vite-plugin-cocos-panel": "^0.0.1-beta.9",
+        "@cocos/creator-types": "^3.8.5",
+        "@vitejs/plugin-vue": "^5.1.2",
+        "@vue/tsconfig": "^0.7.0",
+        "rollup-plugin-node-externals": "^7.1.3",
+        "typescript": "^5.8.2",
+        "vite": "^5.4.1",
+        "vue-tsc": "^2.0.29"
     },
     "dependencies": {
         "vue": "^3.4.37"
-    },
-    "devDependencies": {
-        "@vitejs/plugin-vue": "^5.1.2",
-        "@cocos-fe/vite-plugin-cocos-panel": "^0.0.1-beta.5",
-        "@cocos/creator-types": "^3.8.4",
-        "rollup-plugin-node-externals": "^7.1.3",
-        "typescript": "^5.5.3",
-        "vite": "^5.4.1",
-        "vue-tsc": "^2.0.29"
     },
     "contributions": {
         "menu": [
             {
                 "path": "i18n:menu.panel",
-                "label": "i18n:cocos-plugin-vue.title",
+                "label": "i18n:cocos-plugin-vue-ts.title",
                 "message": "open"
             }
         ],

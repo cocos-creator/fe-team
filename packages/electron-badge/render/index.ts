@@ -1,5 +1,6 @@
-import { ipc_update, ipc_clear } from '../common/index';
 import { ipcRenderer } from 'electron';
+
+import { ipc_update, ipc_clear } from '../common/index';
 
 class BadgeRender {
     update(value: number) {

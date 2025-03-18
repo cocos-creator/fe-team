@@ -1,10 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
 import spawn from 'cross-spawn';
 import minimist from 'minimist';
+import { green, red, reset, yellow } from 'picocolors';
 import prompts from 'prompts';
-import { blue, cyan, green, red, reset, yellow } from 'kolorist';
+
 import { FRAMEWORKS, TEMPLATES } from './templates.js';
 import type { Framework } from './templates.js';
 
@@ -34,7 +36,6 @@ Options:
 Available templates:
 ${yellow   ('vanilla'  )}
 ${green    ('vue-ts         vue'      )}
-${cyan     ('react-ts       react'    )}
 `
 
 const renameFiles: Record<string, string | undefined> = {

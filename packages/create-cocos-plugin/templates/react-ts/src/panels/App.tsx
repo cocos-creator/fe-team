@@ -1,7 +1,8 @@
 import { useState } from 'react';
+
+import cocosLogo from './assets/cocos.png';
 import reactLogo from './assets/react.svg';
 import viteLogo from './assets/vite.svg';
-import cocosLogo from './assets/cocos.png';
 import './App.css';
 
 function App() {

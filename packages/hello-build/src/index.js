@@ -3,11 +3,12 @@
 import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+
 import { Command } from 'commander';
 
 // tasks
-import dev from './tasks/bin-dev.js';
 import build from './tasks/bin-build.js';
+import dev from './tasks/bin-dev.js';
 
 const packagePath = join(dirname(fileURLToPath(import.meta.url)), '../package.json');
 const packageJson = JSON.parse(readFileSync(packagePath));

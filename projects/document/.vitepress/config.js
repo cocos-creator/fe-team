@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress';
-import { withMermaid } from 'vitepress-plugin-mermaid';
+// import { withMermaid } from 'vitepress-plugin-mermaid';
 
 const config = defineConfig({
     base: '/fe-team/',
@@ -46,10 +46,12 @@ const config = defineConfig({
     },
 });
 
-export default withMermaid(config, {
-    mermaid: {},
-    mermaidPlugin: {},
-});
+// export default withMermaid(config, {
+//     mermaid: {},
+//     mermaidPlugin: {},
+// });
+
+export default config;
 
 function getArticleSidebar() {
     return [

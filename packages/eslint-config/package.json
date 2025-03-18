@@ -1,28 +1,22 @@
 {
     "name": "@cocos-fe/eslint-config",
-    "version": "1.1.1",
+    "version": "2.0.0",
     "description": "cocos 团队的共享配置",
+    "type": "module",
+    "types": "index.d.ts",
+    "main": "index.js",
     "exports": {
         ".": {
-            "require": "./index.js"
-        },
-        "./editor": {
-            "require": "./extend-editor.js"
-        },
-        "./engine": {
-            "require": "./extend-engine.js"
+            "types": "./index.d.ts",
+            "import": "./index.js"
         }
     },
     "scripts": {},
     "engines": {
-        "node": ">=18.0.0"
+        "node": ">=18.18.0"
     },
     "peerDependencies": {
-        "@typescript-eslint/eslint-plugin": "^7.4.0",
-        "@typescript-eslint/parser": "^7.4.0",
-        "eslint": "^8.57.0",
-        "eslint-plugin-vue": "^9.24.0",
-        "vue-eslint-parser": "^9.4.2"
+        "eslint": "^9.0.0"
     },
     "homepage": "https://www.npmjs.com/package/@cocos-fe/eslint-config-cocos",
     "publishConfig": {

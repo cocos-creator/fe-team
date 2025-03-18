@@ -1,6 +1,6 @@
 {
     "name": "create-cocos-plugin",
-    "version": "1.0.13",
+    "version": "1.0.14",
     "type": "module",
     "license": "MIT",
     "author": "cocos fe-team",
@@ -28,7 +28,7 @@
         "dev": "unbuild --stub",
         "build": "unbuild",
         "typecheck": "tsc --noEmit",
-        "prepublishOnly": "npm run build",
+        "prepublishOnly": "npm run syncDependenciesVersion && npm run build",
         "syncDependenciesVersion": "node ./scripts/sync-dependencies-version.mjs"
     },
     "engines": {
@@ -49,9 +49,10 @@
         "@types/prompts": "^2.4.9",
         "cross-spawn": "^7.0.3",
         "execa": "^9.3.1",
-        "kolorist": "^1.8.0",
         "minimist": "^1.2.8",
+        "picocolors": "^1.1.1",
         "prompts": "^2.4.2",
+        "semver": "^7.7.1",
         "unbuild": "^2.0.0",
         "vitest": "^2.0.5"
     }

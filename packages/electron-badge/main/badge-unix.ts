@@ -1,13 +1,16 @@
-import { Badge } from './badge';
 import { app } from 'electron';
-import type { BrowserWindow } from 'electron';
+
+import { Badge } from './badge';
 import { IbadgeStyleOpt } from './badge-generator';
+
+import type { BrowserWindow } from 'electron';
+
 
 // mac & linux
 
 export class BadgeUnix extends Badge {
     public constructor(max: number, win: BrowserWindow, style?: Partial<IbadgeStyleOpt>) {
-        super(max, win);
+        super(max, win, style);
     }
 
     public update(val: number): void {

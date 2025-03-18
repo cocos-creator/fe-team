@@ -1,7 +1,9 @@
-import { Badge } from './badge';
-import type { BrowserWindow } from 'electron';
 import { nativeImage } from 'electron';
+
+import { Badge } from './badge';
 import BadgeGenerator, { IbadgeStyleOpt } from './badge-generator';
+
+import type { BrowserWindow } from 'electron';
 
 const badgeDescription = 'downloading count';
 

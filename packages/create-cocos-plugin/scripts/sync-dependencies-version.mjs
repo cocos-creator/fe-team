@@ -1,10 +1,24 @@
-import { join, dirname } from 'node:path';
 import { existsSync } from 'node:fs';
 import { readdir, stat, readFile, writeFile } from 'node:fs/promises';
+import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+import minimist from 'minimist';
+import { valid } from 'semver';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '../');
+
+const argv = minimist(process.argv.slice(2), {
+    default: { dev: false, v: '3.8.5' },
+    alias: { v: 'version' },
+    string: ['_'],
+});
+
+if (valid(argv.v) === null) {
+    console.error(`${argv.v} is invalid`);
+    process.exit();
+}
 
 async function getCocosPanelVersion() {
     let version = '';
@@ -34,8 +48,8 @@ async function rewrite() {
                     const json = JSON.parse(jsonString);
 
                     Object.assign(json.devDependencies, {
-                        '@cocos-fe/vite-plugin-cocos-panel': `^${cocosPanelVersion}`,
-                        '@cocos/creator-types': `^3.8.4`,
+                        '@cocos-fe/vite-plugin-cocos-panel': argv.dev ? 'workspace:*' : `^${cocosPanelVersion}`,
+                        '@cocos/creator-types': `^${argv.v}`,
                     });
                     writeFile(pkg, JSON.stringify(json, null, 4), { encoding: 'utf-8' });
                 }

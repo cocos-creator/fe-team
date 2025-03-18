@@ -1,10 +1,13 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue';
+<script setup lang="ts">
 import { inject } from 'vue';
+
 import { ElMessage } from 'element-plus';
 
-const appRootDom = inject('appRoot');
-const message = inject('message');
+import HelloWorld from './components/HelloWorld.vue';
+import { keyAppRoot, keyMessage } from './provide-inject';
+
+const appRootDom = inject(keyAppRoot);
+const message = inject(keyMessage)!;
 
 const open = () => {
     ElMessage({
@@ -14,7 +17,7 @@ const open = () => {
 };
 
 function open2() {
-    message('show inject message');
+    message({ message: 'show inject message' });
 }
 </script>
 

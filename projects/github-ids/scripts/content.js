@@ -71,7 +71,7 @@ function search(value) {
     if (value) {
         const list = Object.entries(idsMap).reduce((result, next) => {
             const [k, v] = next;
-            if (v.includes(value)) {
+            if (v.includes(value) || k.includes(value)) {
                 result.push(next);
             }
             return result;

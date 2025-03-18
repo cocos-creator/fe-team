@@ -29,10 +29,6 @@
     "engines": {
         "node": ">=18"
     },
-    "devDependencies": {
-        "@types/node": "^22.0.0",
-        "typescript": "^5.5.4"
-    },
     "peerDependencies": {
         "electron": "^29.0.0"
     },

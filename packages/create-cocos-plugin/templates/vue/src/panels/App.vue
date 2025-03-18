@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue';
 </script>
 
@@ -15,6 +15,7 @@ import HelloWorld from './components/HelloWorld.vue';
         </a>
     </div>
     <HelloWorld msg="Vite + Vue + Cocos Creator" />
+    <ui-input></ui-input>
 </template>
 
 <style scoped>

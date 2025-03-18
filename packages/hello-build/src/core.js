@@ -1,7 +1,8 @@
-import { build, defineConfig, mergeConfig } from 'vite';
-import { resolve } from 'node:path';
 import { statSync, existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+
+import { build, defineConfig, mergeConfig } from 'vite';
 
 export { defineConfig } from 'vite';
 

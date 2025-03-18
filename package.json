@@ -2,17 +2,14 @@
     "name": "cocos-fe",
     "description": "cocos fe team",
     "private": false,
-    "workspaces": [
-        "packages/*",
-        "projects/*"
-    ],
+    "packageManager": "pnpm@10.6.3",
+    "type": "module",
     "scripts": {
-        "preinstall": "node ./scripts/preinstall-check-node.js",
-        "docs:dev": "npm run dev -w @cocos-fe/document",
-        "docs:build": "npm run build -w @cocos-fe/document",
-        "docs:serve": "npm run serve -w @cocos-fe/document",
-        "editor-tool:dev": "npm run dev -w cocos-editor-tool",
-        "editor-tool:build": "npm run build -w cocos-editor-tool",
+        "preinstall": "npx only-allow pnpm",
+        "docs:dev": "pnpm --filter=@cocos-fe/document dev",
+        "docs:build": "pnpm --filter=@cocos-fe/document build",
+        "docs:serve": "pnpm --filter=@cocos-fe/document serve",
+        "cocos-panel:dev": "pnpm --filter=@cocos-fe/vite-plugin-cocos-panel dev",
         "lint:js": "cross-env NODE_ENV=production eslint --fix --ext .js,.vue,.ts",
         "prepare": "husky"
     },
@@ -31,13 +28,20 @@
     },
     "homepage": "https://github.com/cocos-creator/cocos-fe#readme",
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^7.4.0",
+        "@cocos-fe/eslint-config": "workspace:*",
+        "@eslint/config-inspector": "^1.0.2",
+        "@eslint/js": "^9.9.0",
+        "@types/node": "^22.11.0",
         "cross-env": "^7.0.3",
-        "eslint": "^8.57.0",
-        "eslint-plugin-vue": "^9.24.0",
-        "husky": "^9.0.11",
-        "lint-staged": "^15.2.2",
-        "ts-node": "^10.9.2"
+        "eslint": "^9.22.0",
+        "eslint-plugin-import": "^2.31.0",
+        "eslint-plugin-vue": "^10.0.0",
+        "globals": "^15.9.0",
+        "husky": "^9.1.7",
+        "lint-staged": "^15.5.0",
+        "ts-node": "^10.9.2",
+        "typescript": "catalog:",
+        "typescript-eslint": "^8.0.1"
     },
     "engines": {
         "node": ">=18.0.0"

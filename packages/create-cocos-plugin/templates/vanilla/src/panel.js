@@ -1,8 +1,8 @@
 import './style.css';
-import { setupCounter } from './counter.js';
+import cocosLogo from './assets/cocos.png';
 import javascriptLogo from './assets/javascript.svg';
 import viteLogo from './assets/vite.svg';
-import cocosLogo from './assets/cocos.png';
+import { setupCounter } from './counter.js';
 
 export default Editor.Panel.define({
     template: /* html*/ `

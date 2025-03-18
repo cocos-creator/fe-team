@@ -1,4 +1,4 @@
-import { blue, cyan, green, red, reset, yellow } from 'kolorist';
+import { blue, green, yellow } from 'picocolors';
 
 export type ColorFunc = (str: string | number) => string;
 export type Framework = {
@@ -37,23 +37,11 @@ export const FRAMEWORKS: Framework[] = [
             },
         ],
     },
-    {
-        name: 'react-ts',
-        display: 'React',
-        color: cyan,
-        // variants: [
-        //     {
-        //         name: 'react-ts',
-        //         display: 'TypeScript',
-        //         color: blue,
-        //     },
-        //     {
-        //         name: 'react',
-        //         display: 'JavaScript',
-        //         color: yellow,
-        //     },
-        // ],
-    },
+    // {
+    //     name: 'react-ts',
+    //     display: 'React',
+    //     color: cyan,
+    // },
 ];
 
 export const TEMPLATES = FRAMEWORKS.map((f) => (f.variants && f.variants.map((v) => v.name)) || [f.name]).reduce((a, b) => a.concat(b), []);

@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
-import { join } from 'node:path';
 import { stat, readdir } from 'node:fs/promises';
+import { join } from 'node:path';
+
 import { createViteBuild, validateProject } from '../core.js';
 
 const root = process.cwd();
@@ -50,7 +51,9 @@ async function getBuildProjects(extensionName) {
             if (config) {
                 result.push(config);
             }
-        } catch (error) {}
+        } catch (error) {
+            console.error(error);
+        }
         return result;
     }, Promise.resolve([]));
 

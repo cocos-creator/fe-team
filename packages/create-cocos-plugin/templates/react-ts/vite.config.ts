@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite';
-import { nodeExternals } from 'rollup-plugin-node-externals';
-import react from '@vitejs/plugin-react';
 import { cocosPanelConfig, cocosPanelCss } from '@cocos-fe/vite-plugin-cocos-panel';
+import react from '@vitejs/plugin-react';
+import { nodeExternals } from 'rollup-plugin-node-externals';
+import { defineConfig } from 'vite';
 
 export default defineConfig(({ mode }) => {
     /**

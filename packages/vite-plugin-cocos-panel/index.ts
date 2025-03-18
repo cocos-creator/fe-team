@@ -1,14 +1,18 @@
-import type { Plugin } from 'vite';
-import type { Program, Property, Identifier, Node, TaggedTemplateExpression, ObjectExpression, CallExpression } from 'estree';
-import * as acorn from 'acorn'; // code to ast
-import { walk } from 'estree-walker'; // walk ast
-import { generate } from 'astring'; // ast to code
+// https://github.com/estree
+// A community organization for standardizing JS ASTs
 import { extname, basename } from 'node:path';
+
+import * as acorn from 'acorn'; // code to ast
+import { generate } from 'astring'; // ast to code
+import { walk } from 'estree-walker'; // walk ast
+import MagicString from 'magic-string';
+
+import type { Program, Property, Identifier, Node, TaggedTemplateExpression, ObjectExpression, CallExpression } from 'estree';
+import type { Plugin } from 'vite';
 
 export function cocosPanelConfig(): Plugin {
     return {
         name: 'cocos-panel-config',
-        version: '0.0.1',
         apply: 'build',
         enforce: 'pre',
 
@@ -22,12 +26,16 @@ export function cocosPanelConfig(): Plugin {
     };
 }
 
-export function cocosPanelCss(option: { transform?: (css: string) => string } = {}): Plugin {
+export function cocosPanelCss(
+    option: {
+        transform?: (css: string) => string;
+        pureString?: boolean;
+    } = { pureString: false }
+): Plugin {
     const styleMap: { [k: string]: string } = {};
 
     return {
         name: 'cocos-panel-css',
-        version: '0.0.1',
         apply: 'build',
         enforce: 'post',
 
@@ -61,64 +69,95 @@ export function cocosPanelCss(option: { transform?: (css: string) => string } = 
                 }
             }
 
-            for (const key in bundle) {
-                const chunk = bundle[key];
-                let styleCode = styleMap[key];
+            if (option.pureString) {
+                for (const key in bundle) {
+                    const chunk = bundle[key];
+                    let styleCode = styleMap[key];
 
-                if (styleCode) {
-                    if (typeof option.transform === 'function') {
-                        styleCode = option.transform(styleCode);
+                    if (styleCode) {
+                        if (typeof option.transform === 'function') {
+                            styleCode = option.transform(styleCode);
+                        }
+                    }
+                    if (
+                        chunk?.type === 'chunk' &&
+                        chunk.fileName.match(/.[cm]?js$/) !== null &&
+                        !chunk.fileName.includes('polyfill') &&
+                        chunk.code.includes('Editor.Panel.define') &&
+                        styleCode
+                    ) {
+                        const s = new MagicString(chunk.code);
+
+                        const replacedCode = chunk.code.replace(/<inject css here>/, styleCode);
+                        s.overwrite(0, chunk.code.length, replacedCode);
+
+                        chunk.code = s.toString();
+                        chunk.map = s.generateMap({ hires: true });
                     }
                 }
-                if (
-                    chunk?.type === 'chunk' &&
-                    chunk.fileName.match(/.[cm]?js$/) !== null &&
-                    !chunk.fileName.includes('polyfill') &&
-                    chunk.code.includes('Editor.Panel.define') &&
-                    styleCode
-                ) {
-                    const ast = acorn.parse(chunk.code, { ecmaVersion: 'latest', sourceType: 'module' }) as Program;
+            } else {
+                for (const key in bundle) {
+                    const chunk = bundle[key];
+                    let styleCode = styleMap[key];
 
-                    walk(ast, {
-                        enter(node) {
-                            if (isEditorPanelDefine(node)) {
-                                // 获取 define 方法的第一个参数（对象）
-                                if (node.arguments[0] && node.arguments[0].type === 'ObjectExpression') {
-                                    const defineProps = node.arguments[0] as ObjectExpression;
+                    if (styleCode) {
+                        if (typeof option.transform === 'function') {
+                            styleCode = option.transform(styleCode);
+                        }
+                    }
+                    if (
+                        chunk?.type === 'chunk' &&
+                        chunk.fileName.match(/.[cm]?js$/) !== null &&
+                        !chunk.fileName.includes('polyfill') &&
+                        chunk.code.includes('Editor.Panel.define') &&
+                        styleCode
+                    ) {
+                        const ast = acorn.parse(chunk.code, { ecmaVersion: 'latest', sourceType: 'module', locations: true }) as Program;
+                        const s = new MagicString(chunk.code);
 
-                                    // 寻找 style 属性并替换
-                                    let foundStyle = false;
-                                    for (let i = 0; i < defineProps.properties.length; i++) {
-                                        const prop = defineProps.properties[i] as Property;
+                        walk(ast, {
+                            enter(node) {
+                                if (isEditorPanelDefine(node)) {
+                                    // 获取 define 方法的第一个参数（对象）
+                                    if (node.arguments[0] && node.arguments[0].type === 'ObjectExpression') {
+                                        const defineProps = node.arguments[0] as ObjectExpression;
 
-                                        if (typeof prop.key === 'object' && (prop.key as Identifier).name === 'style') {
-                                            foundStyle = true;
-                                            prop.value = createTemplateLiteralNode(styleCode);
+                                        // 寻找 style 属性并替换
+                                        let foundStyle = false;
+                                        for (let i = 0; i < defineProps.properties.length; i++) {
+                                            const prop = defineProps.properties[i] as Property;
+
+                                            if (typeof prop.key === 'object' && (prop.key as Identifier).name === 'style') {
+                                                foundStyle = true;
+                                                if ('start' in prop.value && 'end' in prop.value) {
+                                                    const start = prop.value.start as number;
+                                                    const end = prop.value.end as number;
+                                                    s.overwrite(start, end, generate(createTemplateLiteralNode(styleCode)));
+                                                } else {
+                                                    console.warn(`Missing start or end location for style property in ${key}`);
+                                                }
+                                            }
+                                        }
+
+                                        // 如果没有找到 style 属性，则添加一个新的 style 属性
+                                        if (!foundStyle) {
+                                            const lastPropIndex = defineProps.properties.length - 1;
+                                            const lastProp = defineProps.properties[lastPropIndex];
+                                            if ('end' in lastProp) {
+                                                const lastPropEnd = lastProp.end as number;
+                                                s.appendRight(lastPropEnd, `, style: ${generate(createTemplateLiteralNode(styleCode))}`);
+                                            } else {
+                                                console.warn(`Missing end location for last property in ${key}`);
+                                            }
                                         }
                                     }
-
-                                    // 如果没有找到 style 属性，则添加一个新的 style 属性
-                                    if (!foundStyle) {
-                                        defineProps.properties.push({
-                                            type: 'Property',
-                                            key: {
-                                                type: 'Identifier',
-                                                name: 'style',
-                                            },
-                                            value: createTemplateLiteralNode(styleCode),
-                                            kind: 'init',
-                                            method: false,
-                                            shorthand: false,
-                                            computed: false,
-                                        });
-                                    }
-
-                                    // 重新生成代码
-                                    chunk.code = generate(ast);
                                 }
-                            }
-                        },
-                    });
+                            },
+                        });
+
+                        chunk.code = s.toString();
+                        chunk.map = s.generateMap({ hires: true });
+                    }
                 }
             }
         },

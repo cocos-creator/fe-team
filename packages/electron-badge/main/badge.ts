@@ -1,13 +1,20 @@
-import { IbadgeStyleOpt } from './badge-generator';
-import type { BrowserWindow } from 'electron';
 import { ipcMain } from 'electron';
+
 import { ipc_update, ipc_clear } from '../common/index';
+
+import { IbadgeStyleOpt } from './badge-generator';
+
+import type { BrowserWindow } from 'electron';
 
 export abstract class Badge {
     max = 99;
+    win: BrowserWindow;
+    style?: Partial<IbadgeStyleOpt>;
 
     constructor(max: number, win: BrowserWindow, style?: Partial<IbadgeStyleOpt>) {
         this.max = max;
+        this.win = win;
+        this.style = style;
 
         ipcMain.on(ipc_update, (event, value: number) => {
             this.update(value);
