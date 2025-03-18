@@ -2,7 +2,7 @@
 
 cocos creator FE team [官网](https://cocos-creator.github.io/fe-team/)
 
-由于使用了 npm@7 的 workspace 功能，所以 `node` 版本需要在 16 以上。 推荐使用 `nvm` 来管理 `node` 版本。
+本项目使用 pnpm 来管理依赖和 node 版本的设置，请确保你本地安装了最新版本的 pnpm 。
 
 ## Eslint
 
