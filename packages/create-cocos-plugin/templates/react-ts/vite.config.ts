@@ -30,6 +30,7 @@ export default defineConfig(({ mode }) => {
                 : null,
             target: 'modules',
             minify: false,
+            sourcemap: isDev,
         },
         plugins: [
             react(),

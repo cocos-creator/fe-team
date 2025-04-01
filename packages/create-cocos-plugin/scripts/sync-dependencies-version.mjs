@@ -10,7 +10,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '../');
 
 const argv = minimist(process.argv.slice(2), {
-    default: { dev: false, v: '3.8.5' },
+    default: { dev: false, v: '3.8.6' },
     alias: { v: 'version' },
     string: ['_'],
 });
