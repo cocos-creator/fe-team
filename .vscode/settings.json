@@ -1,6 +1,8 @@
 {
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "explicit"
+        "source.fixAll.eslint": "explicit",
+        "source.fixAll.stylelint": "explicit",
+        "source.fixAll.markdownlint": "explicit"
     },
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -8,5 +10,17 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "editor.fontSize": 14,
-    "typescript.tsdk": "${workspaceFolder}/node_modules/typescript/lib"
+    "typescript.tsdk": "${workspaceFolder}/node_modules/typescript/lib",
+    // css 样式相关
+    "[less]": {
+        "editor.defaultFormatter": "stylelint.vscode-stylelint"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "stylelint.vscode-stylelint"
+    },
+    "css.validate": false,
+    "scss.validate": false,
+    "less.validate": false,
+    "stylelint.enable": true,
+    "stylelint.validate": ["css", "postcss", "less"]
 }
