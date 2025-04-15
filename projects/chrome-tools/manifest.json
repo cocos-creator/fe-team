@@ -10,7 +10,7 @@
         {
             "matches": ["https://github.com/cocos/*", "https://github.com/cocos-creator/*"],
             "css": ["./styles/content.css"],
-            "js": ["./scripts/content.js"],
+            "js": ["./scripts/github-ids.js"],
             "run_at": "document_end"
         },
         {
