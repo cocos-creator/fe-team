@@ -21,7 +21,7 @@ export default defineConfig([
     globalIgnores(['**/.vitepress/cache', '**/dist/']),
     {
         name: '谷歌浏览器插件',
-        files: ['projects/github-ids/**/*.js'],
+        files: ['projects/chrome-tools/**/*.{js,ts,vue}'],
         languageOptions: {
             globals: {
                 chrome: 'readonly',

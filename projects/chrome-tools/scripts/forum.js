@@ -21,23 +21,27 @@ function getTopics() {
         const btns = [
             {
                 link: `https://github.com/cocos/3d-tasks/issues/new?`,
-                text: '创建编辑器 issue',
+                text: ' Creator',
             },
             {
                 link: `https://github.com/cocos/cocos-engine/issues/new?`,
-                text: '创建引擎 issue',
+                text: 'Engine',
             },
         ];
+
+        const $issueBox = document.createElement('div');
+        $issueBox.id = 'issue-box';
+        $issueBox.dataset.id = 'issue';
+        $issueBox.dataset.tip = 'create issue for ';
 
         btns.forEach((btn) => {
             const $btn = document.createElement('a');
             $btn.href = btn.link + `title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(issueBody)}`;
             $btn.target = '_blank';
             $btn.innerText = btn.text;
-            $btn.dataset.id = 'issue';
-            $btn.classList.add('btn', 'btn-default'); // 借用论坛的样式
-            $actions.prepend($btn);
+            $issueBox.append($btn);
         });
+        $actions.prepend($issueBox);
     }
 }
 

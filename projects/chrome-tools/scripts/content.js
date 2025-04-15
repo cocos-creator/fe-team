@@ -1,4 +1,4 @@
-console.log('我是 @cocos-fe/githubs-ids 小插件，我被启用了！');
+console.log('我是 @cocos-fe/chrome-tools 小插件，我被启用了！');
 
 const $panel = document.createElement('div');
 $panel.id = 'github-ids';
@@ -19,7 +19,7 @@ function createPanel() {
     const updateImageDark = chrome.runtime.getURL('images/update-dark.png');
     $panel.innerHTML = `
     <div class="icon">
-      <img src="${image}" alt="githubs-ids" />
+      <img src="${image}" alt="github-id" />
     </div>
     <input type="text" />
     <ul></ul>
@@ -98,9 +98,8 @@ function createList(list) {
 }
 
 // 更新数据
-function fetchList() {
+async function fetchList() {
     const url = `https://90s.oss-cn-hangzhou.aliyuncs.com/github-ids/github-ids.json?v=${Date.now()}`;
-    console.log('fetch', url);
     return fetch(url)
         .then((res) => res.json())
         .then((data) => {
