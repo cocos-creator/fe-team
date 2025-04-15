@@ -34,7 +34,7 @@ function createPanel() {
         () => {
             $panel.classList.toggle('show');
         },
-        false
+        false,
     );
 
     $panel.querySelector('input').addEventListener('input', (e) => {
@@ -201,6 +201,10 @@ function message() {
             await fetchList();
         }
         replaceIds();
+        setTimeout(() => {
+            // 延时后再执行一次
+            replaceIds();
+        }, 1000);
         if (ev === 'load') {
             observerProgress();
             createPanel();
