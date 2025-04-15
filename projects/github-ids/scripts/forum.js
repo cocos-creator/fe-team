@@ -77,4 +77,20 @@ function bindDocument() {
         },
         true, // 里面的 a 的事件可能被阻止冒泡了，所有需要 true
     );
+
+    let timer = null;
+    document.addEventListener(
+        'scroll',
+        () => {
+            if (timer) {
+                clearTimeout(timer);
+                timer = null;
+            }
+
+            timer = setTimeout(() => {
+                getTopics();
+            }, 200);
+        },
+        false,
+    );
 }

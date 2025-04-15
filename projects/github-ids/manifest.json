@@ -1,6 +1,6 @@
 {
     "name": "@cocos-fe/github-ids",
-    "version": "1.0.9",
+    "version": "1.1.0",
     "description": "cocos 开发人员的 github 中文名映射表",
     "homepage_url": "https://cocos-creator.github.io/fe-team/",
     "manifest_version": 3,
