@@ -7,13 +7,13 @@ function getTopics() {
 
         const $actions = topic.querySelector('.actions');
 
-        const isReady = $actions.firstChild.dataset.id === 'issue';
+        const isReady = topic.querySelector('.post-controls #issue-box');
         if (isReady) {
             continue;
         }
 
         let link = location.origin + $actions.querySelector('.share').dataset.shareUrl;
-        link = `论坛地址: [${link}](${link})`;
+        link = `Forum link: [${link}](${link})`;
 
         const issueTitle = `[forum]: ${document.title}`;
         const issueBody = content + '\n\n' + link;
@@ -31,8 +31,7 @@ function getTopics() {
 
         const $issueBox = document.createElement('div');
         $issueBox.id = 'issue-box';
-        $issueBox.dataset.id = 'issue';
-        $issueBox.dataset.tip = 'create issue for ';
+        $issueBox.dataset.tip = 'Create issue for ';
 
         btns.forEach((btn) => {
             const $btn = document.createElement('a');
@@ -41,7 +40,7 @@ function getTopics() {
             $btn.innerText = btn.text;
             $issueBox.append($btn);
         });
-        $actions.prepend($issueBox);
+        topic.querySelector('.post-controls').prepend($issueBox);
     }
 }
 
