@@ -127,7 +127,7 @@
 
 #issue-box {
     display: inline-flex;
-    margin-top: 8px;
+    margin-top: 6px;
 
     &::before {
         padding: 0 20px;
