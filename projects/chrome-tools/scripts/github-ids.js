@@ -114,13 +114,14 @@ async function fetchList() {
 // 替换页面id
 function replaceIds() {
     const selector = [
-        '.author',
+        '.author', // PR页面
         '.assignee span',
         '.TimelineItem-body a span',
         '.commit-author',
         '.BorderGrid-row li a strong',
         'a[rel="contributor"]',
         '.opened-by a.Link--muted',
+        '[data-testid]', // issue 的页面
     ].join();
     Array.from(document.querySelectorAll(selector)).forEach((ele) => {
         const text = ele.innerText;
