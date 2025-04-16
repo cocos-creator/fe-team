@@ -1,4 +1,9 @@
-function getTopics() {
+let autoShow = true;
+chrome.storage.sync.get(['autoShow'], function (data) {
+    autoShow = data.autoShow ?? true;
+});
+
+function interIssueButton() {
     const topics = document.querySelectorAll('.post-stream .topic-post');
     if (!topics) return;
 
@@ -44,29 +49,30 @@ function getTopics() {
     }
 }
 
-// 监听路由等事件
-['hashchange', 'popstate', 'load'].forEach((event) => {
-    window.addEventListener(event, () => {
-        start();
+function removeIssueButton() {
+    const topics = document.querySelectorAll('.post-stream .topic-post');
+    if (!topics) return;
 
-        if (event === 'load') {
-            bindDocument();
+    for (const topic of topics) {
+        const $issueBox = topic.querySelector('.post-controls #issue-box');
+        if ($issueBox) {
+            $issueBox.parentElement.removeChild($issueBox);
         }
-    });
-});
+    }
+}
 
-function start() {
+function tryInsertTimes() {
     const times = [0, 500, 1000, 1500, 2000, 2500, 3000];
     times.forEach((time) => {
         setTimeout(() => {
-            getTopics();
+            interIssueButton();
         }, time);
     });
 }
 
 // 从论坛首页点击 A 标签跳转到某个帖子，不会触发 popstate 等事件
 let _url_ = '';
-function bindDocument() {
+function insertAuto() {
     document.addEventListener(
         'click',
         () => {
@@ -74,7 +80,7 @@ function bindDocument() {
             setTimeout(() => {
                 if (_url_ !== location.href) {
                     _url_ = location.href;
-                    start();
+                    tryInsertTimes();
                 }
             }, 200);
         },
@@ -91,9 +97,48 @@ function bindDocument() {
             }
 
             timer = setTimeout(() => {
-                getTopics();
+                interIssueButton();
             }, 200);
         },
         false,
     );
 }
+
+function insertManually() {
+    document.addEventListener(
+        'keydown',
+        (e) => {
+            if (e.code === 'AltRight' || e.code === 'AltLeft') {
+                interIssueButton();
+            }
+        },
+        true,
+    );
+
+    document.addEventListener(
+        'keyup',
+        (e) => {
+            if (e.code === 'AltRight' || e.code === 'AltLeft') {
+                removeIssueButton();
+            }
+        },
+        true,
+    );
+}
+
+// 监听路由等事件
+['hashchange', 'popstate', 'load'].forEach((event) => {
+    window.addEventListener(event, () => {
+        if (autoShow) {
+            tryInsertTimes();
+        }
+
+        if (event === 'load') {
+            if (autoShow) {
+                insertAuto();
+            } else {
+                insertManually();
+            }
+        }
+    });
+});
