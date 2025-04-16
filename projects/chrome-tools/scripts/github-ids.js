@@ -133,21 +133,36 @@ function replaceIds() {
 
 // 通过监听 github 的页面切换进度条来判断是否完成路由切换
 function observerProgress() {
-    const $progress = document.querySelector('.Progress-item');
-    const callback = function (mutationsList) {
+    const mb = new MutationObserver((mutationsList) => {
         for (const mutation of mutationsList) {
-            if (mutation.type === 'attributes') {
-                const press = parseInt($progress.style.width, 10);
-                if (press && press > 95) {
-                    window.setTimeout(replaceIds, 200);
+            if (mutation.type === 'childList') {
+                if (mutation.removedNodes.length > 0) {
+                    if (Array.from(mutation.removedNodes).some((node) => node.nodeName === 'DIV' && node.classList.contains('turbo-progress-bar'))) {
+                        // 2025-04-16 此时的 github 是动态创建一个 .turbo-progress-bar 再进度走完之后又移除它
+                        // 所以这边监听 dom 的移除事件即可
+                        delayRepeat();
+                    }
                 }
             }
         }
-    };
+    });
+    mb.observe(document, { childList: true, subtree: true });
 
-    const observer = new MutationObserver(callback);
-    observer.observe($progress, { attributes: true });
-    // observer.disconnect();
+    // github 改版了，不再是通过这个进度条
+    // const $progress = document.querySelector('.Progress-item');
+    // const callback = function (mutationsList) {
+    //     for (const mutation of mutationsList) {
+    //         if (mutation.type === 'attributes') {
+    //             const press = parseInt($progress.style.width, 10);
+    //             if (press && press > 95) {
+    //                 delayRepeat();
+    //             }
+    //         }
+    //     }
+    // };
+
+    // const observer = new MutationObserver(callback);
+    // observer.observe($progress, { attributes: true });
 }
 
 // 复制
@@ -199,11 +214,7 @@ function message() {
         if (!idsMap || Object.keys(idsMap).length === 0) {
             await fetchList();
         }
-        replaceIds();
-        setTimeout(() => {
-            // 延时后再执行一次
-            replaceIds();
-        }, 1000);
+        delayRepeat();
         if (ev === 'load') {
             observerProgress();
             createPanel();
@@ -211,3 +222,10 @@ function message() {
         }
     });
 });
+
+function delayRepeat() {
+    const times = [0, 500, 1000, 1500, 2000, 2500, 3000];
+    times.forEach((time) => {
+        setTimeout(replaceIds, time);
+    });
+}
