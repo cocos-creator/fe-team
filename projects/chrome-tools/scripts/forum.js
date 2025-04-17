@@ -12,7 +12,8 @@ function interIssueButton() {
 
         const $actions = topic.querySelector('.actions');
 
-        const isReady = topic.querySelector('.post-controls #issue-box');
+        const $postMunuArea = topic.querySelector('.post-menu-area');
+        const isReady = $postMunuArea.querySelector('#issue-box');
         if (isReady) {
             continue;
         }
@@ -45,7 +46,12 @@ function interIssueButton() {
             $btn.innerText = btn.text;
             $issueBox.append($btn);
         });
-        topic.querySelector('.post-controls').prepend($issueBox);
+        if (autoShow) {
+            $postMunuArea.classList.remove('hover-show-issue-btn');
+        } else {
+            $postMunuArea.classList.add('hover-show-issue-btn');
+        }
+        $postMunuArea.prepend($issueBox);
     }
 }
 
@@ -72,7 +78,7 @@ function tryInsertTimes() {
 
 // 从论坛首页点击 A 标签跳转到某个帖子，不会触发 popstate 等事件
 let _url_ = '';
-function insertAuto() {
+function bindClickAndScroll() {
     document.addEventListener(
         'click',
         () => {
@@ -104,41 +110,13 @@ function insertAuto() {
     );
 }
 
-function insertManually() {
-    document.addEventListener(
-        'keydown',
-        (e) => {
-            if (e.code === 'AltRight' || e.code === 'AltLeft') {
-                interIssueButton();
-            }
-        },
-        true,
-    );
-
-    document.addEventListener(
-        'keyup',
-        (e) => {
-            if (e.code === 'AltRight' || e.code === 'AltLeft') {
-                removeIssueButton();
-            }
-        },
-        true,
-    );
-}
-
 // 监听路由等事件
 ['hashchange', 'popstate', 'load'].forEach((event) => {
     window.addEventListener(event, () => {
-        if (autoShow) {
-            tryInsertTimes();
-        }
+        tryInsertTimes();
 
         if (event === 'load') {
-            if (autoShow) {
-                insertAuto();
-            } else {
-                insertManually();
-            }
+            bindClickAndScroll();
         }
     });
 });

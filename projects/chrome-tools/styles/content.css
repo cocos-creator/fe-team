@@ -126,8 +126,10 @@
 }
 
 #issue-box {
+    position: absolute;
+    top: 8px;
+    left: 90px;
     display: inline-flex;
-    margin-top: 6px;
 
     &::before {
         padding: 0 20px;
@@ -147,6 +149,20 @@
 
         &:nth-child(1) {
             margin: 0 4px;
+        }
+    }
+}
+
+.hover-show-issue-btn {
+    position: relative;
+
+    & #issue-box {
+        display: none;
+    }
+
+    &:hover {
+        & #issue-box {
+            display: inline-flex;
         }
     }
 }
