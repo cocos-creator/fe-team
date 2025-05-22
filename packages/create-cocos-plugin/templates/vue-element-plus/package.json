@@ -15,6 +15,7 @@
     "devDependencies": {
         "@cocos-fe/vite-plugin-cocos-panel": "^0.0.1-beta.9",
         "@cocos/creator-types": "^3.8.6",
+        "@types/node": "^22.15.21",
         "@vitejs/plugin-vue": "^5.2.2",
         "@vue/tsconfig": "^0.7.0",
         "rollup-plugin-node-externals": "^7.1.3",
