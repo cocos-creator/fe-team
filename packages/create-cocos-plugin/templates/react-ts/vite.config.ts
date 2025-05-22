@@ -30,7 +30,11 @@ export default defineConfig(({ mode }) => {
                 : null,
             target: 'modules',
             minify: false,
-            sourcemap: isDev ? 'inline' : false,
+            sourcemap: isDev
+                ? process.platform === 'win32'
+                    ? 'inline'
+                    : true // windows 下 sourcemap 只有 inline 模式才会生效
+                : false,
         },
         plugins: [
             react(),

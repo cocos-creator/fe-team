@@ -3,7 +3,10 @@ import { inject } from 'vue';
 
 import { ElMessage } from 'element-plus';
 
+import { name } from '../../package.json';
+
 import HelloWorld from './components/HelloWorld.vue';
+import { state } from './pina';
 import { keyAppRoot, keyMessage } from './provide-inject';
 
 const appRootDom = inject(keyAppRoot);
@@ -18,6 +21,11 @@ const open = () => {
 
 function open2() {
     message({ message: 'show inject message' });
+}
+
+async function showVersion() {
+    const version = await Editor.Message.request(name, 'get-version');
+    message({ message: version });
 }
 </script>
 
@@ -39,6 +47,9 @@ function open2() {
     <HelloWorld msg="Vite + Vue + Cocos Creator + element-plus" />
     <el-button type="primary" @click="open"> show message </el-button>
     <el-button type="danger" @click="open2"> show inject message </el-button>
+    <el-button type="default" @click="showVersion"> get creator version from browser </el-button>
+
+    <p>Try to click the menu: [ panel/{{ name }}/send to panel ] {{ state.a }}</p>
 </template>
 
 <style scoped>

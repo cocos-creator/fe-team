@@ -157,7 +157,7 @@ async function init() {
                 onCancel: () => {
                     throw new Error(red('✖') + ' Operation cancelled');
                 },
-            }
+            },
         );
     } catch (cancelled: any) {
         console.log(cancelled.message);
@@ -245,13 +245,13 @@ async function init() {
         write(file);
     }
 
-    const pkg = JSON.parse(fs.readFileSync(path.join(templateDir, `package.json`), 'utf-8'));
+    let pkgStr = fs.readFileSync(path.join(templateDir, `package.json`), 'utf-8');
 
-    pkg.name = packageName || getProjectName();
+    const name = packageName || getProjectName();
 
-    pkg.contributions.menu[0].label = `i18n:${pkg.name}.title`;
+    pkgStr = pkgStr.replaceAll('{name}', name);
 
-    write('package.json', JSON.stringify(pkg, null, 4) + '\n');
+    write('package.json', pkgStr);
 
     if (isReactSwc) {
         setupReactSwc(root, template.endsWith('-ts'));

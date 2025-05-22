@@ -1,5 +1,5 @@
 {
-    "name": "cocos-plugin-vue-element-plus",
+    "name": "{name}",
     "version": "0.0.0",
     "package_version": 2,
     "type": "module",
@@ -27,15 +27,30 @@
     "contributions": {
         "menu": [
             {
-                "path": "i18n:menu.panel",
-                "label": "i18n:cocos-plugin-vue-element-plus.title",
+                "path": "i18n:menu.panel/{name}",
+                "label": "i18n:{name}.title",
                 "message": "open"
+            },
+            {
+                "path": "i18n:menu.panel/{name}",
+                "label": "send to panel",
+                "message": "increase"
             }
         ],
         "messages": {
             "open": {
                 "methods": [
                     "open"
+                ]
+            },
+            "get-version": {
+                "methods": [
+                    "getVersion"
+                ]
+            },
+            "increase": {
+                "methods": [
+                    "default.increase"
                 ]
             }
         }

@@ -1,5 +1,5 @@
 {
-    "name": "cocos-plugin-vanilla",
+    "name": "{name}",
     "version": "0.0.1",
     "package_version": 2,
     "type": "module",
@@ -18,7 +18,7 @@
         "menu": [
             {
                 "path": "i18n:menu.panel",
-                "label": "i18n:cocos-plugin-vanilla.title",
+                "label": "i18n:{name}.title",
                 "message": "open"
             }
         ],
