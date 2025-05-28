@@ -99,7 +99,7 @@ function createList(list) {
 
 // 更新数据
 async function fetchList() {
-    const url = `https://90s.oss-cn-hangzhou.aliyuncs.com/github-ids/github-ids.json?v=${Date.now()}`;
+    const url = `https://raw.githubusercontent.com/cocos-creator/fe-team/main/projects/chrome-tools/github-ids.json?v=${Date.now()}`;
     return fetch(url)
         .then((res) => res.json())
         .then((data) => {
@@ -122,6 +122,7 @@ function replaceIds() {
         'a[rel="contributor"]',
         '.opened-by a.Link--muted',
         '[data-testid]', // issue 的页面
+        '[class*="issue-item-module__authorCreatedLink"]', // isssue 列表
     ].join();
     Array.from(document.querySelectorAll(selector)).forEach((ele) => {
         const text = ele.innerText;
