@@ -13,7 +13,7 @@
         "react-dom": "^18.3.1"
     },
     "devDependencies": {
-        "@cocos-fe/vite-plugin-cocos-panel": "^1.0.0",
+        "@cocos-fe/vite-plugin-cocos-panel": "^1.0.1",
         "@cocos/creator-types": "^3.8.6",
         "@types/node": "^22.15.21",
         "@eslint/js": "^9.9.0",
