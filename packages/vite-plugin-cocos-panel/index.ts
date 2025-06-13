@@ -1,14 +1,12 @@
-// https://github.com/estree
-// A community organization for standardizing JS ASTs
 import { extname, basename } from 'node:path';
 
-import * as acorn from 'acorn'; // code to ast
-import { generate } from 'astring'; // ast to code
-import { walk } from 'estree-walker'; // walk ast
+import { parse } from 'acorn'; // code to ast
+import { simple } from 'acorn-walk'; // walk ast
 import MagicString from 'magic-string';
+import { WebSocket, WebSocketServer } from 'ws';
 
-import type { Program, Property, Identifier, Node, TaggedTemplateExpression, ObjectExpression, CallExpression } from 'estree';
-import type { Plugin } from 'vite';
+import type { FunctionExpression, ArrowFunctionExpression, Node, CallExpression, Property, SpreadElement } from 'acorn';
+import type { Plugin, Rollup } from 'vite';
 
 export function cocosPanelConfig(): Plugin {
     return {
@@ -26,24 +24,35 @@ export function cocosPanelConfig(): Plugin {
     };
 }
 
-export function cocosPanelCss(
-    option: {
-        transform?: (css: string) => string;
-        pureString?: boolean;
-    } = { pureString: false }
-): Plugin {
-    const styleMap: { [k: string]: string } = {};
+export function cocosPanel(option: { transform?: (css: string) => string; autoReload?: boolean; port?: number }): Plugin {
+    let wss: WebSocketServer | null = null;
+    let enableWSS = false;
+    const wss_message = 'reload';
+
+    const _option = Object.assign({ autoReload: true, port: 8080 }, option);
 
     return {
-        name: 'cocos-panel-css',
+        name: 'cocos-panel',
         apply: 'build',
         enforce: 'post',
 
+        configResolved(config) {
+            enableWSS = config.mode === 'development' && _option.autoReload;
+            if (enableWSS && !wss) {
+                wss = new WebSocketServer({ port: _option.port });
+                wss.on('error', (err) => {
+                    console.warn('[cocos-panel] WebSocket error:', err.message);
+                });
+            }
+        },
+
         generateBundle(_, bundle) {
+            const styleMap: { [k: string]: string } = {};
+
             for (const key in bundle) {
                 const chunk = bundle[key];
                 // 找到以 js 结尾的库入口文件
-                if (chunk?.type === 'chunk' && chunk.fileName.match(/.[cm]?js$/) !== null && !chunk.fileName.includes('polyfill')) {
+                if (jsJSChunk(chunk)) {
                     // 匹配库入口文件对应的 css 文件
                     const js_name = basename(key, extname(key));
                     const css_key = js_name + '.css';
@@ -51,7 +60,7 @@ export function cocosPanelCss(
 
                     // 注意:只有当某个 js 入口文件具备自己的 css 样式时，它才会有对应的 css 入口
                     // 如果某个 js 只导入了公共 css，是不会有样式的。
-                    if (css_chunk?.type === 'asset' && css_chunk.fileName.includes('.css')) {
+                    if (isCSSAsset(css_chunk) && typeof css_chunk.source === 'string') {
                         styleMap[key] = '\n' + css_chunk.source;
                         delete bundle[css_key];
                     }
@@ -61,7 +70,7 @@ export function cocosPanelCss(
             // 这边还能找到的 css 是公共 css，需要给每个入口文件都添加一下公共 css
             for (const key in bundle) {
                 const chunk = bundle[key];
-                if (chunk?.type === 'asset' && chunk.fileName.includes('.css')) {
+                if (isCSSAsset(chunk)) {
                     for (const styleKey in styleMap) {
                         styleMap[styleKey] += chunk.source;
                     }
@@ -69,140 +78,147 @@ export function cocosPanelCss(
                 }
             }
 
-            if (option.pureString) {
-                for (const key in bundle) {
-                    const chunk = bundle[key];
-                    let styleCode = styleMap[key];
+            for (const key in bundle) {
+                const chunk = bundle[key];
 
-                    if (styleCode) {
-                        if (typeof option.transform === 'function') {
-                            styleCode = option.transform(styleCode);
-                        }
-                    }
-                    if (
-                        chunk?.type === 'chunk' &&
-                        chunk.fileName.match(/.[cm]?js$/) !== null &&
-                        !chunk.fileName.includes('polyfill') &&
-                        chunk.code.includes('Editor.Panel.define') &&
-                        styleCode
-                    ) {
-                        const s = new MagicString(chunk.code);
+                // 符合预期的 creator panel 才进行处理
+                if (jsJSChunk(chunk) && chunk.code.includes('Editor.Panel.define')) {
+                    const ast = parse(chunk.code, { ecmaVersion: 'latest', sourceType: 'module', locations: true });
+                    const s = new MagicString(chunk.code);
 
-                        const replacedCode = chunk.code.replace(/<inject css here>/, styleCode);
-                        s.overwrite(0, chunk.code.length, replacedCode);
+                    simple(ast, {
+                        CallExpression(node) {
+                            if (isEditorPanelDefine(node)) {
+                                // 获取 Editor.Panel.define 方法的第一个参数（它是个对象）
+                                const defineProps = node.arguments[0];
+                                if (defineProps?.type !== 'ObjectExpression') return;
+                                if (defineProps.properties.length === 0) return;
 
-                        chunk.code = s.toString();
-                        chunk.map = s.generateMap({ hires: true });
-                    }
-                }
-            } else {
-                for (const key in bundle) {
-                    const chunk = bundle[key];
-                    let styleCode = styleMap[key];
+                                function isProperty(prop: Property | SpreadElement, name: string): prop is Property & { key: { name: string } } {
+                                    return (
+                                        prop.type === 'Property' &&
+                                        !prop.computed &&
+                                        // 对象的 key 可能有引号，AST 中类型为 Literal
+                                        ((prop.key.type === 'Identifier' && prop.key.name === name) || (prop.key.type === 'Literal' && prop.key.value === name))
+                                    );
+                                }
 
-                    if (styleCode) {
-                        if (typeof option.transform === 'function') {
-                            styleCode = option.transform(styleCode);
-                        }
-                    }
-                    if (
-                        chunk?.type === 'chunk' &&
-                        chunk.fileName.match(/.[cm]?js$/) !== null &&
-                        !chunk.fileName.includes('polyfill') &&
-                        chunk.code.includes('Editor.Panel.define') &&
-                        styleCode
-                    ) {
-                        const ast = acorn.parse(chunk.code, { ecmaVersion: 'latest', sourceType: 'module', locations: true }) as Program;
-                        const s = new MagicString(chunk.code);
+                                let styleCode = styleMap[key];
+                                if (styleCode) {
+                                    if (typeof option.transform === 'function') {
+                                        styleCode = option.transform(styleCode);
+                                    }
+                                    styleCode = escapeTemplateString(styleCode);
 
-                        walk(ast, {
-                            enter(node) {
-                                if (isEditorPanelDefine(node)) {
-                                    // 获取 define 方法的第一个参数（对象）
-                                    if (node.arguments[0] && node.arguments[0].type === 'ObjectExpression') {
-                                        const defineProps = node.arguments[0] as ObjectExpression;
+                                    // 寻找 style 属性 执行替换 or 追加
+                                    const styleProp = defineProps.properties.find((prop) => isProperty(prop, 'style'));
+                                    if (styleProp) {
+                                        const start = styleProp.value.start;
+                                        const end = styleProp.value.end;
+                                        s.overwrite(start, end, `/* css */ \`${styleCode}\``);
+                                    } else {
+                                        // 插入 style 属性
+                                        const lastProp = defineProps.properties[defineProps.properties.length - 1];
+                                        const insertionPoint = lastProp.end;
 
-                                        // 寻找 style 属性并替换
-                                        let foundStyle = false;
-                                        for (let i = 0; i < defineProps.properties.length; i++) {
-                                            const prop = defineProps.properties[i] as Property;
-
-                                            if (typeof prop.key === 'object' && (prop.key as Identifier).name === 'style') {
-                                                foundStyle = true;
-                                                if ('start' in prop.value && 'end' in prop.value) {
-                                                    const start = prop.value.start as number;
-                                                    const end = prop.value.end as number;
-                                                    s.overwrite(start, end, generate(createTemplateLiteralNode(styleCode)));
-                                                } else {
-                                                    console.warn(`Missing start or end location for style property in ${key}`);
-                                                }
-                                            }
-                                        }
-
-                                        // 如果没有找到 style 属性，则添加一个新的 style 属性
-                                        if (!foundStyle) {
-                                            const lastPropIndex = defineProps.properties.length - 1;
-                                            const lastProp = defineProps.properties[lastPropIndex];
-                                            if ('end' in lastProp) {
-                                                const lastPropEnd = lastProp.end as number;
-                                                s.appendRight(lastPropEnd, `, style: ${generate(createTemplateLiteralNode(styleCode))}`);
-                                            } else {
-                                                console.warn(`Missing end location for last property in ${key}`);
-                                            }
-                                        }
+                                        // 默认对象的最后一个属性没有跟逗号，这边在新增属性的时候前置一个逗号
+                                        s.appendRight(insertionPoint, `, style: /* css */ \`${styleCode}\``);
                                     }
                                 }
-                            },
-                        });
 
-                        chunk.code = s.toString();
-                        chunk.map = s.generateMap({ hires: true });
-                    }
+                                // 处理自动刷新的代码
+                                if (enableWSS) {
+                                    const reloadCode = escapeTemplateString(`
+                                    const socket = new WebSocket('ws://localhost:${_option.port}');
+                                    socket.addEventListener('message', (event) => {
+                                        if (event.data === '${wss_message}') {
+                                            window.location.reload();
+                                        }
+                                    });
+                                    `).trim();
+
+                                    function isReadyFunctionProp(prop: Property | SpreadElement): prop is Property & { value: FunctionExpression | ArrowFunctionExpression } {
+                                        return isProperty(prop, 'ready') && (prop.value.type === 'FunctionExpression' || prop.value.type === 'ArrowFunctionExpression');
+                                    }
+
+                                    const readyProp = defineProps.properties.find((prop) => isReadyFunctionProp(prop));
+
+                                    if (readyProp) {
+                                        const funcBody = readyProp.value.body;
+
+                                        // 如果是箭头函数但不是块语句，则包裹成 {}
+                                        if (readyProp.value.type === 'ArrowFunctionExpression' && funcBody.type !== 'BlockStatement') {
+                                            const start = funcBody.start;
+
+                                            const end = funcBody.end;
+                                            const originalCode = chunk.code.slice(start, end);
+                                            const replacement = `{ ${originalCode}; \n ${reloadCode} }`;
+                                            s.overwrite(start, end, replacement);
+                                        } else if (funcBody.type === 'BlockStatement') {
+                                            // 普通函数体，在最后一个 } 前插入代码
+
+                                            const insertPos = funcBody.end - 1; // right before closing }
+
+                                            s.appendRight(insertPos, `\n${reloadCode}\n`);
+                                        }
+                                    } else {
+                                        const lastProp = defineProps.properties[defineProps.properties.length - 1];
+                                        const insertionPoint = lastProp.end;
+
+                                        // 默认对象的最后一个属性没有跟逗号，这边在新增属性的时候前置一个逗号
+                                        s.appendRight(insertionPoint, `, ready() {\n${reloadCode}\n}`);
+                                    }
+                                }
+                            }
+                        },
+                    });
+
+                    chunk.code = s.toString();
+                    chunk.map = s.generateMap({ hires: true });
                 }
+            }
+        },
+
+        closeBundle() {
+            if (enableWSS) {
+                wss?.clients.forEach((client) => {
+                    if (client.readyState === WebSocket.OPEN) {
+                        client.send(wss_message);
+                    }
+                });
             }
         },
     };
 }
 
+// 判断是否 css asset
+function isCSSAsset(chunk: Rollup.OutputChunk | Rollup.OutputAsset): chunk is Rollup.OutputAsset {
+    return chunk?.type === 'asset' && chunk.fileName.includes('.css');
+}
+
+// 判断是否 JS chunk
+function jsJSChunk(chunk: Rollup.OutputChunk | Rollup.OutputAsset): chunk is Rollup.OutputChunk {
+    return chunk?.type === 'chunk' && chunk.fileName.match(/.[cm]?js$/) !== null && !chunk.fileName.includes('polyfill');
+}
+
+// 判断是否 Editor.Panel.define(...) 代码块
 function isEditorPanelDefine(node: Node): node is CallExpression {
+    if (node.type !== 'CallExpression') return false;
+
+    const callExpr = node as CallExpression;
+
     return (
-        node.type === 'CallExpression' &&
-        node.callee.type === 'MemberExpression' &&
-        node.callee.object.type === 'MemberExpression' && // 确保 object 也是 MemberExpression
-        node.callee.object.object.type === 'Identifier' &&
-        node.callee.object.object.name === 'Editor' &&
-        node.callee.object.property.type === 'Identifier' &&
-        node.callee.object.property.name === 'Panel' &&
-        node.callee.property.type === 'Identifier' &&
-        node.callee.property.name === 'define'
+        callExpr.callee.type === 'MemberExpression' &&
+        callExpr.callee.object.type === 'MemberExpression' &&
+        callExpr.callee.object.object.type === 'Identifier' &&
+        callExpr.callee.object.object.name === 'Editor' &&
+        callExpr.callee.object.property.type === 'Identifier' &&
+        callExpr.callee.object.property.name === 'Panel' &&
+        callExpr.callee.property.type === 'Identifier' &&
+        callExpr.callee.property.name === 'define'
     );
 }
 
-function createTemplateLiteralNode(content: string): TaggedTemplateExpression {
-    // 创建包含单个 TemplateElement 的 TemplateLiteral 节点
-    // 因为我们非常确定 styleCode 是一个整体的字符串 没有 ${} 表达式
-    // https://github.com/estree/estree/blob/master/es2015.md#templateelement
-    const templateElement = {
-        type: 'TemplateElement' as const, // Tip: as const 可以让 ts 更好的推断字面量类型
-        tail: true,
-        value: {
-            raw: content,
-            cooked: content,
-        },
-    };
-
-    // 创建 TemplateLiteral 节点，并添加标签标识 `/* css */`
-    // https://github.com/estree/estree/blob/master/es2015.md#taggedtemplateexpression
-    return {
-        type: 'TaggedTemplateExpression',
-        tag: {
-            type: 'Identifier',
-            name: '/* css */',
-        },
-        quasi: {
-            type: 'TemplateLiteral',
-            quasis: [templateElement],
-            expressions: [],
-        },
-    };
+function escapeTemplateString(code: string) {
+    return code.replace(/`/g, '\\`').replace(/\${/g, '\\${');
 }

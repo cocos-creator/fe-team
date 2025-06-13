@@ -1,4 +1,4 @@
-import { cocosPanelConfig, cocosPanelCss } from '@cocos-fe/vite-plugin-cocos-panel';
+import { cocosPanelConfig, cocosPanel } from '@cocos-fe/vite-plugin-cocos-panel';
 import vue from '@vitejs/plugin-vue';
 import { nodeExternals } from 'rollup-plugin-node-externals';
 import AutoImport from 'unplugin-auto-import/vite';
@@ -9,10 +9,8 @@ import { defineConfig } from 'vite';
 export default defineConfig(({ mode }) => {
     /**
      *  注意事项:
-     *  vite 在构建 lib 模式的时候，是没有 dev 服务的，dev 主要用于 web 应用
-     *  所以在 package.json 的 scripts 里 dev 和 build 都是执行 vite build
-     *  只是在 dev 的脚本里，手动指定了 "--mode development" https://cn.vitejs.dev/guide/env-and-mode.html
-     *  然后在 development 模式下，我们配置 watch 的配置
+     *  你能发现我们在 dev 和 build 都是走的 vite build，只是通过 --mode development 来区分开发环境 https://cn.vitejs.dev/guide/env-and-mode.html
+     *  因为我们每次构建都需要实际构建出 js 文件，供编辑器读取，所以不能用 vite 的 dev 模式 (它不会构建产物到 dist)
      */
     const isDev = mode === 'development';
 
@@ -55,11 +53,13 @@ export default defineConfig(({ mode }) => {
                 optDeps: true,
             }),
             cocosPanelConfig(),
-            cocosPanelCss({
-                transform: (css) => {
+            cocosPanel({
+                transform: (css: string) => {
                     // element-plus 的全局变量是作用在 :root , 需要改成 :host
                     // 黑暗模式它是在 html 添加 dark 类名，我们应该在最外层的 #app 添加 class="dark"
-                    return css.replaceAll(':root', ':host').replaceAll('html.dark', '#app.dark');
+                    return css.replace(/:root|html\.dark/g, (match) => {
+                        return match === ':root' ? ':host' : '#app.dark';
+                    });
                 },
             }),
             AutoImport({
