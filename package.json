@@ -50,7 +50,7 @@
         "typescript-eslint": "^8.0.1"
     },
     "engines": {
-        "node": ">=22.16.0"
+        "node": ">=22.0.0"
     },
     "lint-staged": {
         "*.{vue,js,ts}": [

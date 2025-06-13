@@ -43,6 +43,18 @@ export function cocosPanel(option: { transform?: (css: string) => string; autoRe
                 wss.on('error', (err) => {
                     console.warn('[cocos-panel] WebSocket error:', err.message);
                 });
+
+                // 监听退出
+                const cleanup = () => {
+                    if (wss) {
+                        wss.close();
+                        wss = null;
+                    }
+                };
+
+                process.once('SIGINT', cleanup); // Ctrl + C
+                process.once('SIGTERM', cleanup); // kill
+                process.once('exit', cleanup); // 正常退出
             }
         },
 
