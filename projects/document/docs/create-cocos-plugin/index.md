@@ -670,3 +670,5 @@ npm create cocos-plugin@latest
 大致流程图如下：
 
 ![](./assets/auto-relaod.png)
+
+虽然没有热更新那样优雅，依然节约了很多去主动刷新面板的时间。
