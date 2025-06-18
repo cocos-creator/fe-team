@@ -13,7 +13,7 @@
         "vue": "^3.4.37"
     },
     "devDependencies": {
-        "@cocos-fe/vite-plugin-cocos-panel": "^1.0.1",
+        "@cocos-fe/vite-plugin-cocos-panel": "^1.0.2",
         "@cocos/creator-types": "^3.8.6",
         "@types/node": "^22.15.21",
         "@vitejs/plugin-vue": "^5.2.2",

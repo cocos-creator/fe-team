@@ -175,7 +175,9 @@ export function close() {}
 
 ### lib 模式
 
-vite 的构建入口是 index.html 文件，而我们的 panel 的入口文件是 xx.js ,所以我们只能使用 vite 提供的 lib 模式。（这样失去了 HMR 的能力）。
+vite 的构建入口是 index.html 文件，而我们的 panel 的入口文件是 xx.js ,所以我们只能使用 vite 提供的 lib 模式。
+
+而且我们不能使用 lib 模式的 dev 环境，因为我们需要构建出实际的 js 文件供编辑器的 Panle 组件去读取。（这样失去了 HMR 的能力）。
 
 基于 lib 模式，我们 vite 配置大概如下：
 
@@ -186,10 +188,8 @@ import { nodeExternals } from 'rollup-plugin-node-externals';
 export default defineConfig(({ mode }) => {
     /**
      *  注意事项:
-     *  vite 在构建 lib 模式的时候，是没有 dev 服务的，dev 主要用于 web 应用
-     *  所以在 package.json 的 scripts 里 dev 和 build 都是执行 vite build
-     *  只是在 dev 的脚本里，手动指定了 "--mode development" https://cn.vitejs.dev/guide/env-and-mode.html
-     *  然后在 development 模式下，我们配置 watch 的配置
+     *  你能发现我们在 dev 和 build 都是走的 vite build，只是通过 --mode development 来区分开发环境 https://cn.vitejs.dev/guide/env-and-mode.html
+     *  因为我们每次构建都需要构建出实际 js 文件到磁盘，供编辑器读取，所以不能用 vite 的 dev 模式 (它不会构建产物到 dist)
      */
     const isDev = mode === 'development';
 
@@ -266,7 +266,7 @@ export default Editor.Panel.define({
 
 也就是比如我们的 panel.ts 是这样的：
 
-```ts
+```ts{8}
 import App from './App.vue';
 import { createApp } from 'vue';
 
@@ -298,11 +298,11 @@ export default Editor.Panel.define({
 
 所以我们就需要一个专门为 cocos-plugin 服务的构建插件，该插件需要做 2 件事。
 
--   1、 将构建配置的 build.cssCodeSplit 设置为 true
+- 1、 将构建配置的 build.cssCodeSplit 设置为 true
 
 这样才可以对每个入口文件分离出属于自己的 css 样式。
 
--   2、 需要将分离出来的 css 样式，自动写入到 panel.js 的 style 属性中去。
+- 2、 需要将分离出来的 css 样式，自动写入到 panel.js 的 style 属性中去。
 
 在拥有这个插件之后，我们就解决了在源码里面去引入构建产物的问题，且一切都是自动完成。
 
@@ -438,7 +438,7 @@ import HelloWorld from './components/HelloWorld.vue';
 
 有的同学希望在使用 vue 的同时，可以使用 element-plus 等框架，理论上这些框架在我们支持通过 vite 去构建单文件之后就自然的支持的，但是由于我们的 panle 最终是在一个 web-component 里面渲染的，所以需要对第三方的框架做点处理。
 
--   css 样式里的 :root 需要改成 :host 这样我们才能在 web-component 里面让 elment-plus 的样式生效
+- css 样式里的 :root 需要改成 :host 这样我们才能在 web-component 里面让 elment-plus 的样式生效
 
     我们在 [@cocos-fe/vite-plugin-cocos-panel](https://www.npmjs.com/package/@cocos-fe/vite-plugin-cocos-panel) 里提供了 css 的转换钩子，如果你需要使用 element-plus，你需要传入 `transform` 来转换它，使其能够在 web-component 里正常渲染 。
     你可以配置里面加如下的参数：
@@ -455,7 +455,9 @@ import HelloWorld from './components/HelloWorld.vue';
                     transform: (css) => {
                         // element-plus 的全局变量是作用在 :root , 需要改成 :host
                         // 黑暗模式它是在 html 添加 dark 类名，我们应该在最外层的 #app 添加 class="dark"
-                        return css.replaceAll(':root', ':host').replaceAll('html.dark', '#app.dark');
+                        return css.replace(/:root|html\.dark/g, (match) => {
+                            return match === ':root' ? ':host' : '#app.dark';
+                        });
                     },
                 }),
             ],
@@ -463,7 +465,7 @@ import HelloWorld from './components/HelloWorld.vue';
     });
     ```
 
--   在使用例如弹窗这样的组件是，需要将 appendTo 设置到当前 panle 的 root 也就是我们 vue 最终挂载到的那个 dom 元素
+- 在使用例如弹窗这样的组件是，需要将 appendTo 设置到当前 panle 的 root 也就是我们 vue 最终挂载到的那个 dom 元素
 
 ::: code-group
 
@@ -524,7 +526,9 @@ export default defineConfig(({ mode }) => {
                 transform: (css) => {
                     // element-plus 的全局变量是作用在 :root , 需要改成 :host
                     // 黑暗模式它是在 html 添加 dark 类名，我们应该在最外层的 #app 添加 class="dark"
-                    return css.replaceAll(':root', ':host').replaceAll('html.dark', '#app.dark');
+                    return css.replace(/:root|html\.dark/g, (match) => {
+                        return match === ':root' ? ':host' : '#app.dark';
+                    });
                 },
             }),
             AutoImport({
@@ -652,3 +656,17 @@ npm create cocos-plugin@latest
 就可以快速选择一个我们配置好的模板，进行插件的开发。
 
 <video src="./assets/video.mov" controls></video>
+
+## 面板自动刷新 （1.x 新增）
+
+在构建插件面板的时候，由于不是启动一个 web 服务，而是在编辑器面板的既有框架里加载我们的 .js 文件。所以无法享受 vite 提供的热更新服务。
+
+我们可以通过一定的 hack 手段来达到页面自动刷新的能力，这在你频繁的编写界面代码和处理样式的时候非常有用。
+
+我们在插件内部启动了一个 websocket 服务，并且将监听 websocket 消息的代码动态注入到 panle 的 js 文件中。这样当编辑器面板在渲染这个 panel 的时候就具备了监听 websocket 消息的能力。
+
+当 vite 内部下次触发构建的时候，在 closeBundle 里会发送消息，面板在接收到消息之后，进行自我刷新。
+
+大致流程图如下：
+
+![](./assets/auto-relaod.png)

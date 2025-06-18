@@ -24,12 +24,13 @@ export function cocosPanelConfig(): Plugin {
     };
 }
 
-export function cocosPanel(option: { transform?: (css: string) => string; autoReload?: boolean; port?: number }): Plugin {
+export function cocosPanel(option: { transform?: (css: string) => string; autoReload?: boolean; port?: number; reloadDelay?: number }): Plugin {
     let wss: WebSocketServer | null = null;
     let enableWSS = false;
+    let timer: NodeJS.Timeout | null = null;
     const wss_message = 'reload';
 
-    const _option = Object.assign({ autoReload: true, port: 8080 }, option);
+    const _option = Object.assign({ autoReload: true, port: 8080, reloadDelay: 2000 }, option);
 
     return {
         name: 'cocos-panel',
@@ -55,6 +56,13 @@ export function cocosPanel(option: { transform?: (css: string) => string; autoRe
                 process.once('SIGINT', cleanup); // Ctrl + C
                 process.once('SIGTERM', cleanup); // kill
                 process.once('exit', cleanup); // 正常退出
+            }
+        },
+
+        buildStart() {
+            if (timer) {
+                clearTimeout(timer);
+                timer = null;
             }
         },
 
@@ -192,13 +200,16 @@ export function cocosPanel(option: { transform?: (css: string) => string; autoRe
         },
 
         closeBundle() {
-            if (enableWSS) {
-                wss?.clients.forEach((client) => {
-                    if (client.readyState === WebSocket.OPEN) {
-                        client.send(wss_message);
-                    }
-                });
-            }
+            timer = setTimeout(() => {
+                if (enableWSS) {
+                    wss?.clients.forEach((client) => {
+                        if (client.readyState === WebSocket.OPEN) {
+                            client.send(wss_message);
+                        }
+                    });
+                }
+                timer = null;
+            }, option.reloadDelay);
         },
     };
 }
