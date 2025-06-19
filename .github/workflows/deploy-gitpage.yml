@@ -18,10 +18,11 @@ jobs:
             - uses: actions/setup-node@v4
               with:
                   node-version: 22
-
-            - name: 安装依赖
-              run: pnpm install
-
+            - uses: pnpm/action-setup@v3
+              with:
+                version: 10 
+                run_install: true # 自动运行 pnpm install
+       
             - name: 构建
               run: pnpm run docs:build
 
