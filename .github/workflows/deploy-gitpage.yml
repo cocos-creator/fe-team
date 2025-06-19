@@ -1,50 +1,52 @@
 name: 发布到 GitPage
 
 on:
-    push:
-        branches: ['main']
-    pull_request:
-        branches: ['main']
-
-    workflow_dispatch:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+  workflow_dispatch:
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        if: contains(github.event.head_commit.message, 'docs')
-        steps:
-            - uses: actions/checkout@v4
+  build:
+    runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, 'docs')
+    steps:
+      - uses: actions/checkout@v4
 
-            - uses: actions/setup-node@v4
-              with:
-                  node-version: 22 
-                  
-            - uses: pnpm/action-setup@v3
-              with:
-                  version: 10 
-                  run_install: true # 自动运行 pnpm install
-       
-            - name: 构建
-              run: pnpm run docs:build
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
 
-            - name: Upload artifact
-              uses: actions/upload-pages-artifact@v3
-              with:
-                  path: ./projects/document/.vitepress/dist
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
 
-    deploy:
-        needs: build
+      - name: Install dependencies
+        run: pnpm install
 
-        permissions:
-            pages: write
-            id-token: write
+      - name: 构建
+        run: pnpm run docs:build
 
-        environment:
-            name: github-pages
-            url: ${{ steps.deployment.outputs.page_url }}
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./projects/document/.vitepress/dist
 
-        runs-on: ubuntu-latest
-        steps:
-            - name: Deploy to GitHub Pages
-              id: deployment
-              uses: actions/deploy-pages@v4
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
