@@ -20,10 +20,10 @@ jobs:
                   node-version: 22
 
             - name: 安装依赖
-              run: npm install
+              run: pnpm install
 
             - name: 构建
-              run: npm run docs:build
+              run: pnpm run docs:build
 
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3
