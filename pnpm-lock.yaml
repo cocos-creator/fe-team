@@ -113,13 +113,16 @@ importers:
 
   packages/create-cocos-plugin/templates/demo:
     dependencies:
+      element-plus:
+        specifier: ^2.8.6
+        version: 2.9.6(vue@3.5.13(typescript@5.8.2))
       vue:
         specifier: ^3.4.37
         version: 3.5.13(typescript@5.8.2)
     devDependencies:
       '@cocos-fe/vite-plugin-cocos-panel':
-        specifier: workspace:*
-        version: link:../../../vite-plugin-cocos-panel
+        specifier: ^1.0.2
+        version: 1.0.2(vite@5.4.14(@types/node@22.15.30))
       '@cocos/creator-types':
         specifier: ^3.8.6
         version: 3.8.6
@@ -127,7 +130,7 @@ importers:
         specifier: ^22.15.21
         version: 22.15.30
       '@vitejs/plugin-vue':
-        specifier: ^5.1.2
+        specifier: ^5.2.2
         version: 5.2.2(vite@5.4.14(@types/node@22.15.30))(vue@3.5.13(typescript@5.8.2))
       '@vue/tsconfig':
         specifier: ^0.7.0
@@ -138,11 +141,17 @@ importers:
       typescript:
         specifier: ^5.8.2
         version: 5.8.2
+      unplugin-auto-import:
+        specifier: ^0.18.6
+        version: 0.18.6(@vueuse/core@12.8.2(typescript@5.8.2))(rollup@4.35.0)
+      unplugin-vue-components:
+        specifier: ^0.27.5
+        version: 0.27.5(@babel/parser@7.27.5)(rollup@4.35.0)(vue@3.5.13(typescript@5.8.2))
       vite:
         specifier: ^5.4.1
         version: 5.4.14(@types/node@22.15.30)
       vue-tsc:
-        specifier: ^2.0.29
+        specifier: ^2.1.10
         version: 2.2.8(typescript@5.8.2)
 
   packages/create-cocos-plugin/templates/react-ts:
@@ -155,8 +164,8 @@ importers:
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@cocos-fe/vite-plugin-cocos-panel':
-        specifier: workspace:*
-        version: link:../../../vite-plugin-cocos-panel
+        specifier: ^1.0.2
+        version: 1.0.2(vite@5.4.14(@types/node@22.15.30))
       '@cocos/creator-types':
         specifier: ^3.8.6
         version: 3.8.6
@@ -203,8 +212,8 @@ importers:
   packages/create-cocos-plugin/templates/vanilla:
     devDependencies:
       '@cocos-fe/vite-plugin-cocos-panel':
-        specifier: workspace:*
-        version: link:../../../vite-plugin-cocos-panel
+        specifier: ^1.0.2
+        version: 1.0.2(vite@5.4.14(@types/node@22.15.30))
       '@cocos/creator-types':
         specifier: ^3.8.6
         version: 3.8.6
@@ -225,8 +234,8 @@ importers:
         version: 3.5.13(typescript@5.8.2)
     devDependencies:
       '@cocos-fe/vite-plugin-cocos-panel':
-        specifier: workspace:*
-        version: link:../../../vite-plugin-cocos-panel
+        specifier: ^1.0.2
+        version: 1.0.2(vite@5.4.14(@types/node@22.15.30))
       '@cocos/creator-types':
         specifier: ^3.8.6
         version: 3.8.6
@@ -262,8 +271,8 @@ importers:
         version: 3.5.13(typescript@5.8.2)
     devDependencies:
       '@cocos-fe/vite-plugin-cocos-panel':
-        specifier: workspace:*
-        version: link:../../../vite-plugin-cocos-panel
+        specifier: ^1.0.2
+        version: 1.0.2(vite@5.4.14(@types/node@22.15.30))
       '@cocos/creator-types':
         specifier: ^3.8.6
         version: 3.8.6
@@ -562,6 +571,11 @@ packages:
 
   '@chevrotain/utils@11.0.3':
     resolution: {integrity: sha512-YslZMgtJUyuMbZ+aKvfF3x1f5liK4mWNxghFRv7jqRR9C3R3fAOGTTKvxXDa2Y1s9zSbcpuO0cAxDYsc9SrXoQ==}
+
+  '@cocos-fe/vite-plugin-cocos-panel@1.0.2':
+    resolution: {integrity: sha512-dQzJje28iS4iQhqV1e5e7oEfE2yRCtfmVCGJ63cL4hNQJUEEdlEnST6fWwEI5VzQG+PfaAVS7hdSRWcp+SIu3Q==}
+    peerDependencies:
+      vite: ^5.0.0
 
   '@cocos/creator-types@3.8.6':
     resolution: {integrity: sha512-hyZ4aoqqLxoRtKbBLSJM5RgtK3oGOlTEryHDcyH4znq3h9cFk+MSbQC2aJHvK5/bMlJzsZ641/hD77RGSrvo8Q==}
@@ -5252,6 +5266,17 @@ snapshots:
   '@chevrotain/types@11.0.3': {}
 
   '@chevrotain/utils@11.0.3': {}
+
+  '@cocos-fe/vite-plugin-cocos-panel@1.0.2(vite@5.4.14(@types/node@22.15.30))':
+    dependencies:
+      acorn: 8.14.1
+      acorn-walk: 8.3.4
+      magic-string: 0.30.17
+      vite: 5.4.14(@types/node@22.15.30)
+      ws: 8.18.2
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
 
   '@cocos/creator-types@3.8.6': {}
 
