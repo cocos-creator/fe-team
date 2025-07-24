@@ -1,0 +1,38 @@
+{
+    "name": "{name}",
+    "version": "0.0.0",
+    "type": "module",
+    "main": "./dist/browser.cjs",
+    "scripts": {
+        "dev": "npm run build -- --mode development",
+        "build": "vite build"
+    },
+    "dependencies": {
+        "element-plus": "^2.8.6",
+        "vue": "^3.4.37"
+    },
+    "devDependencies": {
+        "@cocos-fe/vite-plugin-cocos-panel": "^1.0.3",
+        "@types/node": "^22.15.21",
+        "@vitejs/plugin-vue": "^5.2.2",
+        "rollup-plugin-node-externals": "^7.1.3",
+        "unplugin-auto-import": "^0.18.6",
+        "unplugin-vue-components": "^0.27.5",
+        "vite": "^5.4.1"
+    },
+    "main-menu": {
+        "i18n:MAIN_MENU.package.title/{name}/open": {
+            "message": "{name}:open"
+        },
+        "i18n:MAIN_MENU.package.title/{name}/increase": {
+            "message": "{name}:increase"
+        }
+    },
+    "panel": {
+        "main": "./dist/panel.cjs",
+        "type": "dockable",
+        "title": "{name}",
+        "width": 800,
+        "height": 700
+    }
+}

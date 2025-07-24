@@ -24,13 +24,13 @@ export function cocosPanelConfig(): Plugin {
     };
 }
 
-export function cocosPanel(option: { transform?: (css: string) => string; autoReload?: boolean; port?: number; reloadDelay?: number }): Plugin {
+export function cocosPanel(option: { transform?: (css: string) => string; autoReload?: boolean; port?: number; reloadDelay?: number; panelVersion?: 2 | 3 }): Plugin {
     let wss: WebSocketServer | null = null;
     let enableWSS = false;
     let timer: NodeJS.Timeout | null = null;
     const wss_message = 'reload';
 
-    const _option = Object.assign({ autoReload: true, port: 8080, reloadDelay: 2000 }, option);
+    const _option = Object.assign({ autoReload: true, port: 8080, reloadDelay: 2000, panelVersion: 3 }, option);
 
     return {
         name: 'cocos-panel',
@@ -102,13 +102,13 @@ export function cocosPanel(option: { transform?: (css: string) => string; autoRe
                 const chunk = bundle[key];
 
                 // 符合预期的 creator panel 才进行处理
-                if (jsJSChunk(chunk) && chunk.code.includes('Editor.Panel.define')) {
+                if (isPanelChunk(chunk, _option.panelVersion)) {
                     const ast = parse(chunk.code, { ecmaVersion: 'latest', sourceType: 'module', locations: true });
                     const s = new MagicString(chunk.code);
 
                     simple(ast, {
                         CallExpression(node) {
-                            if (isEditorPanelDefine(node)) {
+                            if (isEditorPanelDefine(node, _option.panelVersion)) {
                                 // 获取 Editor.Panel.define 方法的第一个参数（它是个对象）
                                 const defineProps = node.arguments[0];
                                 if (defineProps?.type !== 'ObjectExpression') return;
@@ -225,7 +225,7 @@ function jsJSChunk(chunk: Rollup.OutputChunk | Rollup.OutputAsset): chunk is Rol
 }
 
 // 判断是否 Editor.Panel.define(...) 代码块
-function isEditorPanelDefine(node: Node): node is CallExpression {
+function isEditorPanelDefine(node: Node, panelVersion: 2 | 3): node is CallExpression {
     if (node.type !== 'CallExpression') return false;
 
     const callExpr = node as CallExpression;
@@ -238,10 +238,14 @@ function isEditorPanelDefine(node: Node): node is CallExpression {
         callExpr.callee.object.property.type === 'Identifier' &&
         callExpr.callee.object.property.name === 'Panel' &&
         callExpr.callee.property.type === 'Identifier' &&
-        callExpr.callee.property.name === 'define'
+        callExpr.callee.property.name === (panelVersion === 2 ? 'extend' : 'define')
     );
 }
 
 function escapeTemplateString(code: string) {
     return code.replace(/`/g, '\\`').replace(/\${/g, '\\${');
+}
+
+function isPanelChunk(chunk: Rollup.OutputChunk | Rollup.OutputAsset, panelVersion: 2 | 3): chunk is Rollup.OutputChunk {
+    return jsJSChunk(chunk) && (panelVersion === 2 ? chunk.code.includes('Editor.Panel.extend') : chunk.code.includes('Editor.Panel.define'));
 }

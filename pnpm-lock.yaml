@@ -121,8 +121,8 @@ importers:
         version: 3.5.13(typescript@5.8.2)
     devDependencies:
       '@cocos-fe/vite-plugin-cocos-panel':
-        specifier: ^1.0.2
-        version: 1.0.2(vite@5.4.14(@types/node@22.15.30))
+        specifier: workspace:*
+        version: link:../../../vite-plugin-cocos-panel
       '@cocos/creator-types':
         specifier: ^3.8.6
         version: 3.8.6
@@ -164,8 +164,8 @@ importers:
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@cocos-fe/vite-plugin-cocos-panel':
-        specifier: ^1.0.2
-        version: 1.0.2(vite@5.4.14(@types/node@22.15.30))
+        specifier: workspace:*
+        version: link:../../../vite-plugin-cocos-panel
       '@cocos/creator-types':
         specifier: ^3.8.6
         version: 3.8.6
@@ -212,8 +212,8 @@ importers:
   packages/create-cocos-plugin/templates/vanilla:
     devDependencies:
       '@cocos-fe/vite-plugin-cocos-panel':
-        specifier: ^1.0.2
-        version: 1.0.2(vite@5.4.14(@types/node@22.15.30))
+        specifier: workspace:*
+        version: link:../../../vite-plugin-cocos-panel
       '@cocos/creator-types':
         specifier: ^3.8.6
         version: 3.8.6
@@ -234,8 +234,8 @@ importers:
         version: 3.5.13(typescript@5.8.2)
     devDependencies:
       '@cocos-fe/vite-plugin-cocos-panel':
-        specifier: ^1.0.2
-        version: 1.0.2(vite@5.4.14(@types/node@22.15.30))
+        specifier: workspace:*
+        version: link:../../../vite-plugin-cocos-panel
       '@cocos/creator-types':
         specifier: ^3.8.6
         version: 3.8.6
@@ -273,6 +273,49 @@ importers:
       '@cocos-fe/vite-plugin-cocos-panel':
         specifier: ^1.0.2
         version: 1.0.2(vite@5.4.14(@types/node@22.15.30))
+      '@cocos/creator-types':
+        specifier: ^3.8.6
+        version: 3.8.6
+      '@types/node':
+        specifier: ^22.15.21
+        version: 22.15.30
+      '@vitejs/plugin-vue':
+        specifier: ^5.2.2
+        version: 5.2.2(vite@5.4.14(@types/node@22.15.30))(vue@3.5.13(typescript@5.8.2))
+      '@vue/tsconfig':
+        specifier: ^0.7.0
+        version: 0.7.0(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2))
+      rollup-plugin-node-externals:
+        specifier: ^7.1.3
+        version: 7.1.3(rollup@4.35.0)
+      typescript:
+        specifier: ^5.8.2
+        version: 5.8.2
+      unplugin-auto-import:
+        specifier: ^0.18.6
+        version: 0.18.6(@vueuse/core@12.8.2(typescript@5.8.2))(rollup@4.35.0)
+      unplugin-vue-components:
+        specifier: ^0.27.5
+        version: 0.27.5(@babel/parser@7.27.5)(rollup@4.35.0)(vue@3.5.13(typescript@5.8.2))
+      vite:
+        specifier: ^5.4.1
+        version: 5.4.14(@types/node@22.15.30)
+      vue-tsc:
+        specifier: ^2.1.10
+        version: 2.2.8(typescript@5.8.2)
+
+  packages/create-cocos-plugin/templates/vue-element-plus-2.x:
+    dependencies:
+      element-plus:
+        specifier: ^2.8.6
+        version: 2.9.6(vue@3.5.13(typescript@5.8.2))
+      vue:
+        specifier: ^3.4.37
+        version: 3.5.13(typescript@5.8.2)
+    devDependencies:
+      '@cocos-fe/vite-plugin-cocos-panel':
+        specifier: workspace:*
+        version: link:../../../vite-plugin-cocos-panel
       '@cocos/creator-types':
         specifier: ^3.8.6
         version: 3.8.6

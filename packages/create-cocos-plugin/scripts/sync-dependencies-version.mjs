@@ -49,8 +49,10 @@ async function rewrite() {
 
                     Object.assign(json.devDependencies, {
                         '@cocos-fe/vite-plugin-cocos-panel': argv.dev ? 'workspace:*' : `^${cocosPanelVersion}`,
-                        '@cocos/creator-types': `^${argv.v}`,
                     });
+                    if (json.devDependencies['@cocos/creator-types']) {
+                        json.devDependencies['@cocos/creator-types'] = `^${argv.v}`;
+                    }
                     writeFile(pkg, JSON.stringify(json, null, 4), { encoding: 'utf-8' });
                 }
             }

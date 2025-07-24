@@ -130,7 +130,7 @@ async function init() {
                             ? reset(`"${argTemplate}" isn't a valid template. Please choose from below: `)
                             : reset('Select a framework:'),
                     initial: 0,
-                    choices: FRAMEWORKS.map((framework) => {
+                    choices: FRAMEWORKS.filter((framework) => !framework.hidden).map((framework) => {
                         const frameworkColor = framework.color;
                         return {
                             title: frameworkColor(framework.display || framework.name),
@@ -143,13 +143,15 @@ async function init() {
                     name: 'variant',
                     message: reset('Select a variant:'),
                     choices: (framework: Framework) => {
-                        return framework.variants?.map((variant) => {
-                            const variantColor = variant.color;
-                            return {
-                                title: variantColor(variant.display || variant.name),
-                                value: variant.name,
-                            };
-                        });
+                        return framework.variants
+                            ?.filter((variant) => !variant.hidden)
+                            .map((variant) => {
+                                const variantColor = variant.color;
+                                return {
+                                    title: variantColor(variant.display || variant.name),
+                                    value: variant.name,
+                                };
+                            });
                     },
                 },
             ],

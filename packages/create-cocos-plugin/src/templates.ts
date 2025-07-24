@@ -1,4 +1,4 @@
-import { blue, green, yellow } from 'picocolors';
+import { blue, green, yellow, cyan } from 'picocolors';
 
 export type ColorFunc = (str: string | number) => string;
 export type Framework = {
@@ -6,12 +6,14 @@ export type Framework = {
     display: string;
     color: ColorFunc;
     variants?: FrameworkVariant[];
+    hidden?: boolean; // 是否隐藏在创建列表中
 };
 export type FrameworkVariant = {
     name: string;
     display: string;
     color: ColorFunc;
     customCommand?: string; // 自定义创建命令
+    hidden?: boolean; // 是否隐藏在创建列表中
 };
 
 export const FRAMEWORKS: Framework[] = [
@@ -35,13 +37,20 @@ export const FRAMEWORKS: Framework[] = [
                 display: 'vue only',
                 color: yellow,
             },
+            {
+                name: 'vue-for-2.x',
+                display: 'vue-for-2.x',
+                color: cyan,
+                hidden: true,
+            },
         ],
     },
-    // {
-    //     name: 'react-ts',
-    //     display: 'React',
-    //     color: cyan,
-    // },
+    {
+        name: 'react-ts',
+        display: 'React',
+        color: cyan,
+        hidden: true,
+    },
 ];
 
 export const TEMPLATES = FRAMEWORKS.map((f) => (f.variants && f.variants.map((v) => v.name)) || [f.name]).reduce((a, b) => a.concat(b), []);
