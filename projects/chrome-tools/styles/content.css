@@ -33,7 +33,35 @@
         right: 8px;
     }
 
-    & .icon {
+    .tip {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 24px;
+        border-top: 1px solid var(--borderColor-default);
+        color: var(--color-fg-muted);
+        font-size: 12px;
+        line-height: 24px;
+        text-align: center;
+
+        img {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            cursor: pointer;
+        }
+
+        .update {
+            display: var(--visible-update);
+        }
+
+        .update-dark {
+            display: var(--visible-update-dark);
+        }
+    }
+
+    .icon {
         position: absolute;
         top: 0;
         left: -50px;
@@ -47,7 +75,7 @@
         background-color: var(--bgColor-default);
         cursor: pointer;
 
-        & img {
+        img {
             width: 30px;
             transition: width 0.2s linear;
 
@@ -57,7 +85,7 @@
         }
     }
 
-    & input {
+    input {
         position: absolute;
         top: 6px;
         left: 5%;
@@ -70,57 +98,29 @@
         box-shadow: none;
     }
 
-    & ul {
+    ul {
         height: 100%;
         padding: 0;
         margin: 0;
         overflow-y: scroll;
 
-        & li {
+        li {
             display: flex;
             height: 30px;
             cursor: pointer;
             line-height: 30px;
             list-style: none;
 
-            & .en {
+            .en {
                 flex: 1;
                 text-align: right;
             }
 
-            & .zh {
+            .zh {
                 width: 80px;
                 padding-left: 6px;
                 text-align: left;
             }
-        }
-    }
-
-    & .tip {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        height: 24px;
-        border-top: 1px solid var(--borderColor-default);
-        color: var(--color-fg-muted);
-        font-size: 12px;
-        line-height: 24px;
-        text-align: center;
-
-        & img {
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            cursor: pointer;
-        }
-
-        & .update {
-            display: var(--visible-update);
-        }
-
-        & .update-dark {
-            display: var(--visible-update-dark);
         }
     }
 }
@@ -149,20 +149,6 @@
 
         &:nth-child(1) {
             margin: 0 4px;
-        }
-    }
-}
-
-.hover-show-issue-btn {
-    position: relative;
-
-    & #issue-box {
-        display: none;
-    }
-
-    &:hover {
-        & #issue-box {
-            display: inline-flex;
         }
     }
 }
