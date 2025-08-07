@@ -121,8 +121,8 @@ importers:
         version: 3.5.13(typescript@5.8.2)
     devDependencies:
       '@cocos-fe/vite-plugin-cocos-panel':
-        specifier: workspace:*
-        version: link:../../../vite-plugin-cocos-panel
+        specifier: ^1.0.3
+        version: 1.0.3(vite@5.4.14(@types/node@22.15.30))
       '@cocos/creator-types':
         specifier: ^3.8.6
         version: 3.8.6
@@ -164,8 +164,8 @@ importers:
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@cocos-fe/vite-plugin-cocos-panel':
-        specifier: workspace:*
-        version: link:../../../vite-plugin-cocos-panel
+        specifier: ^1.0.3
+        version: 1.0.3(vite@5.4.14(@types/node@22.15.30))
       '@cocos/creator-types':
         specifier: ^3.8.6
         version: 3.8.6
@@ -212,11 +212,8 @@ importers:
   packages/create-cocos-plugin/templates/vanilla:
     devDependencies:
       '@cocos-fe/vite-plugin-cocos-panel':
-        specifier: workspace:*
-        version: link:../../../vite-plugin-cocos-panel
-      '@cocos/creator-types':
-        specifier: ^3.8.6
-        version: 3.8.6
+        specifier: ^1.0.3
+        version: 1.0.3(vite@5.4.14(@types/node@22.15.30))
       '@types/node':
         specifier: ^22.15.21
         version: 22.15.30
@@ -234,8 +231,8 @@ importers:
         version: 3.5.13(typescript@5.8.2)
     devDependencies:
       '@cocos-fe/vite-plugin-cocos-panel':
-        specifier: workspace:*
-        version: link:../../../vite-plugin-cocos-panel
+        specifier: ^1.0.3
+        version: 1.0.3(vite@5.4.14(@types/node@22.15.30))
       '@cocos/creator-types':
         specifier: ^3.8.6
         version: 3.8.6
@@ -271,8 +268,8 @@ importers:
         version: 3.5.13(typescript@5.8.2)
     devDependencies:
       '@cocos-fe/vite-plugin-cocos-panel':
-        specifier: ^1.0.2
-        version: 1.0.2(vite@5.4.14(@types/node@22.15.30))
+        specifier: ^1.0.3
+        version: 1.0.3(vite@5.4.14(@types/node@22.15.30))
       '@cocos/creator-types':
         specifier: ^3.8.6
         version: 3.8.6
@@ -304,7 +301,7 @@ importers:
         specifier: ^2.1.10
         version: 2.2.8(typescript@5.8.2)
 
-  packages/create-cocos-plugin/templates/vue-element-plus-2.x:
+  packages/create-cocos-plugin/templates/vue-for-2.x:
     dependencies:
       element-plus:
         specifier: ^2.8.6
@@ -314,26 +311,17 @@ importers:
         version: 3.5.13(typescript@5.8.2)
     devDependencies:
       '@cocos-fe/vite-plugin-cocos-panel':
-        specifier: workspace:*
-        version: link:../../../vite-plugin-cocos-panel
-      '@cocos/creator-types':
-        specifier: ^3.8.6
-        version: 3.8.6
+        specifier: ^1.0.3
+        version: 1.0.3(vite@5.4.14(@types/node@22.15.30))
       '@types/node':
         specifier: ^22.15.21
         version: 22.15.30
       '@vitejs/plugin-vue':
         specifier: ^5.2.2
         version: 5.2.2(vite@5.4.14(@types/node@22.15.30))(vue@3.5.13(typescript@5.8.2))
-      '@vue/tsconfig':
-        specifier: ^0.7.0
-        version: 0.7.0(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2))
       rollup-plugin-node-externals:
         specifier: ^7.1.3
         version: 7.1.3(rollup@4.35.0)
-      typescript:
-        specifier: ^5.8.2
-        version: 5.8.2
       unplugin-auto-import:
         specifier: ^0.18.6
         version: 0.18.6(@vueuse/core@12.8.2(typescript@5.8.2))(rollup@4.35.0)
@@ -343,9 +331,6 @@ importers:
       vite:
         specifier: ^5.4.1
         version: 5.4.14(@types/node@22.15.30)
-      vue-tsc:
-        specifier: ^2.1.10
-        version: 2.2.8(typescript@5.8.2)
 
   packages/electron-badge:
     dependencies:
@@ -615,8 +600,8 @@ packages:
   '@chevrotain/utils@11.0.3':
     resolution: {integrity: sha512-YslZMgtJUyuMbZ+aKvfF3x1f5liK4mWNxghFRv7jqRR9C3R3fAOGTTKvxXDa2Y1s9zSbcpuO0cAxDYsc9SrXoQ==}
 
-  '@cocos-fe/vite-plugin-cocos-panel@1.0.2':
-    resolution: {integrity: sha512-dQzJje28iS4iQhqV1e5e7oEfE2yRCtfmVCGJ63cL4hNQJUEEdlEnST6fWwEI5VzQG+PfaAVS7hdSRWcp+SIu3Q==}
+  '@cocos-fe/vite-plugin-cocos-panel@1.0.3':
+    resolution: {integrity: sha512-UpOpd7Mp0LmQ3F6h2RmD2U2U+u26cXWuX07CNZ+U4XTSUV90XMAfTj6YvPZLCnJjyU9h0ls22ujSzrH8zkD+sg==}
     peerDependencies:
       vite: ^5.0.0
 
@@ -5310,7 +5295,7 @@ snapshots:
 
   '@chevrotain/utils@11.0.3': {}
 
-  '@cocos-fe/vite-plugin-cocos-panel@1.0.2(vite@5.4.14(@types/node@22.15.30))':
+  '@cocos-fe/vite-plugin-cocos-panel@1.0.3(vite@5.4.14(@types/node@22.15.30))':
     dependencies:
       acorn: 8.14.1
       acorn-walk: 8.3.4
