@@ -62,6 +62,7 @@ function getArticleSidebar() {
                 { text: '开发 creator 插件', link: '/docs/create-cocos-plugin/index.md' },
                 { text: '解压 zip', link: '/docs/unzip/index.md' },
                 { text: '编辑器用户手册文档重构', link: '/docs/versions-i18n-docs/index.md' },
+                { text: 'emoji', link: '/docs/emoji.md' },
             ],
         },
     ];
