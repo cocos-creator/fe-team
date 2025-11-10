@@ -14,9 +14,9 @@ chrome.storage.sync.get([storageKey], (result) => {
 });
 
 function createPanel() {
-    const image = chrome.runtime.getURL('images/logo.png');
-    const updateImage = chrome.runtime.getURL('images/update.png');
-    const updateImageDark = chrome.runtime.getURL('images/update-dark.png');
+    const image = chrome.runtime.getURL('github/assets/github.png');
+    const updateImage = chrome.runtime.getURL('github/assets/update.png');
+    const updateImageDark = chrome.runtime.getURL('github/assets/update-dark.png');
     $panel.innerHTML = `
     <div class="icon">
       <img src="${image}" alt="github-id" />
@@ -99,7 +99,7 @@ function createList(list) {
 
 // 更新数据
 async function fetchList() {
-    const url = `https://raw.githubusercontent.com/cocos-creator/fe-team/main/projects/chrome-tools/github-ids.json?v=${Date.now()}`;
+    const url = `https://raw.githubusercontent.com/cocos-creator/fe-team/main/projects/chrome-tools/github/github-ids.json?v=${Date.now()}`;
     return fetch(url)
         .then((res) => res.json())
         .then((data) => {
