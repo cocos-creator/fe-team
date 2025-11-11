@@ -28,17 +28,17 @@
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
-            "16": "public/logo.png",
-            "32": "public/logo.png",
-            "48": "public/logo.png",
-            "128": "public/logo.png"
+            "16": "public/logo-16.png",
+            "32": "public/logo-32.png",
+            "48": "public/logo-48.png",
+            "128": "public/logo-128.png"
         }
     },
     "icons": {
-        "16": "public/logo.png",
-        "32": "public/logo.png",
-        "48": "public/logo.png",
-        "128": "public/logo.png"
+        "16": "public/logo-16.png",
+        "32": "public/logo-32.png",
+        "48": "public/logo-48.png",
+        "128": "public/logo-128.png"
     },
     "web_accessible_resources": [
         {
