@@ -41,29 +41,16 @@ async function saveToHistory(value) {
     }
 }
 
-function enableSubmitButton(textarea) {
-    const placeholder = textarea.previousElementSibling;
-    if (placeholder?.classList.contains('pointer-events-none')) {
-        placeholder.style.width = '0px';
-    }
-
-    // todo: 无效
-    const buttons = document.querySelectorAll('button[data-state="closed"]');
-    buttons.forEach((button) => button.removeAttribute('disabled'));
-}
-
 function navigateHistory(textarea, direction) {
     if (history.length === 0) return;
 
     if (direction === 'up') {
         if (navigationIndex === -1) {
-            draftInput = textarea.value;
             navigationIndex = history.length - 1;
         } else if (navigationIndex > 0) {
             navigationIndex--;
         }
         textarea.value = history[navigationIndex];
-        enableSubmitButton(textarea);
     } else if (direction === 'down') {
         if (navigationIndex === -1) return;
 
@@ -74,23 +61,23 @@ function navigateHistory(textarea, direction) {
             navigationIndex = -1;
             textarea.value = draftInput;
         }
-        enableSubmitButton(textarea);
     }
-}
-
-function resetNavigation() {
-    navigationIndex = -1;
-    draftInput = '';
+    // 让发送按钮变得可用
+    textarea.dispatchEvent(new Event('input', { bubbles: true }));
 }
 
 function attachListeners(textarea) {
+    if (textarea.getAttribute('has-init') === 'true') {
+        return;
+    }
+    textarea.setAttribute('has-init', 'true');
+
     textarea.addEventListener('keydown', async (event) => {
-        if (event.key === 'Enter' && event.shiftKey === false) {
-            const value = textarea.value.trim();
-            if (value) {
-                await saveToHistory(value);
-            }
-        } else if (event.key === 'ArrowUp') {
+        // 如果正在输入法输入状态,不处理方向键
+        if (event.isComposing) {
+            return;
+        }
+        if (event.key === 'ArrowUp') {
             event.preventDefault();
             if (history.length === 0) await loadHistory();
             navigateHistory(textarea, 'up');
@@ -101,15 +88,18 @@ function attachListeners(textarea) {
     });
 
     textarea.addEventListener('focus', async () => {
-        resetNavigation();
+        navigationIndex = -1;
         await loadHistory();
     });
 
-    textarea.addEventListener('input', () => {
-        if (navigationIndex !== -1) {
-            resetNavigation();
+    textarea.addEventListener('change', () => {
+        if (navigationIndex === -1) {
             draftInput = textarea.value;
         }
+    });
+
+    textarea.addEventListener('blur', () => {
+        saveToHistory(textarea.value);
     });
 }
 
