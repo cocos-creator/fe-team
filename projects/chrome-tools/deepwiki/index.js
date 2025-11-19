@@ -4,6 +4,7 @@ const MAX_HISTORY_SIZE = 50;
 let history = [];
 let navigationIndex = -1;
 let draftInput = '';
+let isSaving = false;
 
 async function loadHistory() {
     try {
@@ -18,11 +19,17 @@ async function saveToHistory(value) {
     const trimmedValue = value.trim();
     if (!trimmedValue) return;
 
+    if (isSaving) {
+        return;
+    }
+
+    isSaving = true;
+
     try {
         const result = await chrome.storage.local.get([STORAGE_KEY]);
         const savedHistory = result[STORAGE_KEY] || [];
 
-        const existingIndex = savedHistory.indexOf(trimmedValue);
+        const existingIndex = savedHistory.findIndex((item) => trimmedValue.startsWith(item));
         if (existingIndex !== -1) {
             savedHistory.splice(existingIndex, 1);
         }
@@ -38,6 +45,8 @@ async function saveToHistory(value) {
         navigationIndex = -1;
     } catch (error) {
         console.error('Failed to save history:', error);
+    } finally {
+        isSaving = false;
     }
 }
 
@@ -72,6 +81,15 @@ function attachListeners(textarea) {
     }
     textarea.setAttribute('has-init', 'true');
 
+    const tip = document.createElement('div');
+    tip.style.fontSize = '12px';
+    tip.style.color = '#888';
+    tip.style.position = 'absolute';
+    tip.style.bottom = '100%';
+    tip.style.right = '0';
+    tip.textContent = '双击保存输入记录 <=> 使用 ↑ 和 ↓ 键浏览输入历史';
+    textarea.parentNode.appendChild(tip);
+
     textarea.addEventListener('keydown', async (event) => {
         // 如果正在输入法输入状态,不处理方向键
         if (event.isComposing) {
@@ -99,6 +117,10 @@ function attachListeners(textarea) {
     });
 
     textarea.addEventListener('blur', () => {
+        saveToHistory(textarea.value);
+    });
+
+    textarea.addEventListener('dblclick', () => {
         saveToHistory(textarea.value);
     });
 }
