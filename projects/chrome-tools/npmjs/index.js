@@ -225,7 +225,7 @@ async function render(list) {
 
   $panel.classList.toggle('empty', list.length === 0);
 
-  let container = $panel.querySelector('section.body');
+  const container = $panel.querySelector('section.body');
   if (!container) {
     return;
   }
