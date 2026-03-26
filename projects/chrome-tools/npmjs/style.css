@@ -1,0 +1,203 @@
+#npm-comparison-add-btn-make-sure-unique {
+  margin-left: 20px;
+  &.hidden {
+    display: none;
+  }
+}
+
+#npm-comparison-container-make-sure-unique {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  box-shadow: color-mix(in srgb, rgb(0, 0, 0) 30%, transparent) 0 1px 2px 0, color-mix(in srgb, rgb(0, 0, 0) 15%, transparent) 0 2px 6px 2px;
+  background-color: #fff;
+
+  & .container {
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+
+  &.hide {
+    transform: translateY(100%);
+    transition: transform cubic-bezier(0.075, 0.82, 0.165, 1) 0.2s;
+
+    & .toggle-show-panel {
+      &::before {
+        display: none;
+      }
+      &::after {
+        display: block;
+      }
+    }
+  }
+
+  & .toggle-show-panel {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffcd3a;
+    color: #886701;
+    padding: 4px 6px;
+    cursor: pointer;
+    font-family: 'auto', 'Fira Mono', 'cursive';
+    border-radius: 4px 4px 0 0;
+    &::before {
+      content: 'hide camparison panel';
+      display: block;
+    }
+
+    &::after {
+      content: 'show camparison panel';
+      display: none;
+    }
+  }
+
+  & .header {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    background-color: aliceblue;
+
+    & summary {
+      text-align: center;
+      cursor: pointer;
+      font-weight: bold;
+      font-family: 'auto', 'Fira Mono', 'cursive';
+      /* 取得默认图标 */
+      list-style: none;
+      text-transform: uppercase;
+    }
+
+    & summary::before {
+      content: '👆 show config';
+      font-size: 1.2em;
+      color: #333;
+    }
+
+    & details[open] summary::before {
+      content: '👇 hide config';
+    }
+
+    & h3 {
+      text-align: center;
+      text-transform: capitalize;
+    }
+
+    & .list {
+      margin: 0 auto;
+      --width: 180px;
+      max-width: calc(var(--width) * 6);
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    & .item {
+      width: var(--width);
+      margin-bottom: 8px;
+      cursor: pointer;
+      & input,
+      & label {
+        cursor: inherit;
+      }
+    }
+  }
+
+  & .tool {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    & button + button {
+      margin-left: 20px;
+    }
+  }
+
+  & .body {
+    &::before {
+      content: 'Add [package-name] to comparison table.';
+      display: none;
+    }
+    &:empty {
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &::before {
+        display: block;
+      }
+    }
+  }
+
+  & table {
+    border: 1px solid #eee;
+    border-collapse: collapse;
+    margin: 20px auto;
+
+    & .title .delete {
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    & thead {
+      text-transform: capitalize;
+    }
+
+    & tr {
+      border: 1px solid #eee;
+    }
+    & td,
+    & th {
+      border: 1px solid #eee;
+      padding: 6px;
+
+      & .empty {
+        text-align: center;
+      }
+    }
+  }
+
+  & .footer {
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  &.empty {
+    & .footer .clear {
+      display: none;
+    }
+  }
+}
+
+/* CSS https://getcssscan.com/css-buttons-examples */
+.button-72 {
+  align-items: center;
+  background-color: initial;
+  background-image: linear-gradient(rgba(179, 132, 201, 0.84), rgba(57, 31, 91, 0.84) 50%);
+  border-radius: 42px;
+  border-width: 0;
+  box-shadow: rgba(57, 31, 91, 0.24) 0 2px 2px, rgba(179, 132, 201, 0.4) 0 8px 12px;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  font-family: Quicksand, sans-serif;
+  font-size: 14px;
+  font-weight: bolder;
+  justify-content: center;
+  letter-spacing: 0.03em;
+  line-height: 16px;
+  margin: 0;
+  padding: 8px 10px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: rgba(255, 255, 255, 0.4) 0 0 4px, rgba(255, 255, 255, 0.2) 0 0 12px, rgba(57, 31, 91, 0.6) 1px 1px 4px, rgba(57, 31, 91, 0.32) 4px 4px 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+}
+
+.button-72:hover {
+  background-image: linear-gradient(#b384c9, #391f5b 50%);
+}
