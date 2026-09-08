@@ -21,7 +21,7 @@ function createPanel() {
     <div class="icon">
       <img src="${image}" alt="github-id" />
     </div>
-    <input type="text" />
+    <input type="text" autocomplete="off" name="cocos-gh-${Date.now()}${Math.random().toString(36).slice(2)}" readonly />
     <ul></ul>
     <div class="tip"><span>${tipText}</span> 
       <img class="update" title="更新数据" width="14" height="14" src="${updateImage}" />
@@ -37,7 +37,11 @@ function createPanel() {
         false,
     );
 
-    $panel.querySelector('input').addEventListener('input', (e) => {
+    const $input = $panel.querySelector('input');
+    $input.addEventListener('focus', () => {
+        $input.removeAttribute('readonly');
+    });
+    $input.addEventListener('input', (e) => {
         search(e.target.value);
     });
 
@@ -68,18 +72,35 @@ async function update() {
 }
 
 function search(value) {
-    if (value) {
-        const list = Object.entries(idsMap).reduce((result, next) => {
-            const [k, v] = next;
-            if (v.includes(value) || k.includes(value)) {
-                result.push(next);
-            }
-            return result;
-        }, []);
-        createList(list);
-    } else {
+    const query = value.trim().toLowerCase();
+    if (!query) {
         createList();
+        return;
     }
+    const list = Object.entries(idsMap)
+        .map((entry) => {
+            const [id, name] = entry;
+            const score = Math.max(getFuzzyScore(query, id), getFuzzyScore(query, name));
+            return { entry, score };
+        })
+        .filter((item) => item.score !== -Infinity)
+        .sort((a, b) => b.score - a.score)
+        .map((item) => item.entry);
+    createList(list);
+}
+
+// 模糊匹配打分（VS Code 同款 fuzzyScore），无匹配返回 -Infinity
+function getFuzzyScore(query, target) {
+    const score = fuzzyScore(query, query.toLowerCase(), 0, target, target.toLowerCase(), 0, {
+        firstMatchCanBeWeak: true,
+        boostFullMatch: true,
+    });
+    return isFuzzyScoreDefault(score) ? -Infinity : score[0];
+}
+
+// 裁掉名字后的 -拼音 后缀（拼音仅作为搜索语料，不展示）
+function toDisplayName(value) {
+    return value.replace(/-[a-z]+$/, '');
 }
 
 // 创建列表
@@ -90,7 +111,7 @@ function createList(list) {
     const fragment = document.createDocumentFragment();
     list.forEach(([k, v]) => {
         const li = document.createElement('li');
-        li.innerHTML = `<div class="en">${k}</div><div class="zh">${v}</div>`;
+        li.innerHTML = `<div class="en">${k}</div><div class="zh">${toDisplayName(v)}</div>`;
         fragment.appendChild(li);
     });
     $panel.querySelector('ul').innerHTML = '';
@@ -108,7 +129,22 @@ async function fetchList() {
                 console.log('storage.set:', data);
             });
             return data;
+        })
+        .catch((err) => {
+            console.warn('远程数据获取失败，使用插件内置数据', err);
+            return fetchLocalList();
         });
+}
+
+// 加载插件内置的默认数据（storage 为空或远程获取失败时兜底）
+async function fetchLocalList() {
+    const url = chrome.runtime.getURL('github/github-ids.json');
+    const data = await fetch(url).then((res) => res.json());
+    idsMap = data;
+    chrome.storage.sync.set({ [storageKey]: data }, () => {
+        console.log('storage.set(local):', data);
+    });
+    return data;
 }
 
 // 替换页面id
@@ -128,7 +164,7 @@ function replaceIds() {
         const text = ele.innerText;
         const textZH = idsMap[text];
         if (textZH) {
-            ele.innerText = textZH;
+            ele.innerText = toDisplayName(textZH);
         }
     });
 }
@@ -214,7 +250,7 @@ function message() {
 ['hashchange', 'popstate', 'load'].forEach((ev) => {
     window.addEventListener(ev, async () => {
         if (!idsMap || Object.keys(idsMap).length === 0) {
-            await fetchList();
+            await fetchLocalList();
         }
         delayRepeat();
         if (ev === 'load') {

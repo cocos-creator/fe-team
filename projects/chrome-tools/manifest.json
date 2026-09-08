@@ -1,16 +1,16 @@
 {
     "$schema": "https://json.schemastore.org/chrome-manifest.json",
     "name": "@cocos-fe/chrome-tools",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "description": "cocos 内部开发人员的提效小工具",
     "homepage_url": "https://cocos-creator.github.io/fe-team/",
     "manifest_version": 3,
     "permissions": ["storage"],
     "content_scripts": [
         {
-            "matches": ["https://github.com/cocos/*", "https://github.com/cocos-creator/*"],
+            "matches": ["https://github.com/cocos/*", "https://github.com/cocos-creator/*", "https://github.com/SUD-GLOBAL/*"],
             "css": ["./github/style.css"],
-            "js": ["./github/index.js"],
+            "js": ["./github/fuzzy-score.js", "./github/index.js"],
             "run_at": "document_end"
         },
         {
@@ -48,7 +48,7 @@
     },
     "web_accessible_resources": [
         {
-            "resources": ["**/*.png", "**/*.css"],
+            "resources": ["**/*.png", "**/*.css", "github/github-ids.json"],
             "matches": ["<all_urls>"]
         }
     ]
