@@ -1,0 +1,67 @@
+/* iconfont 项目页分组功能样式 */
+
+/* 开关按钮（插入在 .project-manage-bar 内，复用页面原有 bar-text btn btn-normal 样式） */
+#iconfont-group-btn {
+    /* 复用页面样式，仅做少量覆盖 */
+    cursor: pointer;
+    user-select: none;
+}
+
+#iconfont-group-btn:hover {
+    /* 与页面其他 btn-normal hover 保持一致 */
+    opacity: 0.8;
+}
+
+#iconfont-group-btn.active {
+    /* 激活态：文字变色表示已开启 */
+    color: #ff6600;
+    font-weight: 500;
+}
+
+#iconfont-group-btn.active:hover {
+    opacity: 0.8;
+}
+
+/* 分组标题（div 元素，直接作为 ul 的子元素，不继承 li 样式） */
+ul.block-icon-list .iconfont-group-title {
+    width: 100%;
+    /* 让标题独占一行，不受图标格子宽度影响 */
+    flex-basis: 100%;
+    grid-column: 1 / -1;
+    padding: 4px 12px;
+    margin: 0;
+    background: #f5f5f5;
+    color: #666;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    border-bottom: 1px solid #e8e8e8;
+    box-sizing: border-box;
+    display: block;
+    text-align: left;
+    cursor: default;
+}
+
+/* 分组标题 hover 不触发图标选中态 */
+ul.block-icon-list .iconfont-group-title:hover {
+    background: #f5f5f5;
+    color: #666;
+}
+
+/* 深色模式适配（如果 iconfont 页面有） */
+@media (prefers-color-scheme: dark) {
+    #iconfont-group-btn.active {
+        color: #ff7a1a;
+    }
+
+    ul.block-icon-list .iconfont-group-title {
+        background: #333;
+        color: #aaa;
+        border-bottom-color: #444;
+    }
+
+    ul.block-icon-list .iconfont-group-title:hover {
+        background: #333;
+        color: #aaa;
+    }
+}

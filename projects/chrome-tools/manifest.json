@@ -29,6 +29,12 @@
             "css": ["./npmjs/style.css"],
             "js": ["./npmjs/index.js"],
             "run_at": "document_end"
+        },
+        {
+            "matches": ["https://www.iconfont.cn/*"],
+            "css": ["./iconfont/style.css"],
+            "js": ["./iconfont/index.js"],
+            "run_at": "document_end"
         }
     ],
     "action": {
