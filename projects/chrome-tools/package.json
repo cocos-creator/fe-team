@@ -1,0 +1,14 @@
+{
+    "name": "@cocos-fe/chrome-tools",
+    "version": "1.5.0",
+    "description": "Chrome extension toolbox for FE team (github ids, forum, deepwiki, npmjs, iconfont)",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "zip": "node ./scripts/zip.mjs"
+    },
+    "license": "ISC",
+    "engines": {
+        "node": ">=18"
+    }
+}
