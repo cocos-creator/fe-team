@@ -27,3 +27,7 @@
 在 iconfont 项目详情页右下角提供「按分类展示」开关，根据 `project_icon_name` 第一段（如 `菜单-首页-默认` → `菜单`）对图标进行分组，分组标题吸顶，支持一键还原原始列表。开关状态持久化，刷新后自动恢复。
 
 ![](./iconfont/images/demo.png)
+
+## jwt.io sud 业务检测
+
+监听 JWT token 变化，在输出区域自动展示 token 归属环境：`fat` 或 `prod`。详见 [功能说明](./jwt/README.md)。

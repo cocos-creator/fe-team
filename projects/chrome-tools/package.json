@@ -5,7 +5,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "zip": "node ./scripts/zip.mjs"
+        "zip": "node ./scripts/zip.mjs",
+        "test:jwt": "node --test ./scripts/jwt.test.mjs"
     },
     "license": "ISC",
     "engines": {

@@ -1,39 +1,95 @@
 {
     "$schema": "https://json.schemastore.org/chrome-manifest.json",
     "name": "@cocos-fe/chrome-tools",
-    "version": "1.6.0",
+    "version": "1.7.0",
     "description": "cocos 内部开发人员的提效小工具",
     "homepage_url": "https://cocos-creator.github.io/fe-team/",
     "manifest_version": 3,
-    "permissions": ["storage"],
+    "permissions": [
+        "storage",
+        "declarativeNetRequestWithHostAccess"
+    ],
+    "host_permissions": [
+        "https://cn-000-official-website.s01.tech/*",
+        "https://fat-official-website.s00.tech/*"
+    ],
+    "background": {
+        "service_worker": "common/background.js",
+        "type": "module"
+    },
     "content_scripts": [
         {
-            "matches": ["https://github.com/cocos/*", "https://github.com/cocos-creator/*", "https://github.com/SUD-GLOBAL/*"],
-            "css": ["./github/style.css"],
-            "js": ["./github/fuzzy-score.js", "./github/index.js", "./github/rerun-placeholder.js"],
+            "matches": [
+                "https://github.com/cocos/*",
+                "https://github.com/cocos-creator/*",
+                "https://github.com/SUD-GLOBAL/*"
+            ],
+            "css": [
+                "./github/style.css"
+            ],
+            "js": [
+                "./github/fuzzy-score.js",
+                "./github/index.js",
+                "./github/rerun-placeholder.js"
+            ],
             "run_at": "document_end"
         },
         {
-            "matches": ["https://forum.cocos.org/*"],
-            "css": ["./forum/style.css"],
-            "js": ["./forum/index.js"],
+            "matches": [
+                "https://forum.cocos.org/*"
+            ],
+            "css": [
+                "./forum/style.css"
+            ],
+            "js": [
+                "./forum/index.js"
+            ],
             "run_at": "document_end"
         },
         {
-            "matches": ["https://deepwiki.com/*"],
-            "js": ["./deepwiki/index.js"],
+            "matches": [
+                "https://deepwiki.com/*"
+            ],
+            "js": [
+                "./deepwiki/index.js"
+            ],
             "run_at": "document_end"
         },
         {
-            "matches": ["https://www.npmjs.com/package/*"],
-            "css": ["./npmjs/style.css"],
-            "js": ["./npmjs/index.js"],
+            "matches": [
+                "https://www.npmjs.com/package/*"
+            ],
+            "css": [
+                "./npmjs/style.css"
+            ],
+            "js": [
+                "./npmjs/index.js"
+            ],
             "run_at": "document_end"
         },
         {
-            "matches": ["https://www.iconfont.cn/*"],
-            "css": ["./iconfont/style.css"],
-            "js": ["./iconfont/index.js"],
+            "matches": [
+                "https://www.iconfont.cn/*"
+            ],
+            "css": [
+                "./iconfont/style.css"
+            ],
+            "js": [
+                "./iconfont/index.js"
+            ],
+            "run_at": "document_end"
+        },
+        {
+            "matches": [
+                "https://www.jwt.io/*",
+                "https://jwt.io/*"
+            ],
+            "css": [
+                "./jwt/style.css"
+            ],
+            "js": [
+                "./jwt/index.js"
+            ],
             "run_at": "document_end"
         }
     ],
@@ -54,8 +110,14 @@
     },
     "web_accessible_resources": [
         {
-            "resources": ["**/*.png", "**/*.css", "github/github-ids.json"],
-            "matches": ["<all_urls>"]
+            "resources": [
+                "**/*.png",
+                "**/*.css",
+                "github/github-ids.json"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
         }
     ]
 }
