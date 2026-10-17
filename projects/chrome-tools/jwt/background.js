@@ -88,7 +88,7 @@ async function probe(environment, controller) {
 
         const body = await response.json();
         if (!body || typeof body.code !== 'number') return { status: 'error' };
-        if (body.code === 0 && body.data?.id) return { status: 'matched', environment: environment.name };
+        if (body.code === 0 && body.data?.id) return { status: 'matched', environment: environment.name, data: body.data };
         return { status: 'unmatched' };
     } catch {
         return { status: 'error' };

@@ -7,6 +7,8 @@
 
 首次加载和 token 变化后自动检测，防抖 500ms。后台同时请求两个接口，使用 `sud-official-at` Cookie，首个返回 HTTP 成功、`code: 0` 且包含 `data.id` 的接口决定环境，并取消另一侧请求。两个接口均未命中时显示「未识别」，网络异常或超时（8 秒）显示「检测失败」，支持重试。
 
+检测成功后，在环境信息下方以格式化 JSON 完整展示命中接口的 `data`，包含所有用户字段及嵌套的 `cocos` 信息。输入变化、清空或重新检测时清除上一份用户数据。
+
 后台使用 `declarativeNetRequestWithHostAccess` 和两个接口域名的权限。临时 session rules 只匹配本扩展发起的、精确 URL 的 GET 请求，不修改浏览器 Cookie；请求不携带已有登录态，不接受响应 Cookie，不使用缓存或跟随跳转。token 不写入本地存储或日志，规则在请求结束和后台重新启动时清理。
 
 JWT 后台逻辑位于 `jwt/background.js`，由扩展统一入口 `common/background.js` 通过 ES Modules 静态导入。

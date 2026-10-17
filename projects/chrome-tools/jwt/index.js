@@ -14,11 +14,14 @@
     let requestPending = false;
     let card;
     let value;
+    let userData;
     let retryButton;
 
     function showStatus(state, text) {
         card.dataset.state = state;
         value.textContent = text;
+        userData.hidden = true;
+        userData.textContent = '';
         retryButton.hidden = state !== 'error' && state !== 'unmatched';
     }
 
@@ -39,12 +42,16 @@
             value = document.createElement('strong');
             content.append(value);
 
+            userData = document.createElement('pre');
+            userData.className = 'sud-jwt-user-data';
+            userData.setAttribute('aria-label', '用户数据');
+
             retryButton = document.createElement('button');
             retryButton.type = 'button';
             retryButton.textContent = '重新检测';
             retryButton.addEventListener('click', () => handleTokenChange(currentInput?.value.trim() || ''));
 
-            card.append(title, content, retryButton);
+            card.append(title, content, userData, retryButton);
             showStatus('idle', '等待输入 token');
         }
         if (output.firstElementChild !== card) output.prepend(card);
@@ -70,6 +77,8 @@
             if (requestRevision !== revision) return;
             if (result?.status === 'matched' && (result.environment === 'fat' || result.environment === 'prod')) {
                 showStatus('matched', result.environment);
+                userData.textContent = JSON.stringify(result.data, null, 2);
+                userData.hidden = false;
             } else if (result?.status === 'unmatched') {
                 showStatus('unmatched', '未识别');
             } else {

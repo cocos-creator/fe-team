@@ -110,7 +110,7 @@ for (const environment of ['fat', 'prod']) {
         assert.equal(h.calls.length, 2, 'Both environments must be requested concurrently');
         const index = environment === 'fat' ? 0 : 1;
         h.calls[index].resolve();
-        assert.deepEqual(await result, { status: 'matched', environment });
+        assert.deepEqual(await result, { status: 'matched', environment, data: { id: 'user-1' } });
         assert.equal(h.calls[1 - index].options.signal.aborted, true);
         assert.equal(h.rules.size, 0);
         assert.equal(h.timers.size, 0);
@@ -125,7 +125,7 @@ test('a rejection from one environment does not prevent the other from matching'
     await flush();
     assert.equal(h.calls[1].options.signal.aborted, false);
     h.calls[1].resolve();
-    assert.deepEqual(await result, { status: 'matched', environment: 'prod' });
+    assert.deepEqual(await result, { status: 'matched', environment: 'prod', data: { id: 'user-1' } });
 });
 
 test('network failure in one environment still allows the other to match', async () => {
@@ -134,7 +134,26 @@ test('network failure in one environment still allows the other to match', async
     await flush();
     h.calls[0].reject(new Error('Network unavailable'));
     h.calls[1].resolve();
-    assert.deepEqual(await result, { status: 'matched', environment: 'prod' });
+    assert.deepEqual(await result, { status: 'matched', environment: 'prod', data: { id: 'user-1' } });
+});
+
+test('returns all matched user data, including nested Cocos fields and future fields', async () => {
+    const h = harness();
+    const result = h.check();
+    const data = {
+        id: '2102233660758347778',
+        name: 'fixture@example.com',
+        phone: '',
+        email: 'f***@example.com',
+        avatar: 'https://example.com/avatar.png',
+        avatar_status: 0,
+        cocos_bound: true,
+        cocos: { uid: '2167369', nickname: '', area_code: '', phone: '', avatar: '', email: 'f***@example.com' },
+        future_field: { enabled: false, count: 0, tags: [], note: null },
+    };
+    await flush();
+    h.calls[0].resolve({ request_id: 'fixture-request', code: 0, msg: 'Success', data });
+    assert.deepEqual(await result, { status: 'matched', environment: 'fat', data });
 });
 
 test('two authentication failures return unmatched', async () => {
