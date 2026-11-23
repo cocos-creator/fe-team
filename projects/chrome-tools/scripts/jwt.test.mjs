@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { setImmediate } from 'node:timers/promises';
 import test from 'node:test';
+import { setImmediate } from 'node:timers/promises';
 import vm from 'node:vm';
 
 const source = readFileSync(new URL('../jwt/background.js', import.meta.url), 'utf8');

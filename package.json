@@ -2,7 +2,7 @@
     "name": "cocos-fe",
     "description": "cocos fe team",
     "private": false,
-    "packageManager": "pnpm@10.6.3",
+    "packageManager": "pnpm@12.22.0",
     "type": "module",
     "scripts": {
         "preinstall": "npx only-allow pnpm",

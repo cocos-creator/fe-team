@@ -1,5 +1,7 @@
 console.log('我是 @cocos-fe/chrome-tools 小插件，我被启用了！');
 
+const { fuzzyScore, isFuzzyScoreDefault } = window.CocosFuzzyScore;
+
 const $panel = document.createElement('div');
 $panel.id = 'github-ids';
 

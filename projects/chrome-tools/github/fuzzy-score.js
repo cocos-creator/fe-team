@@ -180,19 +180,7 @@ function _fillInMaxWordMatchPos(patternLen, wordLen, patternStart, wordStart, pa
     }
 }
 
-function _doScore(
-    pattern,
-    patternLow,
-    patternPos,
-    patternStart,
-    word,
-    wordLow,
-    wordPos,
-    wordLen,
-    wordStart,
-    newMatchStart,
-    outFirstMatchStrong,
-) {
+function _doScore(pattern, patternLow, patternPos, patternStart, word, wordLow, wordPos, wordLen, wordStart, newMatchStart, outFirstMatchStrong) {
     if (patternLow[patternPos] !== wordLow[wordPos]) {
         return Number.MIN_SAFE_INTEGER;
     }
@@ -216,8 +204,7 @@ function _doScore(
     }
 
     if (!isGapLocation) {
-        isGapLocation =
-            isUpperCaseAtPos(wordPos, word, wordLow) || isSeparatorAtPos(wordLow, wordPos - 1) || isWhitespaceAtPos(wordLow, wordPos - 1);
+        isGapLocation = isUpperCaseAtPos(wordPos, word, wordLow) || isSeparatorAtPos(wordLow, wordPos - 1) || isWhitespaceAtPos(wordLow, wordPos - 1);
     }
 
     if (patternPos === patternStart) {
@@ -270,19 +257,7 @@ function fuzzyScore(pattern, patternLow, patternStart, word, wordLow, wordStart,
             let canComeDiag = false;
 
             if (wordPos <= maxWordMatchPos) {
-                score = _doScore(
-                    pattern,
-                    patternLow,
-                    patternPos,
-                    patternStart,
-                    word,
-                    wordLow,
-                    wordPos,
-                    wordLen,
-                    wordStart,
-                    _diag[row - 1][column - 1] === 0,
-                    hasStrongFirstMatch,
-                );
+                score = _doScore(pattern, patternLow, patternPos, patternStart, word, wordLow, wordPos, wordLen, wordStart, _diag[row - 1][column - 1] === 0, hasStrongFirstMatch);
             }
 
             let diagScore = 0;
@@ -373,5 +348,11 @@ function fuzzyScore(pattern, patternLow, patternStart, word, wordLow, wordStart,
 
     return result;
 }
+
+// content_scripts 按 manifest 中的顺序加载，供 github/index.js 使用。
+window.CocosFuzzyScore = Object.freeze({
+    fuzzyScore,
+    isFuzzyScoreDefault,
+});
 
 // endregion
